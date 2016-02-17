@@ -1,0 +1,26 @@
+{
+  "name": "shandy-club",
+  "version": "1.0.0",
+  "description": "Shandy Club application",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShandyClub/shandy-club-app.git"
+  },
+  "keywords": [
+    "shandy",
+    "club",
+    "beer",
+    "pubs"
+  ],
+  "author": "Luke Hedger <luke.hedger@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShandyClub/shandy-club-app/issues"
+  },
+  "homepage": "http://shandy.club/"
+}

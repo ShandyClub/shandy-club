@@ -22,7 +22,9 @@ class PubContainer extends Component {
     return (
       <div>
 
-        <Pub pub={pub} />
+        <Loader loading={isFetching}>
+          <Pub pub={pub} />
+        </Loader>
 
       </div>
     );

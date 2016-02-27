@@ -1,3 +1,2 @@
-body {
-  color: yellowgreen;
-}
+@import "./shared/reset.css";
+@import "./shared/global.css";

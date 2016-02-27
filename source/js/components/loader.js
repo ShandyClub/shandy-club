@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-// import styles from '../../css/components/loader.css';
+import styles from '../../css/components/loader.css';
 
 export default class Loader extends Component {
 

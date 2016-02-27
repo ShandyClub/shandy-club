@@ -1,0 +1,5 @@
+/* component/pub */
+
+.base {
+  /*composes: wrapper from "./shared/layout.css";*/
+}

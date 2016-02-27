@@ -1,0 +1,21 @@
+/* SETTINGS */
+
+/* breakpoints */
+@value small: (max-width: 40em);
+@value above-small: (min-width: 40em);
+@value large: (min-width: 64em);
+@value retina: (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi);
+
+/* dimensions */
+@value content-width: 1280px;
+@value gutter: 20px;
+
+/* fonts */
+@value font-size: 14px;
+
+/* colors */
+@value color-dark: #000000;
+@value color-light: #FFFFFF;
+
+/* easing */
+@value easing-sample: cubic-bezier(.165,.84,.44,1);

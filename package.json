@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "",
-    "start": ""
+    "start": "webpack-dev-server --inline --no-info --config ./webpack/dev.config.js",
+    "build": "NODE_ENV=production webpack --config ./webpack/prod.config.js --progress --profile --colors"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,16 @@
   "bugs": {
     "url": "https://github.com/ShandyClub/shandy-club-app/issues"
   },
-  "homepage": "http://shandy.club/"
+  "homepage": "http://shandy.club/",
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "clean-webpack-plugin": "^0.1.8",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "postcss-cssnext": "^2.4.0",
+    "postcss-loader": "^0.8.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
 }

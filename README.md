@@ -1,6 +1,6 @@
 # Shandy Club - Application
 
-> *Shandy strictly prohibited
+> Shandy strictly prohibited
 
 ## Setup
 ```
@@ -15,6 +15,13 @@ npm i
 
 ```
 npm start
+```
+
+## Test
+
+Lint CSS and JS:
+```
+npm run lint
 ```
 
 ## Release

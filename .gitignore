@@ -9,5 +9,14 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
+# Logs #
+######################
+*.log
+
+# Dependencies #
+######################
 node_modules/
+
+# Project files #
+######################
 *.todo

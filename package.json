@@ -4,7 +4,7 @@
   "description": "Shandy Club application",
   "main": "index.js",
   "scripts": {
-    "test": "",
+    "test": "babel-node test/index.js | faucet",
     "lint-css": "stylelint --config .stylelintrc.js ./source/css/**/*.css; exit 0",
     "lint-js": "eslint --env es6 ./source/js; exit 0",
     "lint": "npm run lint-css & npm run lint-js",
@@ -29,6 +29,7 @@
   "homepage": "http://shandy.club/",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
+    "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.5.0",
@@ -39,11 +40,13 @@
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "faucet": "0.0.1",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.1",
     "style-loader": "^0.13.0",
     "stylelint": "^4.4.0",
     "stylelint-config-standard": "^3.0.0",
+    "tape": "^4.4.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },

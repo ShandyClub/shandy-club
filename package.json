@@ -8,6 +8,7 @@
     "lint-css": "stylelint --config .stylelintrc.js ./source/css/**/*.css; exit 0",
     "lint-js": "eslint --env es6 ./source/js; exit 0",
     "lint": "npm run lint-css & npm run lint-js",
+    "generate": "gulp generate",
     "start": "webpack-dev-server --inline --no-info --config ./webpack/dev.config.js",
     "build": "NODE_ENV=production webpack --config ./webpack/prod.config.js --progress --profile --colors"
   },
@@ -41,6 +42,10 @@
     "eslint-plugin-react": "^4.1.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "faucet": "0.0.1",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-template": "^3.1.0",
+    "inquirer": "^0.12.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.1",
     "style-loader": "^0.13.0",

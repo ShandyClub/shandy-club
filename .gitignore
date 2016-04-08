@@ -17,6 +17,10 @@ Thumbs.db
 ######################
 node_modules/
 
+# Release #
+######################
+public/
+
 # Project files #
 ######################
 *.todo

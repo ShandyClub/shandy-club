@@ -1,4 +1,4 @@
-import { REQUEST_PUB } from '../constants/actions';
+import { REQUEST_PUB } from './actionTypes';
 
 export function requestPub() {
   return {

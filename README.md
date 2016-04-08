@@ -4,10 +4,6 @@
 
 ## Setup
 ```
-npm i -g webpack
-```
-
-```
 npm i
 ```
 
@@ -40,6 +36,11 @@ npm test
 ## Release
 ```
 npm run build
+```
+
+You can also run the production server locally:
+```
+NODE_ENV=production npm start
 ```
 
 ## Deploy

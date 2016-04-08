@@ -1,16 +1,18 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-var dir_build = path.resolve(__dirname, '../public');
-var dir_js = path.resolve(__dirname, '../source/js');
-var dir_css = path.resolve(__dirname, '../source/css');
+const PATHS = {
+  src: path.join(__dirname, '../client'),
+  dist: path.join(__dirname, '../public')
+}
 
 module.exports = {
   devtool: 'source-map',
-  entry: ['./source/js/app'],
+  entry: [PATHS.src],
   output: {
-    path: dir_build,
+    path: PATHS.dist,
     filename: 'bundle.js'
   },
   plugins: [
@@ -25,26 +27,25 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true })
+    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new CopyPlugin([
+      { from: './client/index.html', to: 'index.html' }
+    ])
   ],
   module: {
     loaders: [
       {
-        test: dir_js,
+        test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loader: 'babel'
       },
       {
-        test: dir_css,
+        test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1!postcss-loader')
       }
     ]
   },
   postcss: [
-    require('autoprefixer'),
     require('postcss-cssnext')
   ]
 };

@@ -1,44 +1,51 @@
-var path = require('path');
-var webpack = require('webpack');
-var CleanPlugin = require('clean-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const CleanPlugin = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-var dir_build = path.resolve(__dirname, '../public');
-var dir_js = path.resolve(__dirname, '../source/js');
-var dir_css = path.resolve(__dirname, '../source/css');
+const PATHS = {
+  src: path.join(__dirname, '../client'),
+  dist: path.join(__dirname, '../public')
+}
 
 module.exports = {
   devtool: 'eval',
-  entry: ['./source/js/app'],
+  entry: [PATHS.src],
   output: {
-    path: dir_build,
+    path: PATHS.dist,
     filename: 'bundle.js'
   },
   plugins: [
-    new CleanPlugin(['bundle.js', 'bundle.js.map', 'style.css', 'style.css.map'], dir_build)
+    new CleanPlugin(['index.html', 'bundle.js', 'bundle.js.map', 'server.bundle.js', 'style.css', 'style.css.map'], PATHS.dist),
+    new CopyPlugin([
+      { from: './client/index.html', to: 'index.html' }
+    ])
   ],
   devServer: {
-    contentBase: dir_build,
-    port: 3000
+    contentBase: PATHS.dist,
+    port: 3000,
+    // hot: true,
+    inline: true,
+    stats: 'errors-only',
+    historyApiFallback: true
   },
   module: {
     loaders: [
       {
-        test: dir_js,
+        test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          cacheDirectory: true,
-          presets: ['es2015', 'react']
+          cacheDirectory: true
         }
       },
       {
-        test: dir_css,
+        test: /\.css$/,
         loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
       }
     ]
   },
   postcss: [
-    require('autoprefixer'),
     require('postcss-cssnext')
   ]
 };

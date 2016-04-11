@@ -2,7 +2,7 @@
   "name": "shandy-club",
   "version": "1.0.0",
   "description": "Shandy Club application",
-  "main": "index.js",
+  "main": "public/server.bundle.js",
   "scripts": {
     "test": "babel-node test/index.js | faucet",
     "lint-css": "stylelint --config .stylelintrc.js client/css/**/*.css; exit 0",

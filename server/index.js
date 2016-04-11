@@ -3,7 +3,6 @@ import path from 'path'
 // import compression from 'compression'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-// TODO - this should be done in universal/store/configureStore with applyMiddleware etc
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
@@ -57,7 +56,11 @@ function renderPage(html, initialState) {
    `
 }
 
-const PORT = process.env.PORT || 8080
-app.listen(PORT, function() {
-  console.log('Production Express server running at localhost:' + PORT)
+const NODE_IP = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+const NODE_PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080
+
+const server = app.listen(NODE_PORT, NODE_IP, () => {
+
+  console.log(`Production Express server running at http://${server.address().address}:${server.address().port}`)
+
 })

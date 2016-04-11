@@ -14,7 +14,8 @@
     "start:prod": "npm run build && node public/server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config webpack/prod.config.js --progress --profile --colors",
-    "build:server": "webpack --config webpack/server.config.js"
+    "build:server": "webpack --config webpack/server.config.js",
+    "deploy": "git push openshift"
   },
   "repository": {
     "type": "git",

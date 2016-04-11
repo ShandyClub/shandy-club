@@ -1,21 +1,15 @@
+import Immutable from 'immutable'
+import { createReducer } from 'redux-immutablejs'
+
+// actionTypes
 import { REQUEST_PUB } from './actionTypes'
 
-export const initialState = {
+export const initialState = Immutable.Map({
   request: false
-}
+})
 
-export default (state = initialState, action) => {
-
-  switch (action.type) {
-
-    case REQUEST_PUB:
-      return Object.assign({}, state, {
-        request: true
-      });
-
-    default:
-      return state
-
-  }
-
-}
+export default createReducer(initialState, {
+  [REQUEST_PUB]: (state, action) => state.merge({
+    request: action.payload.request
+  })
+})

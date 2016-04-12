@@ -15,11 +15,12 @@ const questions = [
     message: 'Which templates do you want to generate for this module?',
     type: 'checkbox',
     choices: [
-      'action',
+      'actions',
       'component',
       'container',
       'reducer',
-      'saga'
+      'sagas',
+      'selectors'
     ]
   },
   {
@@ -29,14 +30,9 @@ const questions = [
   }
 ];
 
-const templates = {
-  action: 'actions/*',
-  component: 'components/*',
-  container: 'containers/*',
-  reducer: 'reducers/*',
-  saga: 'sagas/*',
-  test: 'test/*'
-}
+const tests = [
+  'actions'
+]
 
 function isEmpty (answer) {
 
@@ -46,13 +42,13 @@ function isEmpty (answer) {
 
 function addTest (module, t) {
 
-  let src = path.join(__dirname, 'templates', templates['test']);
+  let src = path.join(__dirname, 'templates', 'test.js');
 
   gulp.src(src)
     .pipe(rename({
-      basename: module
+      basename: t
     }))
-    .pipe(gulp.dest('./test/' + `${t}s`))
+    .pipe(gulp.dest(`./test/${module}/`))
 
 }
 
@@ -64,20 +60,24 @@ export default (done) => {
 
     let module = answers.module.toLowerCase();
 
+    // always create `index` and `constants`
+    answers.templates.push('index', 'constants');
+
+    // add `actionTypes` template if `actions` selected
+    if (answers.templates.indexOf('actions') > -1) answers.templates.push('actionTypes');
+
     answers.templates.map(t => {
 
-      let src = path.join(__dirname, 'templates', templates[t]);
+      let src = path.join(__dirname, 'templates', `${t}.js`);
 
       gulp.src(src)
-        .pipe(template(answers))
-        .on('error', console.error.bind(console))
-        .pipe(rename( file => {
-          file.basename = t === 'container' ? module.charAt(0).toUpperCase() + module.slice(1) : module;
-          return file;
+        .pipe(template(answers, {
+          interpolate: /<%=([\s\S]+?)%>/g
         }))
-        .pipe(gulp.dest('./source/js/' + `${t}s`))
+        .on('error', console.error.bind(console))
+        .pipe(gulp.dest(`./universal/${module}/`))
 
-      addTest(module, t)
+      if (tests.indexOf(t) > -1) addTest(module, t)
 
     });
 

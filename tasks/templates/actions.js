@@ -1,5 +1,5 @@
-// TODO - import some action constants
-import { SOME_ACTION } from '../constants/actions';
+// TODO - import some action types
+import { SOME_ACTION } from './actionTypes';
 
 // TODO - write a new action creator
 export function someAction() {

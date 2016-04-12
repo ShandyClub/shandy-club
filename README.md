@@ -42,9 +42,3 @@ You can also run the production server locally:
 ```
 NODE_ENV=production npm start
 ```
-
-## Deploy
-
-```
-sh surge.sh
-```

@@ -5,7 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
   src: path.join(__dirname, '../client'),
-  dist: path.join(__dirname, '../public')
+  dist: path.join(__dirname, '../public'),
+  css: path.join(__dirname, '../client/css')
 }
 
 module.exports = {
@@ -14,6 +15,11 @@ module.exports = {
   output: {
     path: PATHS.dist,
     filename: 'bundle.js'
+  },
+  resolve: {
+    alias: {
+      css: PATHS.css
+    }
   },
   plugins: [
     new CleanPlugin(['index.html', 'bundle.js', 'bundle.js.map', 'server.bundle.js', 'style.css', 'style.css.map'], PATHS.dist),

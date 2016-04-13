@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames/bind';
-// TODO - can resolve.alias be used here?
-import styles from '../../../client/css/components/rating.css';
+import styles from 'css/components/rating.css';
 
 const cx = classNames.bind(styles);
 

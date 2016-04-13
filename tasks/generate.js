@@ -66,16 +66,24 @@ export default (done) => {
     // add `actionTypes` template if `actions` selected
     if (answers.templates.indexOf('actions') > -1) answers.templates.push('actionTypes');
 
+    // add `component-index` template if `component` selected
+    if (answers.templates.indexOf('component') > -1) answers.templates.push('component-index');
+
     answers.templates.map(t => {
 
       let src = path.join(__dirname, 'templates', `${t}.js`);
+      let dest = t.includes('component') ? `./universal/${module}/components/` : `./universal/${module}/`;
 
       gulp.src(src)
         .pipe(template(answers, {
           interpolate: /<%=([\s\S]+?)%>/g
         }))
         .on('error', console.error.bind(console))
-        .pipe(gulp.dest(`./universal/${module}/`))
+        .pipe(rename( file => {
+          file.basename = t === 'component-index' ? 'index' : t;
+          return file;
+        }))
+        .pipe(gulp.dest(dest))
 
       if (tests.indexOf(t) > -1) addTest(module, t)
 

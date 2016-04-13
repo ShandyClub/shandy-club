@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
+// components
+import * as Components from './components'
 // actions
 import * as actions from './actions'
 // selectors
@@ -15,6 +17,7 @@ export class Container extends React.Component {
     return (
       <div>
         <h1><%= module %></h1>
+        <Components.component />
       </div>
     )
 

@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
 import * as actions from './actions'
-// import * as components from './components'
+import * as Components from './components'
 import { getAll } from './selectors'
 
 export class Container extends React.Component {
@@ -14,6 +14,7 @@ export class Container extends React.Component {
     return (
       <div>
         <h1>Pub</h1>
+        <Components.rating cheers={4} />
       </div>
     )
 

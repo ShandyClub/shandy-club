@@ -8,7 +8,8 @@ const logger = createLogger();
 const router = routerMiddleware(browserHistory);
 
 const finalCreateStore = compose(
-  applyMiddleware(router, logger)
+  applyMiddleware(router, logger),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 // Grab the state from a global injected into server-generated HTML

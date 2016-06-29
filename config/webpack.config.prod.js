@@ -2,11 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const PATHS = {
   src: path.join(__dirname, '../client'),
   dist: path.join(__dirname, '../public'),
-  css: path.join(__dirname, '../client/css')
+  css: path.join(__dirname, '../client/css'),
+  img: path.join(__dirname, '../static/img')
 }
 
 module.exports = {
@@ -18,7 +20,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      css: PATHS.css
+      css: PATHS.css,
+      img: PATHS.img
     }
   },
   plugins: [
@@ -36,7 +39,11 @@ module.exports = {
     new ExtractTextPlugin('style.css', { allChunks: true }),
     new CopyPlugin([
       { from: './client/index.html', to: 'index.html' }
-    ])
+    ]),
+    new HtmlWebpackPlugin({
+      template: 'client/index.html',
+      favicon: 'static/img/favicon.png'
+    })
   ],
   module: {
     loaders: [
@@ -48,6 +55,13 @@ module.exports = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1!postcss-loader')
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
       }
     ]
   },

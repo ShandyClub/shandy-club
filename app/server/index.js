@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // serve our static stuff like index.css
-app.use(express.static(path.join(__dirname, '../public')))
+app.use(express.static(path.join(__dirname, '../../public')))
 
 // send all requests to index.html so browserHistory works
 app.use((req, res) => {

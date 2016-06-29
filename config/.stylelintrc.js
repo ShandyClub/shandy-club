@@ -4,6 +4,6 @@ module.exports = {
     "function-calc-no-unspaced-operator": null
   },
   "ignoreFiles": [
-    "../client/css/shared/reset.css"
+    "../app/client/css/shared/reset.css"
   ]
 }

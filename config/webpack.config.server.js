@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const PATHS = {
-  server: path.resolve(__dirname, '../server'),
+  server: path.resolve(__dirname, '../app/server'),
   dist: path.resolve(__dirname, '../public'),
   modules: path.resolve(__dirname, '../node_modules')
 }

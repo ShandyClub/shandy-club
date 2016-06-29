@@ -5,9 +5,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const PATHS = {
-  src: path.join(__dirname, '../client'),
+  src: path.join(__dirname, '../app/client'),
   dist: path.join(__dirname, '../public'),
-  css: path.join(__dirname, '../client/css'),
+  css: path.join(__dirname, '../app/client/css'),
   img: path.join(__dirname, '../static/img')
 }
 
@@ -32,10 +32,10 @@ module.exports = {
     }),
     new CleanPlugin(['index.html', 'bundle.js', 'bundle.js.map', 'server.bundle.js', 'style.css', 'style.css.map'], PATHS.dist),
     new CopyPlugin([
-      { from: './client/index.html', to: 'index.html' }
+      { from: './app/client/index.html', to: 'index.html' }
     ]),
     new HtmlWebpackPlugin({
-      template: 'client/index.html',
+      template: 'app/client/index.html',
       favicon: 'static/img/favicon.png'
     })
   ],

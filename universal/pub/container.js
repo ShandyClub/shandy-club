@@ -9,6 +9,12 @@ import { getAll } from './selectors'
 
 export class Container extends React.Component {
 
+  componentWillMount() {
+
+    console.log('Pub :: componentWillMount')
+
+  }
+
   render() {
 
     return (

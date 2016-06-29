@@ -57,11 +57,11 @@ function renderPage(html, initialState) {
    `
 }
 
-const NODE_IP = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
-const NODE_PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080
+const NODE_IP = '127.0.0.1'
+const NODE_PORT = process.env.PORT || 8000
 
 const server = app.listen(NODE_PORT, NODE_IP, () => {
 
-  console.log(`Production Express server running at http://${server.address().address}:${server.address().port}`)
+  console.log(`🍺  Production server running at http://${server.address().address}:${server.address().port}`)
 
 })

@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "description": "Shandy Club application",
   "main": "public/server.bundle.js",
+  "engines": {
+    "node": "~6.2.0"
+  },
   "scripts": {
     "test": "babel-node test/index.js | faucet",
-    "lint-css": "stylelint --config .stylelintrc.js client/css/**/*.css; exit 0",
-    "lint-js": "eslint --env es6 universal/ client/; exit 0",
-    "lint": "npm run lint-css & npm run lint-js",
+    "lint": "npm run lint:css & npm run lint:js",
+    "lint:css": "stylelint --config .stylelintrc.js client/css/**/*.css; exit 0",
+    "lint:js": "eslint --env es6 universal/ client/; exit 0",
     "generate": "gulp generate",
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:dev": "webpack-dev-server --config webpack/dev.config.js",
-    "start:prod": "npm run build && node public/server.bundle.js",
+    "start": "per-env",
+    "start:development": "webpack-dev-server --config webpack/dev.config.js",
+    "start:production": "node public/server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config webpack/prod.config.js --progress --profile --colors",
-    "build:server": "webpack --config webpack/server.config.js",
-    "deploy": "if-env DEPLOY=hot && npm run deploy:hot || npm run deploy:cold",
-    "deploy:hot": "touch .openshift/markers/hot_deploy & git push openshift",
-    "deploy:cold": "trash .openshift/markers/hot_deploy & git push openshift"
+    "build:server": "webpack --config webpack/server.config.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,6 @@
   },
   "homepage": "http://shandy.club/",
   "devDependencies": {
-    "autoprefixer": "^6.3.3",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.4",
@@ -54,8 +53,8 @@
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-template": "^3.1.0",
-    "if-env": "^1.0.0",
     "inquirer": "^0.12.0",
+    "per-env": "^1.0.2",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.1",
     "style-loader": "^0.13.0",

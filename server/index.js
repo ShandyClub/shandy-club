@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-// import compression from 'compression'
+import bodyParser from 'body-parser'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
@@ -11,7 +11,9 @@ import routes from '../universal/routes'
 
 const app = express()
 
-// app.use(compression())
+// parser
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // serve our static stuff like index.css
 app.use(express.static(path.join(__dirname, '../public')))

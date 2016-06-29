@@ -87,6 +87,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "classnames": "^2.2.3",
     "immutable": "^3.7.6",
     "normalize.css": "^4.1.1",

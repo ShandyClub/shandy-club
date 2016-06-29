@@ -9,15 +9,15 @@
   "scripts": {
     "test": "babel-node test/index.js | faucet",
     "lint": "npm run lint:css & npm run lint:js",
-    "lint:css": "stylelint --config .stylelintrc.js client/css/**/*.css; exit 0",
-    "lint:js": "eslint --env es6 universal/ client/; exit 0",
+    "lint:css": "stylelint --config config/.stylelintrc.js client/css/**/*.css; exit 0",
+    "lint:js": "eslint --config config/.eslintrc.js universal/ client/ server/; exit 0",
     "generate": "gulp generate",
     "start": "per-env",
-    "start:development": "webpack-dev-server --config webpack/dev.config.js",
+    "start:development": "webpack-dev-server --config config/webpack.config.dev.js",
     "start:production": "node public/server.bundle.js",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "NODE_ENV=production webpack --config webpack/prod.config.js --progress --profile --colors",
-    "build:server": "webpack --config webpack/server.config.js"
+    "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
+    "build:server": "webpack --config config/webpack.config.server.js"
   },
   "repository": {
     "type": "git",
@@ -46,8 +46,9 @@
     "copy-webpack-plugin": "^1.1.1",
     "css-loader": "^0.23.1",
     "eslint": "^2.2.0",
-    "eslint-config-airbnb": "^6.0.2",
-    "eslint-plugin-react": "^4.1.0",
+    "eslint-config-unlease": "^2.0.0",
+    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-react": "^4.3.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "faucet": "0.0.1",
     "gulp": "^3.9.1",

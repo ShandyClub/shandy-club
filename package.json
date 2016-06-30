@@ -2,7 +2,7 @@
   "name": "shandy-club",
   "version": "1.0.0",
   "description": "Shandy Club application",
-  "main": "public/server.bundle.js",
+  "main": "server.bundle.js",
   "engines": {
     "node": "~6.2.0"
   },
@@ -31,10 +31,11 @@
     "generate": "gulp generate",
     "start": "per-env",
     "start:development": "webpack-dev-server --config config/webpack.config.dev.js",
-    "start:production": "node public/server.bundle.js",
+    "start:production": "node server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
-    "build:server": "webpack --config config/webpack.config.server.js"
+    "build:server": "webpack --config config/webpack.config.server.js",
+    "deploy": "modulus deploy -p shandyclub public/"
   },
   "repository": {
     "type": "git",
@@ -76,7 +77,6 @@
     "html-webpack-plugin": "^2.21.0",
     "image-webpack-loader": "^1.8.0",
     "inquirer": "^0.12.0",
-    "per-env": "^1.0.2",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.1",
     "style-loader": "^0.13.0",
@@ -89,8 +89,10 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "classnames": "^2.2.3",
+    "express": "^4.14.0",
     "immutable": "^3.7.6",
     "normalize.css": "^4.1.1",
+    "per-env": "^1.0.2",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.2",

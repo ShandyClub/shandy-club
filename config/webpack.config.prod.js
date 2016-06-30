@@ -38,7 +38,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('style.css', { allChunks: true }),
     new CopyPlugin([
-      { from: './app/client/index.html', to: 'index.html' }
+      { from: 'package.json', to: 'package.json' }
     ]),
     new HtmlWebpackPlugin({
       template: 'app/client/index.html',
@@ -68,4 +68,4 @@ module.exports = {
   postcss: [
     require('postcss-cssnext')
   ]
-};
+}

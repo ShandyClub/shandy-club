@@ -11,12 +11,14 @@ import routes from '../universal/routes'
 
 const app = express()
 
+const PORT = process.env.PORT || 8000
+
 // parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // serve our static stuff like index.css
-app.use(express.static(path.join(__dirname, '../../public')))
+app.use(express.static('./'))
 
 // send all requests to index.html so browserHistory works
 app.use((req, res) => {
@@ -59,11 +61,8 @@ function renderPage(html, initialState) {
    `
 }
 
-const NODE_IP = '127.0.0.1'
-const NODE_PORT = process.env.PORT || 8000
+const server = app.listen(PORT, () => {
 
-const server = app.listen(NODE_PORT, NODE_IP, () => {
-
-  console.log(`🍺  Production server running at http://${server.address().address}:${server.address().port}`)
+  console.log(`🍺  Production server running on port ${server.address().port}`)
 
 })

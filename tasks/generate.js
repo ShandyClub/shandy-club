@@ -48,7 +48,7 @@ function addTest (module, t) {
     .pipe(rename({
       basename: t
     }))
-    .pipe(gulp.dest(`./test/${module}/`))
+    .pipe(gulp.dest(`../test/${module}/`))
 
 }
 
@@ -72,7 +72,7 @@ export default (done) => {
     answers.templates.map(t => {
 
       let src = path.join(__dirname, 'templates', `${t}.js`);
-      let dest = t.includes('component') ? `./app/universal/${module}/components/` : `./app/universal/${module}/`;
+      let dest = t.includes('component') ? `../app/universal/${module}/components/` : `../app/universal/${module}/`;
 
       gulp.src(src)
         .pipe(template(answers, {

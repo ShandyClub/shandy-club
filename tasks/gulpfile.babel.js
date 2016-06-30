@@ -1,4 +1,4 @@
 import gulp from 'gulp';
-import generate from './tasks/generate.js';
+import generate from './generate.js';
 
 gulp.task('generate', generate);

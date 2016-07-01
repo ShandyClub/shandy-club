@@ -30,11 +30,11 @@
     "lint:js": "eslint --config config/.eslintrc.js app/; exit 0",
     "generate": "gulp generate --gulpfile tasks/gulpfile.babel.js",
     "start": "per-env",
-    "start:development": "webpack-dev-server --config config/webpack.config.dev.js",
+    "start:development": "webpack-dev-server --config config/webpack.config.dev.js & NODE_ENV=development babel-node app/server/index.js",
     "start:production": "node server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
-    "build:server": "webpack --config config/webpack.config.server.js",
+    "build:server": "webpack -p --config config/webpack.config.server.js",
     "deploy": "modulus deploy -p shandyclub public/"
   },
   "repository": {
@@ -90,6 +90,7 @@
     "body-parser": "^1.15.2",
     "classnames": "^2.2.3",
     "express": "^4.14.0",
+    "http-proxy": "^1.14.0",
     "immutable": "^3.7.6",
     "normalize.css": "^4.1.1",
     "per-env": "^1.0.2",

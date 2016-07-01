@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import httpProxy from 'http-proxy'
 import bodyParser from 'body-parser'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -13,12 +14,32 @@ const app = express()
 
 const PORT = process.env.PORT || 8000
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+const staticPath = isDevelopment ? path.join(__dirname, '../../public') : './'
+
 // parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// serve our static stuff like index.css
-app.use(express.static('./'))
+// serve static assets
+app.use(express.static(staticPath))
+
+// development env
+if (isDevelopment) {
+
+  // proxy non-API requests to webpack-dev-server
+  const proxy = httpProxy.createProxyServer()
+
+  // TODO - filter API routes
+  app.all('/*', function (req, res) {
+
+    proxy.web(req, res, {
+      target: 'http://localhost:3000'
+    })
+
+  })
+
+}
 
 // send all requests to index.html so browserHistory works
 app.use((req, res) => {

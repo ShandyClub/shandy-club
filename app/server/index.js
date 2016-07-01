@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 import rootReducer from '../universal/shared/reducers'
 import routes from '../universal/routes'
+import APIRoutes from './routes'
 
 const app = express()
 
@@ -24,14 +25,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // serve static assets
 app.use(express.static(staticPath))
 
+// API routes
+app.use('/api', APIRoutes)
+
 // development env
 if (isDevelopment) {
 
   // proxy non-API requests to webpack-dev-server
   const proxy = httpProxy.createProxyServer()
 
-  // TODO - filter API routes
-  app.all('/*', function (req, res) {
+  app.all('/*', function (req, res, next) {
+
+    if (req.path === '/api') return next()
 
     proxy.web(req, res, {
       target: 'http://localhost:3000'
@@ -41,31 +46,41 @@ if (isDevelopment) {
 
 }
 
-// send all requests to index.html so browserHistory works
-app.use((req, res) => {
+// send all non-API requests to index.html so browserHistory works
+app.use((req, res, next) => {
+
+  if (req.path === '/api') return next()
+
   match({ routes, location: req.url }, (err, redirect, props) => {
-    if (err) {
-      res.status(500).send(err.message)
-    } else if (redirect) {
-      res.redirect(redirect.pathname + redirect.search)
-    } else if (props) {
-      // hey we made it!
+
+    if (err) return res.status(500).send(err.message)
+
+    else if (redirect) return res.redirect(redirect.pathname + redirect.search)
+
+    else if (props) {
+
       // Create a new Redux store instance
       const store = createStore(rootReducer)
+
       // Render the component to a string
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props}/>
         </Provider>
       )
+
       // Grab the initial state from our Redux store
       const initialState = store.getState()
+
       // Send the rendered page back to the client
       res.send(renderPage(html, initialState))
-    } else {
-      res.status(404).send('Not Found')
+
     }
+
+    else return res.status(404).send('Not Found')
+
   })
+
 })
 
 function renderPage(html, initialState) {

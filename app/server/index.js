@@ -9,13 +9,14 @@ import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 import rootReducer from '../universal/shared/reducers'
 import routes from '../universal/routes'
-import APIRoutes from './routes'
+import ApiRoutes from './routes'
 
 const app = express()
-
 const PORT = process.env.PORT || 8000
 
+const isApiRoute = path => path.match(/^\/api/)
 const isDevelopment = process.env.NODE_ENV === 'development'
+
 const staticPath = isDevelopment ? path.join(__dirname, '../../public') : './'
 
 // parser
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(staticPath))
 
 // API routes
-app.use('/api', APIRoutes)
+app.use('/api', ApiRoutes)
 
 // development env
 if (isDevelopment) {
@@ -36,7 +37,7 @@ if (isDevelopment) {
 
   app.all('/*', function (req, res, next) {
 
-    if (req.path === '/api') return next()
+    if (isApiRoute(req.path)) return next()
 
     proxy.web(req, res, {
       target: 'http://localhost:3000'
@@ -49,7 +50,7 @@ if (isDevelopment) {
 // send all non-API requests to index.html so browserHistory works
 app.use((req, res, next) => {
 
-  if (req.path === '/api') return next()
+  if (isApiRoute(req.path)) return next()
 
   match({ routes, location: req.url }, (err, redirect, props) => {
 

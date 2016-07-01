@@ -1,4 +1,6 @@
 import express from 'express'
+import * as Pub from './pub'
+
 const router = express.Router()
 
 router.get('/', (req, res, next) => {
@@ -9,4 +11,6 @@ router.get('/', (req, res, next) => {
 
 })
 
-module.exports = router
+router.use(`/${Pub.name}`, Pub.routes)
+
+export default router

@@ -11,11 +11,18 @@
 @value gutter: 20px;
 
 /* fonts */
-@value font-size: 14px;
+@value font-family-primary: helvetica, arial, sans-serif;
+@value font-size-small: 12px;
+@value font-size-body: 16px;
+@value font-size-h4: 21px;
+@value font-size-h3: 28px;
+@value font-size-h2: 37px;
+@value font-size-h1: 50px;
 
 /* colors */
-@value color-dark: #000000;
-@value color-light: #FFFFFF;
+@value color-dark: #04160F;
+@value color-light: #F1DBE5;
+@value color-shandy: #FBB80C;
 
 /* easing */
 @value easing-sample: cubic-bezier(.165,.84,.44,1);

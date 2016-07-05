@@ -1,12 +1,1 @@
 /* COMMON */
-
-@value font-size, color-dark from "./settings.css";
-
-.font {
-  font-size: font-size;
-  color: color-dark;
-}
-
-.font-primary {
-  font-family: helvetica, arial, sans-serif;
-}

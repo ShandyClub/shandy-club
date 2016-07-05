@@ -10,6 +10,7 @@ import { match, RouterContext } from 'react-router'
 import rootReducer from '../universal/shared/reducers'
 import routes from '../universal/routes'
 import ApiRoutes from './routes'
+import database from './database'
 
 const app = express()
 const PORT = process.env.PORT || 8000

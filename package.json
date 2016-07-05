@@ -29,6 +29,7 @@
     "lint:css": "stylelint --config config/.stylelintrc.js app/client/css/**/*.css; exit 0",
     "lint:js": "eslint --config config/.eslintrc.js app/; exit 0",
     "generate": "gulp generate --gulpfile tasks/gulpfile.babel.js",
+    "db": "npm-run mongo-express -u admin -p admin -d shandyclub",
     "start": "per-env",
     "start:development": "webpack-dev-server --config config/webpack.config.dev.js & NODE_ENV=development nodemon --exec babel-node app/server/index.js",
     "start:production": "node server.bundle.js",

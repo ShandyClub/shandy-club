@@ -3,9 +3,8 @@
 > Shandy strictly prohibited
 
 ## Setup
-```
-npm i
-```
+
+[Setup instructions](wiki/setup.md)
 
 ## Develop
 

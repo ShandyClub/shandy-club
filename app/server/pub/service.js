@@ -7,34 +7,24 @@ const Pub = mongoose.model(collection, schema)
 
 export const create = (id, props) => {
 
-  // TODO
-  return Promise.resolve(true)
-
-  // return Pub.create({ id, ...props })
+  return Pub.create({ id, ...props })
 
 }
 
 export const read = (id) => {
 
-  // TODO
-  return Promise.resolve({ name: 'apub' })
-
-  // return Pub.findOne({ id })
+  return Pub.findOne({ id })
 
 }
 
 export const update = (id, props) => {
 
-  // TODO
-  return Promise.resolve(true)
-
-  // return Pub.findOneAndUpdate({ id }, { ...props }, { new: true })
+  return Pub.findOneAndUpdate({ id }, { ...props }, { new: true })
 
 }
 
-export const remove = () => {
+export const remove = (id) => {
 
-  // TODO
-  return Promise.resolve(true)
+  return Pub.remove({ id })
 
 }

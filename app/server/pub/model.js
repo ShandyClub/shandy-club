@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import random from 'mongoose-simple-random'
+
 const Schema = mongoose.Schema
 
 const Pub = new Schema({
@@ -19,13 +21,20 @@ const Pub = new Schema({
   },
   desc: String,
   loc: {
-    type: String,
-    coordinates: Array
+    type: { type: String, default: 'Point' },
+    coordinates: { type: [Number], required: true }
   },
   created_at: Date,
   updated_at: Date
 })
 
+// create geoJSON index
+Pub.index({ loc: '2dsphere' })
+
+// use `random` plugin
+Pub.plugin(random)
+
+// pre save
 Pub.pre('save', function(next) {
 
   const currentDate = new Date()
@@ -40,7 +49,7 @@ Pub.pre('save', function(next) {
 
 })
 
-
+// pre find and update
 Pub.pre('findOneAndUpdate', function(next) {
 
   this.update({}, { $set: { updated_at: new Date() }})

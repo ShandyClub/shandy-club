@@ -7,9 +7,9 @@ export const geocode = (place) => {
 
   return new Promise( (resolve, reject) => {
 
-    mapbox.geocodeForward(place, GEOCODE_OPTIONS, (err, res) => {
+    mapbox.geocodeForward(place, GEOCODE_OPTIONS, (err, { features }) => {
 
-      return err ? reject(err) : resolve(res.features)
+      return err ? reject(err) : resolve(features)
 
     })
 

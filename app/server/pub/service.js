@@ -28,3 +28,21 @@ export const remove = (id) => {
   return Pub.remove({ id })
 
 }
+
+export const lucky = (point) => {
+
+  const filter = {}
+
+  if (point) filter['loc'] = { $near: { $geometry: { type: 'Point' , coordinates: point } } }
+
+  return new Promise( (resolve, reject) => {
+
+    Pub.findRandom(filter, {}, { limit: 3 }, (err, pubs) => {
+
+      return err ? reject(err) : resolve(pubs)
+
+    })
+
+  })
+
+}

@@ -1,5 +1,6 @@
 import co from 'co'
 import * as Search from './service'
+import { service as Pub } from '../pub'
 
 export const geocode = (req, res, next) => {
 
@@ -12,6 +13,26 @@ export const geocode = (req, res, next) => {
   }).then( geocode => {
 
     res.json({ geocode })
+
+    res.sendStatus(200)
+
+    return next()
+
+  }, e => next(e) )
+
+}
+
+export const lucky = (req, res, next) => {
+
+  const { lng, lat } = req.body
+
+  co(function* () {
+
+    return yield Pub.lucky([ lng, lat ])
+
+  }).then( pubs => {
+
+    res.json({ pubs })
 
     res.sendStatus(200)
 

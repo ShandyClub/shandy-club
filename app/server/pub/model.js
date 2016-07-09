@@ -2,8 +2,26 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const Pub = new Schema({
-  id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
+  address: String,
+  postcode: String,
+  website: String,
+  cheers: Number,
+  features: {
+    architecture: Boolean,
+    beer: Boolean,
+    fire: Boolean,
+    food: Boolean,
+    games: Boolean,
+    garden: Boolean,
+    peace: Boolean,
+    tv: Boolean
+  },
+  desc: String,
+  loc: {
+    type: String,
+    coordinates: Array
+  },
   created_at: Date,
   updated_at: Date
 })

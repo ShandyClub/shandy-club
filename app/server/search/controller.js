@@ -1,14 +1,22 @@
+import co from 'co'
 import * as Search from './service'
 
 export const geocode = (req, res, next) => {
 
-  const place = req.params.place
+  const { place } = req.params
 
-  // TODO - promise this
-  Search.geocode(place)
+  co(function* () {
 
-  res.sendStatus(200)
+    return yield Search.geocode(place)
 
-  return next()
+  }).then( geocode => {
+
+    res.json({ geocode })
+
+    res.sendStatus(200)
+
+    return next()
+
+  }, e => next(e) )
 
 }

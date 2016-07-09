@@ -12,20 +12,22 @@ import routes from '../universal/routes'
 import ApiRoutes from './routes'
 import database from './database'
 
+// setup express
 const app = express()
 const PORT = process.env.PORT || 8000
 
 const isApiRoute = path => path.match(/^\/api/)
 const isDevelopment = process.env.NODE_ENV === 'development'
 
+// construct static assets path
 const staticPath = isDevelopment ? path.join(__dirname, '../../public') : './'
+
+// serve static assets
+app.use(express.static(staticPath))
 
 // parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// serve static assets
-app.use(express.static(staticPath))
 
 // API routes
 app.use('/api', ApiRoutes)

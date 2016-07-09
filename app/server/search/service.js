@@ -1,12 +1,18 @@
 import MapboxClient from 'mapbox/lib/services/geocoding'
-import { MAPBOX_ACCESS_TOKEN } from '../shared/constants'
+import { GEOCODE_OPTIONS, MAPBOX_ACCESS_TOKEN } from './constants'
 
-const client = new MapboxClient(MAPBOX_ACCESS_TOKEN)
+const mapbox = new MapboxClient(MAPBOX_ACCESS_TOKEN)
 
 export const geocode = (place) => {
 
-  console.log(client, place)
+  return new Promise( (resolve, reject) => {
 
-  return true
+    mapbox.geocodeForward(place, GEOCODE_OPTIONS, (err, res) => {
+
+      return err ? reject(err) : resolve(res.features)
+
+    })
+
+  })
 
 }

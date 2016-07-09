@@ -22,6 +22,26 @@ export const geocode = (req, res, next) => {
 
 }
 
+export const pubs = (req, res, next) => {
+
+  const { lng, lat, features } = req.body
+
+  co(function* () {
+
+    return yield Pub.search([ lng, lat ], features)
+
+  }).then( pubs => {
+
+    res.json({ pubs })
+
+    res.sendStatus(200)
+
+    return next()
+
+  }, e => next(e) )
+
+}
+
 export const lucky = (req, res, next) => {
 
   const { lng, lat } = req.body

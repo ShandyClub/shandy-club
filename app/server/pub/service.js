@@ -29,6 +29,18 @@ export const remove = (id) => {
 
 }
 
+export const search = (point, features) => {
+
+  const query = {
+    loc: { $near: { $geometry: { type: 'Point' , coordinates: point } } }
+  }
+
+  features && features.map( f => query[`features.${f}`] = true )
+
+  return Pub.find(query).exec()
+
+}
+
 export const lucky = (point) => {
 
   const filter = {}

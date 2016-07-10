@@ -13,7 +13,7 @@ const PATHS = {
 
 module.exports = {
   devtool: 'eval',
-  entry: [PATHS.src],
+  entry: ['babel-polyfill', PATHS.src],
   output: {
     path: PATHS.dist,
     filename: 'bundle.js'

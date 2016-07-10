@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
-import * as pub from '../../pub'
+import { combineReducers } from 'redux-immutablejs'
+import routerReducer from './router'
+import * as Pub from '../../pub'
+import * as Search from '../../search'
 
 export default combineReducers({
   routing: routerReducer,
-  [pub.name]: pub.reducer
+  [Pub.name]: Pub.reducer,
+  [Search.name]: Search.reducer,
 })

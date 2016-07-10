@@ -1,1 +1,1 @@
-export const name = 'pub';
+export const name = 'pub'

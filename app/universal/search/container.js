@@ -11,7 +11,7 @@ export class Container extends Component {
 
   componentWillMount() {
 
-    console.log('Pub :: componentWillMount')
+    console.log('Search :: componentWillMount')
 
   }
 
@@ -19,8 +19,7 @@ export class Container extends Component {
 
     return (
       <div>
-        <h1>Pub</h1>
-        <Components.rating cheers={4} />
+        <h1>Search</h1>
       </div>
     )
 
@@ -30,7 +29,7 @@ export class Container extends Component {
 
 export default connect(
   createStructuredSelector({
-    pub: selectors.getAll
+    search: selectors.getAll
   }),
   dispatch => bindActionCreators(actions, dispatch)
 )(Container)

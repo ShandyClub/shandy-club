@@ -1,5 +1,5 @@
-import rating from './rating';
+import rating from './rating'
 
 export {
-  rating
-};
+  rating,
+}

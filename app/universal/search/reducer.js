@@ -5,11 +5,11 @@ import { createReducer } from 'redux-immutablejs'
 import * as actions from './actionTypes'
 
 export const initialState = Immutable.fromJS({
-  request: false
+  search: false
 })
 
 export default createReducer(initialState, {
 
-  [actions.REQUEST_PUB]: (state, action) => state.merge({ ...action.payload })
+  [actions.SOME_ACTION]: (state, action) => state.merge({ ...action.payload })
 
 })

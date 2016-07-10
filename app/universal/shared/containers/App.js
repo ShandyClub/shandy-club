@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import * as Components from '../components'
 
 export default class App extends Component {
 
@@ -7,7 +8,11 @@ export default class App extends Component {
     return (
       <div>
 
+        <Components.header />
+
         {this.props.children}
+
+        <Components.footer />
 
       </div>
     )

@@ -16,7 +16,8 @@ module.exports = {
   entry: ['babel-polyfill', PATHS.src],
   output: {
     path: PATHS.dist,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   resolve: {
     alias: {

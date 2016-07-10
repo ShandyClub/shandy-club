@@ -9,7 +9,7 @@ const PATHS = {
 
 module.exports = {
 
-  entry: PATHS.server,
+  entry: ['babel-polyfill', PATHS.server],
 
   output: {
     path: PATHS.dist,

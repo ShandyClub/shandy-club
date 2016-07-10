@@ -28,14 +28,13 @@ const finalCreateStore = compose(
 
 // persist stored state
 const persistState = Storage.getItem(STATE_KEY) || {}
-const immutableState = Immutable.fromJS(persistState)
 
 // Grab the state from a global injected into server-generated HTML
-const initialState = window.__INITIAL_STATE__ || immutableState
+const initialState = window.__INITIAL_STATE__ || persistState
 
 export default function configureStore(state = initialState) {
 
-  const store = finalCreateStore(rootReducer, initialState)
+  const store = finalCreateStore(rootReducer, Immutable.fromJS(initialState))
 
   // start sagas
   saga.run(rootSaga)

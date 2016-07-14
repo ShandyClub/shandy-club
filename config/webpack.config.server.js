@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const webpack = require('webpack')
 
 const PATHS = {
   server: path.resolve(__dirname, '../app/server'),
@@ -9,12 +10,21 @@ const PATHS = {
 
 module.exports = {
 
-  entry: ['babel-polyfill', PATHS.server],
+  entry: PATHS.server,
 
   output: {
     path: PATHS.dist,
     filename: 'server.bundle.js'
   },
+
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
+    })
+  ],
 
   target: 'node',
 

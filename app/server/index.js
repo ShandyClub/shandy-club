@@ -94,10 +94,10 @@ function renderPage(html, initialState) {
     <meta charset="utf-8">
     <title>Shandy Club</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" media="(device-height: 568px)" />
-    <link rel="stylesheet" href="style.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/style.css" media="screen" charset="utf-8">
     <div id="root">${html}</div>
     <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>
-    <script src="bundle.js"></script>
+    <script src="/bundle.js"></script>
    `
 }
 

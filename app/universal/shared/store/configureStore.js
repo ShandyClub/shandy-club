@@ -3,17 +3,18 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { browserHistory } from 'react-router'
 import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
-import createSagaMiddleware from 'redux-saga'
+// import createSagaMiddleware from 'redux-saga'
 import rootReducer from '../reducers'
-import rootSaga from '../sagas'
+// import rootSaga from '../sagas'
 import * as Storage from '../services/storage'
 import { STATE_KEY } from '../constants'
 
 // middleware
 const router = routerMiddleware(browserHistory)
-const saga = createSagaMiddleware()
+// const saga = createSagaMiddleware()
 
-let middleware = [ router, saga ]
+// let middleware = [ router, saga ]
+let middleware = [ router ]
 
 // logger middleware in development
 if (process.env.NODE_ENV === 'development') {
@@ -37,7 +38,7 @@ export default function configureStore(state = initialState) {
   const store = finalCreateStore(rootReducer, Immutable.fromJS(initialState))
 
   // start sagas
-  saga.run(rootSaga)
+  // saga.run(rootSaga)
 
   // store state on change
   store.subscribe( () => {

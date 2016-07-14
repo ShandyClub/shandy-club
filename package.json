@@ -35,7 +35,7 @@
     "start:production": "node server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
-    "build:server": "webpack -p --config config/webpack.config.server.js",
+    "build:server": "webpack --config config/webpack.config.server.js",
     "deploy": "modulus deploy -p shandyclub public/"
   },
   "repository": {

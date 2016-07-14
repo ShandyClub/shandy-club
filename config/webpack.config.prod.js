@@ -13,7 +13,7 @@ const PATHS = {
 
 module.exports = {
   devtool: 'source-map',
-  entry: ['babel-polyfill', PATHS.src],
+  entry: ['regenerator-runtime/runtime', PATHS.src],
   output: {
     path: PATHS.dist,
     filename: 'bundle.js',

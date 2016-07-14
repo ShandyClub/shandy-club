@@ -1,13 +1,14 @@
+import 'regenerator-runtime/runtime'
 import express from 'express'
 import path from 'path'
 import httpProxy from 'http-proxy'
 import bodyParser from 'body-parser'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
-import rootReducer from '../universal/shared/reducers'
+import configureStore from '../universal/shared/store/configureStore'
+import rootSaga from '../universal/shared/sagas'
 import routes from '../universal/routes'
 import ApiRoutes from './routes'
 import database from './database'
@@ -21,6 +22,22 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 
 // construct static assets path
 const staticPath = isDevelopment ? path.join(__dirname, '../../public') : './'
+
+// layout method
+const renderPage = (html, initialState) => {
+  // TODO - abstract this template
+  return `
+    <!DOCTYPE html>
+    <html>
+    <meta charset="utf-8">
+    <title>Shandy Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" media="(device-height: 568px)" />
+    <link rel="stylesheet" href="/style.css" media="screen" charset="utf-8">
+    <div id="root">${html}</div>
+    <script>window.__INITIAL_STATE__ = ${initialState}</script>
+    <script src="/bundle.js"></script>
+   `
+}
 
 // serve static assets
 app.use(express.static(staticPath))
@@ -55,6 +72,9 @@ app.use((req, res, next) => {
 
   if (isApiRoute(req.path)) return next()
 
+  // create Redux store
+  const store = configureStore()
+
   match({ routes, location: req.url }, (err, redirect, props) => {
 
     if (err) return res.status(500).send(err.message)
@@ -63,21 +83,26 @@ app.use((req, res, next) => {
 
     else if (props) {
 
-      // Create a new Redux store instance
-      const store = createStore(rootReducer)
+      // start sagas
+      store.runSaga(rootSaga).done.then( () => {
 
-      // Render the component to a string
-      const html = renderToString(
-        <Provider store={store}>
-          <RouterContext {...props}/>
-        </Provider>
-      )
+        // Render the component to a string
+        const html = renderToString(
+          <Provider store={store}>
+            <RouterContext {...props}/>
+          </Provider>
+        )
 
-      // Grab the initial state from our Redux store
-      const initialState = store.getState()
+        // Grab the initial state from our Redux store
+        const initialState = JSON.stringify(store.getState())
 
-      // Send the rendered page back to the client
-      res.send(renderPage(html, initialState))
+        // Send the rendered page back to the client
+        res.send(renderPage(html, initialState))
+
+      }).catch( e => res.status(500).send(e.message) )
+
+      // terminate sagas
+      store.close()
 
     }
 
@@ -86,20 +111,6 @@ app.use((req, res, next) => {
   })
 
 })
-
-function renderPage(html, initialState) {
-  return `
-    <!DOCTYPE html>
-    <html>
-    <meta charset="utf-8">
-    <title>Shandy Club</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" media="(device-height: 568px)" />
-    <link rel="stylesheet" href="/style.css" media="screen" charset="utf-8">
-    <div id="root">${html}</div>
-    <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>
-    <script src="/bundle.js"></script>
-   `
-}
 
 const server = app.listen(PORT, () => {
 

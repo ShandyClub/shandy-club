@@ -1,8 +1,26 @@
 import * as actions from './actionTypes'
 
-export const someAction = () => ({
-  type: actions.SOME_ACTION,
+export const setTerm = term => ({
+  type: actions.TERM,
   payload: {
-    search: true
+    term
+  }
+})
+
+export const toggleFeature = feature => ({
+  type: actions.FEATURE,
+  payload: {
+    feature
+  }
+})
+
+export const submitSearch = () => ({
+  type: actions.SUBMIT
+})
+
+export const setResult = result => ({
+  type: actions.RESULT,
+  payload: {
+    result
   }
 })

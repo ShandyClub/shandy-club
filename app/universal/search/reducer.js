@@ -9,6 +9,7 @@ import { immutableToggle as toggle } from '../shared/util'
 
 export const initialState = Immutable.fromJS({
   features: [],
+  geocodes: [],
   results: [],
   term: null,
   requesting: false,
@@ -17,10 +18,18 @@ export const initialState = Immutable.fromJS({
 
 export default createReducer(initialState, {
 
-  [actions.TERM]: (state, action) => state.merge({ ...action.payload }),
   [actions.FEATURE]: (state, action) => toggle(state.get('features'), action.payload.feature),
+
+  [actions.GEOCODE_REQUEST]: (state, action) => state.merge({ ...action.payload }),
+  [actions.GEOCODE_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
+  [actions.GEOCODE_FAILURE]: (state, action) => state.merge({ ...action.payload }),
+
   [actions.SUBMIT_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.SUBMIT_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
   [actions.SUBMIT_FAILURE]: (state, action) => state.merge({ ...action.payload }),
+
+  [actions.LUCKY_REQUEST]: (state, action) => state.merge({ ...action.payload }),
+  [actions.LUCKY_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
+  [actions.LUCKY_FAILURE]: (state, action) => state.merge({ ...action.payload }),
 
 })

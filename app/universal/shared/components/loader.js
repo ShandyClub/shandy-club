@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
-const Component = (props) => {
+const Loader = ({ loaded, children }) => {
+
+  const content = loaded ? children : 'Loading...'
 
   return (
     <div>
-      Loader
+      { content }
     </div>
   )
 
 }
 
-export default Component
+Loader.propTypes = {
+  loaded: PropTypes.bool.isRequired
+}
+
+Loader.defaultProps = {
+  loaded: false
+}
+
+export default Loader

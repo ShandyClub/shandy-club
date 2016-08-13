@@ -112,6 +112,12 @@ app.use((req, res, next) => {
 
 })
 
+// error handling
+app.use( (err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send(err.message)
+})
+
 const server = app.listen(PORT, () => {
 
   console.log(`🍺  Production server running on port ${server.address().port}`)

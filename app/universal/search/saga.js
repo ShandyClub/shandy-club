@@ -6,24 +6,36 @@ import * as actions from './actionTypes'
 // import { getHuman, hasBeenPolled, hasVisited, isTheEnd } from './selectors'
 
 // -----
-// JUST A TEST
+// SUBMIT
 // -----
 
-export function* testing() {
+export function* submit() {
 
-  yield* takeLatest(actions.SOME_ACTION, fetchTest)
+  yield* takeLatest(actions.SUBMIT_REQUEST, fetchSubmit)
 
 }
 
-function* fetchTest(action) {
+function* fetchSubmit(action) {
 
-  yield true
+  try {
+
+    const res = yield call(API.post, 'search/pubs', { ...action.payload.search })
+    const data = yield res.json()
+    const results = data.pubs
+
+    yield put({ type: actions.SUBMIT_SUCCESS, payload: { results, requesting: false } })
+
+  } catch (error) {
+
+    yield put({ type: actions.SUBMIT_FAILURE, payload: { error, requesting: false } })
+
+  }
 
 }
 
 // export the root saga containing forks of all the sagas
 export default function* root() {
 
-  yield fork(testing)
+  yield fork(submit)
 
 }

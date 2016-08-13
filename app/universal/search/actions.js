@@ -14,13 +14,11 @@ export const toggleFeature = feature => ({
   }
 })
 
-export const submitSearch = () => ({
-  type: actions.SUBMIT
-})
-
-export const setResult = result => ({
-  type: actions.RESULT,
+export const submitSearch = search => ({
+  type: actions.SUBMIT_REQUEST,
   payload: {
-    result
+    search,
+    requesting: true,
+    error: null
   }
 })

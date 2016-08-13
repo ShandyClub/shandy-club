@@ -4,6 +4,9 @@ import { createReducer } from 'redux-immutablejs'
 // actionTypes
 import * as actions from './actionTypes'
 
+// utils
+import { immutableToggle as toggle } from '../shared/util'
+
 export const initialState = Immutable.fromJS({
   features: [],
   results: [],
@@ -13,8 +16,7 @@ export const initialState = Immutable.fromJS({
 export default createReducer(initialState, {
 
   [actions.TERM]: (state, action) => state.merge({ ...action.payload }),
-  // TODO - how to update feature array with toggled feature ?
-  [actions.FEATURE]: (state, action) => state.merge({ ...action.payload }),
+  [actions.FEATURE]: (state, action) => toggle(state.get('features'), action.payload.feature),
   [actions.SUBMIT]: (state, action) => state.merge({ ...action.payload }),
   [actions.RESULT]: (state, action) => state.merge({ ...action.payload }),
 

@@ -24,11 +24,11 @@ export const geocode = (req, res, next) => {
 
 export const pubs = (req, res, next) => {
 
-  const { lng, lat, features } = req.body
+  const { point, features } = req.body
 
   co(function* () {
 
-    return yield Pub.search([ lng, lat ], features)
+    return yield Pub.search(point, features)
 
   }).then( pubs => {
 

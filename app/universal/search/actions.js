@@ -7,6 +7,22 @@ export const getGeocode = term => ({
   }
 })
 
+export const setGeocode = (point, term) => ({
+  type: actions.GEOCODE_SET,
+  payload: {
+    term,
+    point
+  }
+})
+
+export const clearGeocode = () => ({
+  type: actions.GEOCODE_RESET,
+  payload: {
+    geocodes: [],
+    term: null
+  }
+})
+
 export const toggleFeature = feature => ({
   type: actions.FEATURE,
   payload: {
@@ -14,10 +30,9 @@ export const toggleFeature = feature => ({
   }
 })
 
-export const submitSearch = search => ({
+export const submitSearch = () => ({
   type: actions.SUBMIT_REQUEST,
   payload: {
-    search,
     requesting: true,
     error: null
   }

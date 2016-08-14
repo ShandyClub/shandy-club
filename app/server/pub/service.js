@@ -35,7 +35,7 @@ export const search = (point, features) => {
     loc: { $near: { $geometry: { type: 'Point' , coordinates: point } } }
   }
 
-  features && features.map( f => query[`features.${f}`] = true )
+  features && Object.keys(features).map( f => query[`features.${f}`] = features[f] )
 
   return Pub.find(query).exec()
 

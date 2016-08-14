@@ -1,13 +1,19 @@
 import React from 'react'
+import uuid from 'node-uuid'
 
-const Component = (props) => {
+const SearchFeatures = ({ features, toggleFeature }) => {
+
+  // TODO - active class
+  const featureList = Object.keys(features).map( f => (
+    <div key={uuid.v4()} onClick={ () => toggleFeature(f) }>{ f }</div>
+  ))
 
   return (
     <div>
-      Features
+      { featureList }
     </div>
   )
 
 }
 
-export default Component
+export default SearchFeatures

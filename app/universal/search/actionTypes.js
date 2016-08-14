@@ -2,6 +2,9 @@ import { name } from './constants'
 
 export const FEATURE = `${name}/FEATURE`
 
+export const GEOCODE_SET = `${name}/GEOCODE_SET`
+export const GEOCODE_RESET = `${name}/GEOCODE_RESET`
+
 export const GEOCODE_REQUEST = `${name}/GEOCODE_REQUEST`
 export const GEOCODE_SUCCESS = `${name}/GEOCODE_SUCCESS`
 export const GEOCODE_FAILURE = `${name}/GEOCODE_FAILURE`

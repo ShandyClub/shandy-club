@@ -8,6 +8,7 @@ import * as selectors from './selectors'
 
 // components
 import * as Components from './components'
+import Button from '../shared/components/button'
 import Loader from '../shared/components/loader'
 
 export class Container extends Component {
@@ -20,30 +21,21 @@ export class Container extends Component {
 
   render() {
 
-    const { features, geocodes, term, isRequestingGeocodes, error, actions: { getGeocode } } = this.props
-
-    // TODO - need to get availableFeatures somehow... ? Constants?
-    // "features": {
-    //     "architecture": true,
-    //     "beer": true,
-    //     "fire": false,
-    //     "food": false,
-    //     "games": false,
-    //     "garden": true,
-    //     "peace": false,
-    //     "tv": false
-    // }
+    const { actions, features, geocodes, term, isRequestingGeocodes, error } = this.props
+    const { getGeocode, setGeocode, clearGeocode, toggleFeature, submitSearch } = actions
 
     return (
       <div>
 
-        <Components.input term={term} handleSearchTerm={getGeocode} />
+        <Components.input term={term} handleSearchTerm={ (term) => term ? getGeocode(term) : clearGeocode() } />
 
         <Loader loaded={isRequestingGeocodes}>
-          <Components.suggestions geocodes={geocodes} error={error} />
+          <Components.suggestions geocodes={geocodes} setGeocode={setGeocode} error={error} />
         </Loader>
 
-        <Components.features features={features} />
+        <Components.features features={features} toggleFeature={toggleFeature} />
+
+        <Button label={'beer me'} callback={submitSearch} />
 
         {/* TODO - Components.roam ... */}
         {/* TODO - Components.lucky ... */}

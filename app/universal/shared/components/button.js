@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Component = (props) => {
+const Button = ({ label, callback }) => {
 
   return (
-    <div>
-      Button
+    <div onClick={callback}>
+      { label }
     </div>
   )
 
 }
 
-export default Component
+export default Button

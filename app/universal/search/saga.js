@@ -3,7 +3,7 @@ import { call, put, fork, select } from 'redux-saga/effects'
 
 import * as API from '../shared/services/api'
 import * as actions from './actionTypes'
-// import { getHuman, hasBeenPolled, hasVisited, isTheEnd } from './selectors'
+import { getFeatures, getPoint } from './selectors'
 
 // -----
 // GEOCODE
@@ -43,7 +43,9 @@ export function* lucky() {
 
 }
 
-function* fetchLucky(action) {
+function* fetchLucky() {
+
+  // TODO - get geolocation
 
   try {
 
@@ -71,11 +73,15 @@ export function* submit() {
 
 }
 
-function* fetchSubmit(action) {
+function* fetchSubmit() {
 
   try {
 
-    const res = yield call(API.post, 'search/pubs', { ...action.payload.search })
+    // get search criteria
+    const point = yield select(getPoint)
+    const features = yield select(getFeatures)
+
+    const res = yield call(API.post, 'search/pubs', { point, features })
     const data = yield res.json()
     const results = data.pubs
 

@@ -4,21 +4,32 @@ import { createReducer } from 'redux-immutablejs'
 // actionTypes
 import * as actions from './actionTypes'
 
-// utils
-import { immutableToggle as toggle } from '../shared/util'
-
+// TODO - consider child reducer for `features`
 export const initialState = Immutable.fromJS({
-  features: [],
+  features: {
+    architecture: false,
+    beer: false,
+    fire: false,
+    food: false,
+    games: false,
+    garden: false,
+    peace: false,
+    tv: false
+  },
   geocodes: [],
   results: [],
   term: null,
+  point: null,
   requesting: false,
   error: null,
 })
 
 export default createReducer(initialState, {
 
-  [actions.FEATURE]: (state, action) => toggle(state.get('features'), action.payload.feature),
+  [actions.FEATURE]: (state, action) => state.updateIn([ 'features', action.payload.feature ], value => !value ),
+
+  [actions.GEOCODE_SET]: (state, action) => state.merge({ ...action.payload }),
+  [actions.GEOCODE_RESET]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.GEOCODE_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.GEOCODE_SUCCESS]: (state, action) => state.merge({ ...action.payload }),

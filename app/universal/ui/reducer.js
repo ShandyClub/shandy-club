@@ -6,11 +6,15 @@ import * as actions from './actionTypes'
 export const initialState = Immutable.fromJS({
   requesting: false,
   error: null,
+  search: {
+    focus: false,
+    overlay: true,
+  }
 })
 
 export default createReducer(initialState, {
 
-  [actions.SET_ERROR]: (state, action) => state.merge({ ...action.payload }),
-  [actions.SET_REQUEST]: (state, action) => state.merge({ ...action.payload }),
+  [actions.UPDATE]: (state, action) => state.merge({ ...action.payload }),
+  [actions.RESET]: (state, action) => state.merge({ ...initialState.toJS() }),
 
 })

@@ -4,7 +4,6 @@ import { createReducer } from 'redux-immutablejs'
 // actionTypes
 import * as actions from './actionTypes'
 
-// TODO - consider child reducer for `features`
 export const initialState = Immutable.fromJS({
   features: {
     architecture: false,
@@ -20,8 +19,6 @@ export const initialState = Immutable.fromJS({
   results: [],
   term: null,
   point: null,
-  requesting: false,
-  error: null,
 })
 
 export default createReducer(initialState, {

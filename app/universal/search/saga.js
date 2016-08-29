@@ -3,6 +3,7 @@ import { call, put, fork, select } from 'redux-saga/effects'
 
 import * as API from '../shared/services/api'
 import * as actions from './actionTypes'
+import { actionTypes as ui } from '../ui'
 import { getFeatures, getPoint } from './selectors'
 
 // -----
@@ -15,19 +16,30 @@ export function* geocode() {
 
 }
 
+export function* watchGeocode() {
+
+  yield* takeLatest(actions.GEOCODE_SUCCESS, updateUI, { requesting: false })
+
+}
+
 function* fetchGeocode(action) {
 
   try {
+
+    yield call(updateUI, { error: null, requesting: true }, action)
 
     const res = yield call(API.get, `search/geocode/${action.payload.term}`)
     const data = yield res.json()
     const geocodes = data.geocode
 
+    yield put({ type: ui.UPDATE, payload: { requesting: false } })
     yield put({ type: actions.GEOCODE_SUCCESS, payload: { geocodes } })
 
   } catch (error) {
 
-    yield put({ type: actions.GEOCODE_FAILURE, payload: { error } })
+    yield call(updateUI, { error, requesting: false }, action)
+
+    yield put({ type: actions.GEOCODE_FAILURE })
 
   }
 
@@ -43,21 +55,32 @@ export function* lucky() {
 
 }
 
-function* fetchLucky() {
+export function* watchLucky() {
+
+  yield* takeLatest(actions.LUCKY_SUCCESS, updateUI, { requesting: false })
+
+}
+
+function* fetchLucky(action) {
 
   // TODO - get geolocation
 
   try {
 
+    yield call(updateUI, { error: null, requesting: true }, action)
+
     const res = yield call(API.post, 'search/lucky', {})
     const data = yield res.json()
     const results = data.pubs
 
-    yield put({ type: actions.LUCKY_SUCCESS, payload: { results, requesting: false } })
+    yield put({ type: ui.UPDATE, payload: { requesting: false } })
+    yield put({ type: actions.LUCKY_SUCCESS, payload: { results } })
 
   } catch (error) {
 
-    yield put({ type: actions.LUCKY_FAILURE, payload: { error, requesting: false } })
+    yield call(updateUI, { error, requesting: false }, action)
+
+    yield put({ type: actions.LUCKY_FAILURE })
 
   }
 
@@ -73,9 +96,17 @@ export function* submit() {
 
 }
 
-function* fetchSubmit() {
+export function* watchSubmit() {
+
+  yield* takeLatest(actions.SUBMIT_SUCCESS, updateUI, { requesting: false })
+
+}
+
+function* fetchSubmit(action) {
 
   try {
+
+    yield call(updateUI, { error: null, requesting: true }, action)
 
     // get search criteria
     const point = yield select(getPoint)
@@ -85,13 +116,25 @@ function* fetchSubmit() {
     const data = yield res.json()
     const results = data.pubs
 
-    yield put({ type: actions.SUBMIT_SUCCESS, payload: { results, requesting: false } })
+    yield put({ type: actions.SUBMIT_SUCCESS, payload: { results } })
 
   } catch (error) {
 
-    yield put({ type: actions.SUBMIT_FAILURE, payload: { error, requesting: false } })
+    yield call(updateUI, { error, requesting: false }, action)
+
+    yield put({ type: actions.SUBMIT_FAILURE })
 
   }
+
+}
+
+// -----
+// UI
+// -----
+
+function* updateUI(props, action) {
+
+  yield put({ type: ui.UPDATE, payload: { ...props } })
 
 }
 
@@ -99,7 +142,12 @@ function* fetchSubmit() {
 export default function* root() {
 
   yield fork(geocode)
+  yield fork(watchGeocode)
+
   yield fork(lucky)
+  yield fork(watchLucky)
+
   yield fork(submit)
+  yield fork(watchSubmit)
 
 }

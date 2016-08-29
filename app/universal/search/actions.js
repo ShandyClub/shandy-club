@@ -31,17 +31,9 @@ export const toggleFeature = feature => ({
 })
 
 export const submitSearch = () => ({
-  type: actions.SUBMIT_REQUEST,
-  payload: {
-    requesting: true,
-    error: null
-  }
+  type: actions.SUBMIT_REQUEST
 })
 
 export const submitLucky = () => ({
-  type: actions.LUCKY_REQUEST,
-  payload: {
-    requesting: true,
-    error: null
-  }
+  type: actions.LUCKY_REQUEST
 })

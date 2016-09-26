@@ -31,7 +31,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-    new CleanPlugin(['index.html', 'bundle.js', 'bundle.js.map', 'server.bundle.js', 'style.css', 'style.css.map'], PATHS.dist),
+    new CleanPlugin(['index.html', 'bundle.js', 'bundle.js.map', 'style.css', 'style.css.map'], PATHS.dist),
     new CopyPlugin([
       { from: './app/client/index.html', to: 'index.html' }
     ]),

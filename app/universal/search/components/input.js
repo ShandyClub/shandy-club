@@ -1,20 +1,20 @@
 import React from 'react'
-// import classNames from 'classnames/bind'
-// import styles from 'css/components/search/input.css'
+import classNames from 'classnames/bind'
+import styles from 'css/components/search/input.css'
 
-// const cx = classNames.bind(styles)
+const cx = classNames.bind(styles)
 
 const SearchInput = ({ term, handleSearchTerm, onFocus }) => {
 
-  // let className = cx({
-  //   base: true
-  // })
+  let className = cx({
+    base: true
+  })
 
   const onKeyUp = () => handleSearchTerm(SearchInput._input.value)
 
   return (
     <div>
-      <input ref={ r => SearchInput._input = r } type='text' defaultValue={term} onKeyUp={onKeyUp} onFocus={onFocus} />
+      <input className={className} ref={ r => SearchInput._input = r } type='text' defaultValue={term} onKeyUp={onKeyUp} onFocus={onFocus} />
     </div>
   )
 

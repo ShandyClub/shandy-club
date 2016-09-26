@@ -31,7 +31,7 @@
     "generate": "gulp generate --gulpfile tasks/gulpfile.babel.js",
     "db": "npm-run mongo-express -u admin -p admin -d shandyclub",
     "start": "per-env",
-    "start:development": "webpack-dev-server --config config/webpack.config.dev.js & NODE_ENV=development nodemon --exec babel-node app/server/index.js",
+    "start:development": "webpack-dev-server --config config/webpack.config.dev.js & webpack --watch --config config/webpack.config.server.js --colors & NODE_ENV=development nodemon -w public --exec babel-node public/server.bundle.js",
     "start:production": "node server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",

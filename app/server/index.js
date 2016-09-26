@@ -21,7 +21,7 @@ const isApiRoute = path => path.match(/^\/api/)
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 // construct static assets path
-const staticPath = isDevelopment ? path.join(__dirname, '../../public') : './'
+const staticPath = isDevelopment ? path.join(__dirname, '../../public') : './public'
 
 // layout method
 const renderPage = (html, initialState) => {

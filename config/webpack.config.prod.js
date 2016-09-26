@@ -12,19 +12,24 @@ const PATHS = {
 }
 
 module.exports = {
+
   devtool: 'source-map',
-  entry: ['regenerator-runtime/runtime', PATHS.src],
+
+  entry: [ 'regenerator-runtime/runtime', PATHS.src ],
+
   output: {
     path: PATHS.dist,
     filename: 'bundle.js',
     publicPath: '/'
   },
+
   resolve: {
     alias: {
       css: PATHS.css,
       img: PATHS.img
     }
   },
+
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
@@ -46,16 +51,21 @@ module.exports = {
       favicon: 'static/img/favicon.png'
     })
   ],
+
+  eslint: {
+    configFile: './config/.eslintrc.js'
+  },
+
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loaders: [ 'babel', 'eslint' ]
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1!postcss-loader')
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1!postcss')
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -66,7 +76,7 @@ module.exports = {
       }
     ]
   },
-  postcss: [
-    require('postcss-cssnext')
-  ]
+
+  postcss: [ require('postcss-cssnext') ]
+
 }

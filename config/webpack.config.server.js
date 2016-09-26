@@ -48,12 +48,16 @@ module.exports = {
     __dirname: true
   },
 
+  eslint: {
+    configFile: './config/.eslintrc.js'
+  },
+
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loaders: [ 'babel', 'eslint' ]
       },
       {
         test: /\.css$/,

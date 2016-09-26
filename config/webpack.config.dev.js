@@ -12,19 +12,24 @@ const PATHS = {
 }
 
 module.exports = {
+
   devtool: 'eval',
-  entry: ['babel-polyfill', PATHS.src],
+
+  entry: [ 'babel-polyfill', PATHS.src ],
+
   output: {
     path: PATHS.dist,
     filename: 'bundle.js',
     publicPath: '/'
   },
+
   resolve: {
     alias: {
       css: PATHS.css,
       img: PATHS.img
     }
   },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -40,6 +45,7 @@ module.exports = {
       favicon: 'static/img/favicon.png'
     })
   ],
+
   devServer: {
     contentBase: PATHS.dist,
     port: 3000,
@@ -48,19 +54,21 @@ module.exports = {
     stats: 'errors-only',
     historyApiFallback: true
   },
+
+  eslint: {
+    configFile: './config/.eslintrc.js'
+  },
+
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: true
-        }
+        loaders: [ 'babel?cacheDirectory', 'eslint' ]
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -71,7 +79,7 @@ module.exports = {
       }
     ]
   },
-  postcss: [
-    require('postcss-cssnext')
-  ]
+
+  postcss: [ require('postcss-cssnext') ]
+
 }

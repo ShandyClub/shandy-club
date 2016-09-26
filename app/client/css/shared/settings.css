@@ -25,4 +25,4 @@
 @value color-shandy: #FBB80C;
 
 /* easing */
-@value easing-sample: cubic-bezier(.165,.84,.44,1);
+@value easing-sample: cubic-bezier(0.165, 0.84, 0.44, 1);

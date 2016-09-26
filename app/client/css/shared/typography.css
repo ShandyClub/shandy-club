@@ -1,6 +1,6 @@
 /* TYPOGRAPHY */
 
-@value font-size-small, font-size-body, font-size-h4, font-size-h3, font-size-h2, font-size-h1 from "./settings.css";
+@value font-size-small, font-size-body, font-size-h4, font-size-h3, font-size-h2, font-size-h1 from './settings.css';
 
 .primary {
   font-family: font-family-primary;

@@ -21,7 +21,7 @@ export class Container extends Component {
 
   render() {
 
-    const { actions, uiActions, features, geocodes, term, hasSuggestions } = this.props
+    const { actions, features, geocodes, term, hasSuggestions } = this.props
     const { getGeocode, setGeocode, clearGeocode, toggleFeature, submitSearch, submitLucky, updateUI } = actions
 
     const renderSuggestions = hasSuggestions ? (

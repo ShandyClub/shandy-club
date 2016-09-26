@@ -19,10 +19,7 @@ const saga = createSagaMiddleware()
 let middleware = [ router, saga ]
 
 // logger middleware in development
-if (isDevelopment) {
-  const logger = createLogger({ collapsed: true })
-  middleware.push(logger)
-}
+if (isDevelopment) middleware.push( createLogger({ collapsed: true }) )
 
 // create store with middleware - and devTools if dev
 const finalCreateStore = compose(
@@ -38,7 +35,7 @@ const initialState = isBrowser && window.__INITIAL_STATE__ || persistState
 
 export default function configureStore(state = initialState) {
 
-  const store = finalCreateStore(rootReducer, Immutable.fromJS(initialState))
+  const store = finalCreateStore(rootReducer, Immutable.fromJS(state))
 
   // start sagas
   store.runSaga = saga.run
@@ -54,7 +51,7 @@ export default function configureStore(state = initialState) {
 
     isBrowser && Storage.setItem(STATE_KEY, stateTrimmed.toJS())
 
-  });
+  })
 
   return store
 

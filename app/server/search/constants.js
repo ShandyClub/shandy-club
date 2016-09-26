@@ -1,5 +1,5 @@
 // set undefined env vars
-if(!process.env.MAPBOX_API) require('../../../config/env')
+if (!process.env.MAPBOX_API) require('../../../config/env')
 
 export const name = 'search'
 

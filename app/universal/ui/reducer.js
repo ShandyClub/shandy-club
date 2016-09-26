@@ -15,6 +15,6 @@ export const initialState = Immutable.fromJS({
 export default createReducer(initialState, {
 
   [actions.UPDATE]: (state, action) => state.merge({ ...action.payload }),
-  [actions.RESET]: (state, action) => state.merge({ ...initialState.toJS() }),
+  [actions.RESET]: state => state.merge({ ...initialState.toJS() }),
 
 })

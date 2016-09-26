@@ -32,7 +32,7 @@ export const remove = (id) => {
 export const search = (point, features) => {
 
   const query = {
-    loc: { $near: { $geometry: { type: 'Point' , coordinates: point } } }
+    loc: { $near: { $geometry: { type: 'Point', coordinates: point } } }
   }
 
   features && Object.keys(features).map( f => query[`features.${f}`] = features[f] )
@@ -45,7 +45,7 @@ export const lucky = (point) => {
 
   const filter = {}
 
-  if (point) filter['loc'] = { $near: { $geometry: { type: 'Point' , coordinates: point } } }
+  if (point) filter['loc'] = { $near: { $geometry: { type: 'Point', coordinates: point } } }
 
   return new Promise( (resolve, reject) => {
 

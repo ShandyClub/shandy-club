@@ -1,4 +1,4 @@
-import { takeEvery, takeLatest } from 'redux-saga'
+import { takeLatest } from 'redux-saga'
 import { call, put, fork, select } from 'redux-saga/effects'
 
 import * as API from '../shared/services/api'
@@ -132,7 +132,7 @@ function* fetchSubmit(action) {
 // UI
 // -----
 
-function* updateUI(props, action) {
+function* updateUI(props) {
 
   yield put({ type: ui.UPDATE, payload: { ...props } })
 

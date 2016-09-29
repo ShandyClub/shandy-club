@@ -3,9 +3,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+// actions
 import * as actions from './actions'
 import { actions as uiActions } from '../ui'
-import * as selectors from './selectors'
+
+// selectors
+import selectors from './selectors'
 
 // components
 import * as Components from './components'
@@ -116,14 +119,7 @@ export class Search extends Component {
 }
 
 export default connect(
-  createStructuredSelector({
-    features: selectors.getFeatures,
-    geocodes: selectors.getGeocodes,
-    results: selectors.getResults,
-    term: selectors.getTerm,
-    showSuggestions: selectors.getShowSuggestions,
-    isSearchFocused: selectors.getSearchFocus,
-  }),
+  createStructuredSelector({ ...selectors }),
   dispatch => ({
     actions: bindActionCreators({ ...actions, ...uiActions }, dispatch)
   })

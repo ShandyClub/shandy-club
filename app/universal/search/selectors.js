@@ -4,15 +4,21 @@ import { name } from './constants'
 import { selectors as ui } from '../ui'
 
 // static
-export const getAll = state => state.get(name)
-export const getFeatures = state => state.getIn([ name, 'features' ]).toObject()
-export const getGeocodes = state => state.getIn([ name, 'geocodes' ])
-export const getResults = state => state.getIn([ name, 'results' ])
-export const getTerm = state => state.getIn([ name, 'term' ])
-export const getPoint = state => state.getIn([ name, 'point' ]).toArray()
-export const getIsRequesting = state => state.getIn([ name, 'requesting' ])
-export const getError = state => state.getIn([ name, 'error' ])
-export const getSearchFocus = ui.getSearchFocus
+const getAll = state => state.get(name)
+const getFeatures = createSelector( getAll, state => state.get('features').toObject() )
+const getGeocodes = createSelector( getAll, state => state.get('geocodes') )
+const getResults = createSelector( getAll, state => state.get('results') )
+const getTerm = createSelector( getAll, state => state.get('term') )
+const getSearchFocus = ui.getSearchFocus
 
 // computed
-export const getShowSuggestions = createSelector( [ getTerm, getGeocodes, ui.getSearchFocus ], (term, geocodes, focus) => term && geocodes.size && focus )
+const getShowSuggestions = createSelector( [ getTerm, getGeocodes, getSearchFocus ], (term, geocodes, focus) => term && geocodes.size && focus )
+
+export default {
+  features: getFeatures,
+  geocodes: getGeocodes,
+  results: getResults,
+  term: getTerm,
+  isSearchFocused: getSearchFocus,
+  showSuggestions: getShowSuggestions,
+}

@@ -8,6 +8,7 @@
   },
   "pre-commit": {
     "run": [
+      "test",
       "lint"
     ],
     "silent": true
@@ -30,7 +31,7 @@
     }
   },
   "scripts": {
-    "test": "babel-node test/index.js | faucet",
+    "test": "babel-node test | faucet",
     "lint": "npm run lint:css & npm run lint:js",
     "lint:css": "stylelint --config config/.stylelintrc.js app/client/css/**/*.css",
     "lint:js": "eslint --config config/.eslintrc.js app/",

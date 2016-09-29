@@ -48,8 +48,6 @@ export class Search extends Component {
 
   toggleClickOutsideEvent(enabled) {
 
-    console.log('toggleClickOutsideEvent', enabled)
-
     const handleClickOutside = this.handleClickOutside
 
     // listen for clicks outside || stop listening for clicks outside

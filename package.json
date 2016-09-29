@@ -43,7 +43,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
     "build:server": "webpack --config config/webpack.config.server.js",
-    "deploy": "modulus deploy -p shandyclub public/"
+    "deploy": "npm run build && modulus deploy -p shandyclub public/"
   },
   "repository": {
     "type": "git",

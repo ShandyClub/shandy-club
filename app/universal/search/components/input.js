@@ -10,11 +10,11 @@ const SearchInput = ({ term, handleSearchTerm, onFocus, onClick }) => {
     base: true
   })
 
-  const onKeyUp = () => handleSearchTerm(SearchInput._input.value)
+  const onChange = () => handleSearchTerm(SearchInput._input.value)
 
   return (
     <div>
-      <input className={className} ref={ r => SearchInput._input = r } type='text' defaultValue={term} onKeyUp={onKeyUp} onFocus={onFocus} onClick={onClick} />
+      <input className={className} ref={ r => SearchInput._input = r } type='text' value={term || ''} onChange={onChange} onFocus={onFocus} onClick={onClick} />
     </div>
   )
 

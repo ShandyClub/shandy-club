@@ -1,7 +1,7 @@
 {
   "name": "shandy-club",
   "version": "1.0.0",
-  "description": "Shandy Club application",
+  "description": "Shandy Club",
   "main": "server.bundle.js",
   "engines": {
     "node": "~6.2.0"

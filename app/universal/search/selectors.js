@@ -3,6 +3,7 @@ import { name } from './constants'
 
 import { selectors as ui } from '../ui'
 
+// static
 export const getAll = state => state.get(name)
 export const getFeatures = state => state.getIn([ name, 'features' ]).toObject()
 export const getGeocodes = state => state.getIn([ name, 'geocodes' ])
@@ -11,5 +12,7 @@ export const getTerm = state => state.getIn([ name, 'term' ])
 export const getPoint = state => state.getIn([ name, 'point' ]).toArray()
 export const getIsRequesting = state => state.getIn([ name, 'requesting' ])
 export const getError = state => state.getIn([ name, 'error' ])
+export const getSearchFocus = ui.getSearchFocus
 
-export const getHasSuggestions = createSelector([ getTerm, getGeocodes, ui.getSearchFocus ], (term, geocodes, focus) => term && geocodes.size && focus ? true : false)
+// computed
+export const getShowSuggestions = createSelector( [ getTerm, getGeocodes, ui.getSearchFocus ], (term, geocodes, focus) => term && geocodes.size && focus )

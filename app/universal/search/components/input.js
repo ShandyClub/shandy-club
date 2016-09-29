@@ -4,7 +4,7 @@ import styles from 'css/components/search/input.css'
 
 const cx = classNames.bind(styles)
 
-const SearchInput = ({ term, handleSearchTerm, onFocus }) => {
+const SearchInput = ({ term, handleSearchTerm, onFocus, onClick }) => {
 
   let className = cx({
     base: true
@@ -14,7 +14,7 @@ const SearchInput = ({ term, handleSearchTerm, onFocus }) => {
 
   return (
     <div>
-      <input className={className} ref={ r => SearchInput._input = r } type='text' defaultValue={term} onKeyUp={onKeyUp} onFocus={onFocus} />
+      <input className={className} ref={ r => SearchInput._input = r } type='text' defaultValue={term} onKeyUp={onKeyUp} onFocus={onFocus} onClick={onClick} />
     </div>
   )
 

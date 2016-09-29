@@ -5,7 +5,7 @@ import { selectors as ui } from '../ui'
 
 // static
 const getAll = state => state.get(name)
-const getFeatures = createSelector( getAll, state => state.get('features').toObject() )
+const getFeatures = createSelector( getAll, state => state.get('features') )
 const getGeocodes = createSelector( getAll, state => state.get('geocodes') )
 const getResults = createSelector( getAll, state => state.get('results') )
 const getTerm = createSelector( getAll, state => state.get('term') )

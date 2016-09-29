@@ -4,7 +4,7 @@ import uuid from 'node-uuid'
 const SearchFeatures = ({ features, toggleFeature }) => {
 
   // TODO - active class
-  const featureList = Object.keys(features).map( f => (
+  const featureList = features.keySeq().map( f => (
     <div key={uuid.v4()} onClick={ () => toggleFeature(f) }>{ f }</div>
   ))
 

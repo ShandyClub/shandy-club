@@ -1,7 +1,11 @@
 import { takeLatest } from 'redux-saga'
 import { call, put, fork, select } from 'redux-saga/effects'
 
+// services
 import * as API from '../shared/services/api'
+import * as Geolocation from '../shared/services/geolocation'
+
+// actions/selectors
 import * as actions from './actionTypes'
 import { actionTypes as ui } from '../ui'
 import selectors from './selectors'
@@ -51,7 +55,7 @@ function* fetchGeocode(action) {
 
 export function* lucky() {
 
-  yield* takeLatest(actions.LUCKY_REQUEST, fetchLucky)
+  yield* takeLatest(actions.LUCKY_REQUEST, checkGeolocation, fetchLucky)
 
 }
 
@@ -63,13 +67,14 @@ export function* watchLucky() {
 
 function* fetchLucky(action) {
 
-  // TODO - get geolocation
-
   try {
 
     yield call(updateUI, { error: null, requesting: true }, action)
 
-    const res = yield call(API.post, 'search/lucky', {})
+    // get geolocation data
+    const geolocation = yield select(selectors.geolocation)
+
+    const res = yield call(API.post, 'search/lucky', { ...geolocation })
     const data = yield res.json()
     const results = data.pubs
 
@@ -123,6 +128,29 @@ function* fetchSubmit(action) {
     yield call(updateUI, { error, requesting: false }, action)
 
     yield put({ type: actions.SUBMIT_FAILURE })
+
+  }
+
+}
+
+// -----
+// GEOLOCATION
+// -----
+
+function* checkGeolocation(callback, action) {
+
+  try {
+
+    // request user geolocation
+    const { coords: { longitude: lng, latitude: lat } } = yield call(Geolocation.getCurrentPosition)
+
+    yield put({ type: actions.GEOLOCATION_SET, payload: { geolocation: { lng, lat } } })
+
+    yield call(callback, action)
+
+  } catch (error) {
+
+    yield call(updateUI, { error })
 
   }
 

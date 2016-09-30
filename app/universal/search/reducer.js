@@ -4,6 +4,8 @@ import { createReducer } from 'redux-immutablejs'
 // actionTypes
 import * as actions from './actionTypes'
 
+// TODO - use Records for geolocation|point|other?
+
 export const initialState = Immutable.fromJS({
   features: {
     architecture: false,
@@ -16,9 +18,13 @@ export const initialState = Immutable.fromJS({
     tv: false
   },
   geocodes: [],
+  geolocation: {
+    lng: null,
+    lat: null,
+  },
+  point: [],
   results: [],
   term: null,
-  point: null,
 })
 
 export default createReducer(initialState, {
@@ -27,6 +33,8 @@ export default createReducer(initialState, {
 
   [actions.GEOCODE_SET]: (state, action) => state.merge({ ...action.payload }),
   [actions.GEOCODE_RESET]: (state, action) => state.merge({ ...action.payload }),
+
+  [actions.GEOLOCATION_SET]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.GEOCODE_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.GEOCODE_SUCCESS]: (state, action) => state.merge({ ...action.payload }),

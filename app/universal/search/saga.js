@@ -4,7 +4,7 @@ import { call, put, fork, select } from 'redux-saga/effects'
 import * as API from '../shared/services/api'
 import * as actions from './actionTypes'
 import { actionTypes as ui } from '../ui'
-import { getFeatures, getPoint } from './selectors'
+import selectors from './selectors'
 
 // -----
 // GEOCODE
@@ -109,8 +109,8 @@ function* fetchSubmit(action) {
     yield call(updateUI, { error: null, requesting: true }, action)
 
     // get search criteria
-    const point = yield select(getPoint)
-    const features = yield select(getFeatures)
+    const point = yield select(selectors.point)
+    const features = yield select(selectors.features)
 
     const res = yield call(API.post, 'search/pubs', { point, features })
     const data = yield res.json()

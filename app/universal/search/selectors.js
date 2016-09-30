@@ -7,6 +7,7 @@ import { selectors as ui } from '../ui'
 const getAll = state => state.get(name)
 const getFeatures = createSelector( getAll, state => state.get('features') )
 const getGeocodes = createSelector( getAll, state => state.get('geocodes') )
+const getPoint = createSelector( getAll, state => state.get('point').toArray() )
 const getResults = createSelector( getAll, state => state.get('results') )
 const getTerm = createSelector( getAll, state => state.get('term') )
 const getSearchFeatures = ui.getSearchFeatures
@@ -18,6 +19,7 @@ const getShowSuggestions = createSelector( [ getTerm, getGeocodes, getSearchFocu
 export default {
   features: getFeatures,
   geocodes: getGeocodes,
+  point: getPoint,
   results: getResults,
   term: getTerm,
   isSearchFeatures: getSearchFeatures,

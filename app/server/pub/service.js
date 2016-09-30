@@ -31,11 +31,11 @@ export const remove = (id) => {
 
 export const search = (point, features) => {
 
-  const query = {
-    loc: { $near: { $geometry: { type: 'Point', coordinates: point } } }
-  }
+  // query by selected features
+  const query = features && Object.keys(features).reduce( (reduced, f) => features[f] ? { ...reduced, [`features.${f}`]: features[f] } : reduced, {} ) || {}
 
-  features && Object.keys(features).map( f => query[`features.${f}`] = features[f] )
+  // and location
+  query['loc'] = { $near: { $geometry: { type: 'Point', coordinates: point } } }
 
   return Pub.find(query).exec()
 

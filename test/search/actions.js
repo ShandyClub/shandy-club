@@ -1,72 +1,83 @@
 import test from 'tape'
-import nock from 'nock'
-import configureMockStore from 'redux-mock-store'
-import promise from '../../src/app/js/middleware/promise-middleware'
 
-import * as actions from '../../src/app/js/actionCreator/referralActionCreator'
-import * as types from '../../src/app/js/actionTypes/referral'
-import { REFERRAL_URL, ANALYTICS_CATEGORY } from '../../src/app/js/constants/referral'
+import * as actions from '../../app/universal/search/actions'
+import * as types from '../../app/universal/search/actionTypes'
 
-const mockStore = configureMockStore([ promise ])
-const localhost = 'http://local.unlease.io:9000'
+test(`Search:Action[${types.GEOCODE_REQUEST}] - Geocode API request action`, t => {
 
-test('Referral:Action:[TOGGLE_EMAIL] - toggle email active state', t => {
+  const term = 'Shoreditch'
 
-  const actual = actions.toggleEmail()
-  const expected = { type: types.TOGGLE_EMAIL }
+  const actual = actions.getGeocode(term)
+  const expected = { type: types.GEOCODE_REQUEST, payload: { term } }
 
   t.deepEqual(actual, expected,
-    'toggleEmail() should set emailActive to !emailActive')
+    'getGeocode() should set `term`')
 
   t.end()
 
 })
 
-test('Referral:Action:[GENERATE_CODE_SUCCESS] - generate code success async action output', t => {
+test(`Search:Action[${types.GEOCODE_SET}] - Geocode set action`, t => {
 
-  t.plan(1)
+  const point = [ -0.101729, 51.569542 ]
+  const term = 'Finsbury Park'
 
-  const token = null
-  const referralCode = 'TEST1234'
-  const referralName = 'Test'
-  const referralLink = `${REFERRAL_URL}${referralCode}`
+  const actual = actions.setGeocode(point, term)
+  const expected = { type: types.GEOCODE_SET, payload: { point, term } }
 
-  nock(localhost)
-      .post('/resource/user/generateReferralCode')
-      .reply(200, { referralCode, firstName: referralName })
+  t.deepEqual(actual, expected,
+    'setGeocode() should set `point` and `term`')
 
-  const store = mockStore({})
-  const expectedActions = [
-    { type: types.GENERATE_CODE_REQUEST, payload: { isLoading: true, error: null } },
-    { type: types.GENERATE_CODE_SUCCESS, result: { payload: { referralCode, referralName, referralLink, isLoading: false, error: null } } }
-  ]
-
-  return store.dispatch(actions.fetchReferralCode(token))
-    .then( () => {
-      t.deepEqual(store.getActions(), expectedActions)
-    })
+  t.end()
 
 })
 
-test('Referral:Action:[GENERATE_CODE_FAILURE] - generate code failure async action output', t => {
+test(`Search:Action[${types.GEOCODE_RESET}] - Geocode clear action`, t => {
 
-  t.plan(1)
+  const actual = actions.clearGeocode()
+  const expected = { type: types.GEOCODE_RESET, payload: { geocodes: [], term: null } }
 
-  const token = null
+  t.deepEqual(actual, expected,
+    'clearGeocode() should reset `geocodes` and `term`')
 
-  nock(localhost)
-      .post('/resource/user/generateReferralCode')
-      .reply(400)
+  t.end()
 
-  const store = mockStore({})
-  const expectedActions = [
-    { type: types.GENERATE_CODE_REQUEST, payload: { isLoading: true, error: null } },
-    { type: types.GENERATE_CODE_FAILURE, error: { payload: { error: new Error(), isLoading: false } } }
-  ]
+})
 
-  return store.dispatch(actions.fetchReferralCode(token))
-    .then( () => {
-      t.deepEqual(store.getActions(), expectedActions)
-    })
+test(`Search:Action[${types.FEATURE}] - Toggle feature action`, t => {
+
+  const feature = 'beer'
+
+  const actual = actions.toggleFeature(feature)
+  const expected = { type: types.FEATURE, payload: { feature } }
+
+  t.deepEqual(actual, expected,
+    'toggleFeature() should toggle `feature`')
+
+  t.end()
+
+})
+
+test(`Search:Action[${types.SUBMIT_REQUEST}] - Submit search action`, t => {
+
+  const actual = actions.submitSearch()
+  const expected = { type: types.SUBMIT_REQUEST }
+
+  t.deepEqual(actual, expected,
+    'submitSearch() should start search request')
+
+  t.end()
+
+})
+
+test(`Search:Action[${types.LUCKY_REQUEST}] - Submit lucky action`, t => {
+
+  const actual = actions.submitLucky()
+  const expected = { type: types.LUCKY_REQUEST }
+
+  t.deepEqual(actual, expected,
+    'submitLucky() should start lucky request')
+
+  t.end()
 
 })

@@ -2,7 +2,7 @@ import test from 'tape'
 
 import { actions, actionTypes as types } from '../../app/universal/ui'
 
-test('UI:Action:[UPDATE] - update UI state', t => {
+test('UI:Action[UPDATE] - update UI state', t => {
 
   const payload = { requesting: true }
 
@@ -16,7 +16,7 @@ test('UI:Action:[UPDATE] - update UI state', t => {
 
 })
 
-test('UI:Action:[RESET] - reset UI state', t => {
+test('UI:Action[RESET] - reset UI state', t => {
 
   const actual = actions.resetUI()
   const expected = { type: types.RESET }

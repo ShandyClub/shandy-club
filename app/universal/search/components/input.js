@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classNames from 'classnames/bind'
 import styles from 'css/components/search/input.css'
 
@@ -18,6 +18,13 @@ const SearchInput = ({ term, handleSearchTerm, onFocus, onClick }) => {
     </div>
   )
 
+}
+
+SearchInput.propTypes = {
+  term: PropTypes.string,
+  handleSearchTerm: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default SearchInput

@@ -106,6 +106,7 @@
     "express": "^4.14.0",
     "http-proxy": "^1.14.0",
     "immutable": "^3.7.6",
+    "immutable-props": "^1.1.0",
     "mapbox": "^1.0.0-beta1",
     "mongoose": "^4.5.3",
     "mongoose-simple-random": "^0.3.3",

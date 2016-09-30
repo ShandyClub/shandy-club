@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { Map } from 'immutable-props'
 import uuid from 'node-uuid'
 
 import styles from 'css/components/search/feature.css'
@@ -15,6 +16,11 @@ const SearchFeatures = ({ features, toggleFeature }) => {
     </div>
   )
 
+}
+
+SearchFeatures.propTypes = {
+  features: Map.isRequired,
+  toggleFeature: PropTypes.func.isRequired,
 }
 
 export default SearchFeatures

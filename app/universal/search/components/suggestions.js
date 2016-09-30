@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import uuid from 'node-uuid'
 
 const SearchSuggestions = ({ geocodes, setGeocode }) => {
@@ -15,6 +15,11 @@ const SearchSuggestions = ({ geocodes, setGeocode }) => {
     </div>
   )
 
+}
+
+SearchSuggestions.propTypes = {
+  geocodes: PropTypes.object.isRequired,
+  setGeocode: PropTypes.func.isRequired,
 }
 
 export default SearchSuggestions

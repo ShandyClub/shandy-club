@@ -7,6 +7,7 @@ export const initialState = Immutable.fromJS({
   requesting: false,
   error: null,
   search: {
+    features: false,
     focus: false,
     overlay: true,
   }

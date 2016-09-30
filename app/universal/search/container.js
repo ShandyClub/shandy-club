@@ -22,6 +22,7 @@ export class Search extends Component {
 
     this.handleClickOutside = this.handleClickOutside.bind(this)
     this.toggleClickOutsideEvent = this.toggleClickOutsideEvent.bind(this)
+    this.toggleFeatures = this.toggleFeatures.bind(this)
     this.toggleInputFocus = this.toggleInputFocus.bind(this)
 
   }
@@ -66,6 +67,14 @@ export class Search extends Component {
 
   }
 
+  toggleFeatures() {
+
+    const { isSearchFeatures, actions: { updateUI } } = this.props
+
+    updateUI({ search: { features: !isSearchFeatures } })
+
+  }
+
   toggleInputFocus(focus=true) {
 
     const { updateUI } = this.props.actions
@@ -76,10 +85,14 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, term, showSuggestions } = this.props
+    const { actions, features, geocodes, term, isSearchFeatures, showSuggestions } = this.props
     const { getGeocode, setGeocode, clearGeocode, toggleFeature, submitSearch, submitLucky } = actions
 
-    const toggleInputFocus = this.toggleInputFocus
+    const { toggleInputFocus, toggleFeatures } = this
+
+    const renderFeatures = isSearchFeatures ? (
+      <Components.features features={features} toggleFeature={toggleFeature} />
+    ): null
 
     const renderSuggestions = showSuggestions ? (
       <Components.suggestions geocodes={geocodes} setGeocode={setGeocode} />
@@ -96,9 +109,11 @@ export class Search extends Component {
 
         { renderSuggestions }
 
-        <Components.features
-          features={features}
-          toggleFeature={toggleFeature} />
+        <Button
+          label={'toggle features'}
+          callback={toggleFeatures} />
+
+        { renderFeatures }
 
         <Button
           label={'beer me'}

@@ -9,6 +9,7 @@ const getFeatures = createSelector( getAll, state => state.get('features') )
 const getGeocodes = createSelector( getAll, state => state.get('geocodes') )
 const getResults = createSelector( getAll, state => state.get('results') )
 const getTerm = createSelector( getAll, state => state.get('term') )
+const getSearchFeatures = ui.getSearchFeatures
 const getSearchFocus = ui.getSearchFocus
 
 // computed
@@ -19,6 +20,7 @@ export default {
   geocodes: getGeocodes,
   results: getResults,
   term: getTerm,
+  isSearchFeatures: getSearchFeatures,
   isSearchFocused: getSearchFocus,
   showSuggestions: getShowSuggestions,
 }

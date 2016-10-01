@@ -9,7 +9,7 @@ export const GEOCODE_OPTIONS = {
   types: 'region,postcode,place,locality,neighborhood,address',
   country: 'gb',
   // weight results closer to London
-  proximity: { latitude: 51.528308, longitude: -0.3817765 },
+  proximity: { latitude: 51.507463, longitude: -0.127694 },
   // set bounding box to Greater London
   bbox: [ -0.489, 51.28, 0.236, 51.686 ]
 }

@@ -9,8 +9,8 @@ import * as Storage from '../services/storage'
 import { STATE_KEY } from '../constants'
 
 // environment
+import { isBrowser } from '../util'
 const isDevelopment = process.env.NODE_ENV === 'development'
-const isBrowser = typeof window !== 'undefined'
 
 // middleware
 const router = routerMiddleware(browserHistory)

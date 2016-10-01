@@ -12,7 +12,10 @@ import selectors from './selectors'
 
 // components
 import * as Components from './components'
-import Button from '../shared/components/button'
+import * as Shared from '../shared/components'
+
+// constants
+import { MAPBOX_PUBLIC_KEY, MAPBOX_OPTIONS } from '../shared/constants'
 
 export class Search extends Component {
 
@@ -109,22 +112,24 @@ export class Search extends Component {
 
         { renderSuggestions }
 
-        <Button
+        <Shared.button
           label={'toggle features'}
           callback={toggleFeatures} />
 
         { renderFeatures }
 
-        <Button
+        <Shared.button
           label={'beer me'}
           callback={submitSearch} />
 
-        <Button
+        <Shared.button
           label={'roam free'} />
 
-        <Button
+        <Shared.button
           label={'lucky pint!'}
           callback={submitLucky} />
+
+        <Shared.map options={MAPBOX_OPTIONS} token={MAPBOX_PUBLIC_KEY} />
 
       </div>
     )

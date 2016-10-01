@@ -17,6 +17,9 @@ const getSearchFocus = ui.getSearchFocus
 // computed
 const getShowSuggestions = createSelector( [ getTerm, getGeocodes, getSearchFocus ], (term, geocodes, focus) => term && geocodes.size && focus )
 
+// construct MapBox markers from `results`
+const getMapMarkers = createSelector( getResults, results => results.map( r => ({ id: r.get('_id'), coordinates: r.getIn([ 'loc', 'coordinates' ]).toArray() }) ).toArray() )
+
 export default {
   features: getFeatures,
   geocodes: getGeocodes,
@@ -24,6 +27,7 @@ export default {
   point: getPoint,
   results: getResults,
   term: getTerm,
+  mapMarkers: getMapMarkers,
   isSearchFeatures: getSearchFeatures,
   isSearchFocused: getSearchFocus,
   showSuggestions: getShowSuggestions,

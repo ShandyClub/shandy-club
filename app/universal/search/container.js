@@ -15,7 +15,7 @@ import * as Components from './components'
 import * as Shared from '../shared/components'
 
 // constants
-import { MAPBOX_PUBLIC_KEY, MAPBOX_OPTIONS } from '../shared/constants'
+import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS } from '../shared/constants'
 
 export class Search extends Component {
 
@@ -88,7 +88,7 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, term, isSearchFeatures, showSuggestions } = this.props
+    const { actions, features, geocodes, mapMarkers, term, isSearchFeatures, showSuggestions } = this.props
     const { getGeocode, setGeocode, clearGeocode, toggleFeature, submitSearch, submitLucky } = actions
 
     const { toggleInputFocus, toggleFeatures } = this
@@ -129,8 +129,11 @@ export class Search extends Component {
           label={'lucky pint!'}
           callback={submitLucky} />
 
-        <Shared.map options={MAPBOX_OPTIONS} token={MAPBOX_PUBLIC_KEY} />
-
+        <Shared.map
+          markers={mapMarkers}
+          mapOptions={MAP_OPTIONS}
+          tileOptions={MAP_TILE_OPTIONS}
+          tileURL={MAP_TILE_URL} />
       </div>
     )
 

@@ -1,36 +1,53 @@
 import React, { Component } from 'react'
+import { isBrowser } from '../util'
 import styles from 'css/components/map.css'
+
+// conditionally import Leaflet -> requires `window`
+let L
+if (isBrowser) L = require('leaflet')
 
 export default class Map extends Component {
 
   componentDidMount() {
 
-    const mapboxgl = window.mapboxgl
-    const { options, token } = this.props
+    this.initMap()
 
-    // configure Mapbox
-    mapboxgl.accessToken = token
+  }
 
-    // init MapBox
-    const map = new mapboxgl.Map({
-      container: 'map',
-      ...options,
-    })
+  componentDidUpdate() {
 
-    // add MapBox controls
-    const nav = new mapboxgl.Navigation({ position: 'top-left' })
-    map.addControl(nav)
-    const geo = new mapboxgl.Geolocate({ position: 'bottom-left' })
-    map.addControl(geo)
+    const { markers } = this.props
+
+    // TODO - really should check if markers != prevProps.markers
+    this.plotMarkers(markers)
+
+  }
+
+  initMap() {
+
+    const { markers, mapOptions, tileOptions, tileURL } = this.props
+
+    // init Leaflet
+    this.map = L.map('map', mapOptions)
+
+    // configure Leaflet
+    L.tileLayer(tileURL, tileOptions).addTo(this.map)
+
+    // plot pubs
+    this.plotMarkers(markers)
+
+  }
+
+  plotMarkers(markers) {
+
+    markers.map( ({ coordinates: [ lng, lat ] }) => L.marker([ lat, lng ]).addTo(this.map) )
 
   }
 
   render() {
 
     return (
-      <div id='map' className={styles.base}>
-
-      </div>
+      <div id='map' className={styles.base}></div>
     )
 
   }

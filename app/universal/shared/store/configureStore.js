@@ -4,13 +4,10 @@ import { browserHistory } from 'react-router'
 import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import createSagaMiddleware, { END } from 'redux-saga'
+import { isBrowser, isDevelopment } from '../util'
 import rootReducer from '../reducers'
 import * as Storage from '../services/storage'
 import { STATE_KEY } from '../constants'
-
-// environment
-import { isBrowser } from '../util'
-const isDevelopment = process.env.NODE_ENV === 'development'
 
 // middleware
 const router = routerMiddleware(browserHistory)
@@ -49,7 +46,7 @@ export default function configureStore(state = initialState) {
     // remove routing|ui from state before storing
     let stateTrimmed = store.getState().delete('routing').delete('ui')
 
-    isBrowser && Storage.setItem(STATE_KEY, stateTrimmed.toJS())
+    isBrowser && Storage.setItem(STATE_KEY, stateTrimmed)
 
   })
 

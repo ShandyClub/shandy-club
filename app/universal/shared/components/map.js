@@ -10,6 +10,7 @@ export default class Map extends Component {
 
   componentDidMount() {
 
+    this.initIcon()
     this.initMap()
 
   }
@@ -18,8 +19,17 @@ export default class Map extends Component {
 
     const { markers } = this.props
 
+    // clear pubs
+    this.clearMarkers()
+
     // TODO - really should check if markers != prevProps.markers
-    this.plotMarkers(markers)
+    this.plotMarkers(markers, this.markerIcon)
+
+  }
+
+  initIcon() {
+
+    this.markerIcon = L.divIcon({ className: styles.icon, iconSize: [ 40, 40 ] })
 
   }
 
@@ -33,14 +43,27 @@ export default class Map extends Component {
     // configure Leaflet
     L.tileLayer(tileURL, tileOptions).addTo(this.map)
 
+    // clear pubs
+    this.clearMarkers()
+
     // plot pubs
-    this.plotMarkers(markers)
+    this.plotMarkers(markers, this.markerIcon)
 
   }
 
-  plotMarkers(markers) {
+  plotMarkers(markers, icon) {
 
-    markers.map( ({ coordinates: [ lng, lat ] }) => L.marker([ lat, lng ]).addTo(this.map) )
+    this.markersLayer = L.layerGroup()
+
+    markers.map( ({ coordinates: [ lng, lat ] }) => this.markersLayer.addLayer( L.marker([ lat, lng ], { icon }) ) )
+
+    this.markersLayer.addTo(this.map)
+
+  }
+
+  clearMarkers() {
+
+    this.markersLayer && this.markersLayer.clearLayers()
 
   }
 

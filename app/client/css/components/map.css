@@ -4,3 +4,7 @@
   width: 100%;
   height: 300px;
 }
+
+.icon {
+  background: url('img/marker-icon.png');
+}

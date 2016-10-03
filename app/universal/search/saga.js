@@ -116,8 +116,9 @@ function* fetchSubmit(action) {
     // get search criteria
     const point = yield select(selectors.point)
     const features = yield select(selectors.features)
+    const maxDistance = yield select(selectors.maxDistance)
 
-    const res = yield call(API.post, 'search/pubs', { point, features })
+    const res = yield call(API.post, 'search/pubs', { point, features, maxDistance })
     const data = yield res.json()
     const results = data.pubs
 

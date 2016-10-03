@@ -29,13 +29,13 @@ export const remove = (id) => {
 
 }
 
-export const search = (point, features) => {
+export const search = (point, features, maxDistance) => {
 
   // query by selected features
   const query = features && Object.keys(features).reduce( (reduced, f) => features[f] ? { ...reduced, [`features.${f}`]: features[f] } : reduced, {} ) || {}
 
   // and location
-  query['loc'] = { $near: { $geometry: { type: 'Point', coordinates: point } } }
+  query['loc'] = { $near: { $geometry: { type: 'Point', coordinates: point }, $maxDistance: maxDistance } }
 
   return Pub.find(query).exec()
 

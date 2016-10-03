@@ -1,8 +1,8 @@
 import Immutable from 'immutable'
 import { createReducer } from 'redux-immutablejs'
 
-// actionTypes
 import * as actions from './actionTypes'
+import { MAX_DISTANCE } from './constants'
 
 // TODO - use Records for geolocation|point|other?
 
@@ -22,6 +22,7 @@ export const initialState = Immutable.fromJS({
     lng: null,
     lat: null,
   },
+  maxDistance: MAX_DISTANCE,
   point: [],
   results: [],
   term: null,

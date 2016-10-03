@@ -55,7 +55,7 @@ export default class Map extends Component {
 
     this.markersLayer = L.layerGroup()
 
-    markers.map( ({ coordinates: [ lng, lat ] }) => this.markersLayer.addLayer( L.marker([ lat, lng ], { icon }) ) )
+    markers.map( ({ coordinates: [ lng, lat ], name }) => this.markersLayer.addLayer( L.marker([ lat, lng ], { icon }).bindPopup(name) ) )
 
     this.markersLayer.addTo(this.map)
 

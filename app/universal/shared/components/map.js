@@ -53,17 +53,17 @@ export default class Map extends Component {
 
   plotMarkers(markers, icon) {
 
-    this.markersLayer = L.layerGroup()
+    this.markerLayer = L.layerGroup()
 
-    markers.map( ({ coordinates: [ lng, lat ], name }) => this.markersLayer.addLayer( L.marker([ lat, lng ], { icon }).bindPopup(name) ) )
+    markers.map( ({ coordinates: [ lng, lat ], name }) => this.markerLayer.addLayer( L.marker([ lat, lng ], { icon }).bindPopup(name) ) )
 
-    this.markersLayer.addTo(this.map)
+    this.markerLayer.addTo(this.map)
 
   }
 
   clearMarkers() {
 
-    this.markersLayer && this.markersLayer.clearLayers()
+    this.markerLayer && this.markerLayer.clearLayers()
 
   }
 

@@ -1,9 +1,10 @@
 /* lib/marker-cluster */
 
-:global .leaflet-cluster-anim .leaflet-marker-icon, :global .leaflet-cluster-anim .leaflet-marker-shadow {
-	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+:global .leaflet-cluster-anim .leaflet-marker-icon,
+:global .leaflet-cluster-anim .leaflet-marker-shadow {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-in;
 }
 
 :global .leaflet-cluster-spider-leg {
-	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+  color: red;
 }

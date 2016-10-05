@@ -18,6 +18,7 @@ export default class Map extends Component {
 
     super()
 
+    this.onMapDragEnd = this.onMapDragEnd.bind(this)
     this.onMapZoomEnd = this.onMapZoomEnd.bind(this)
 
   }
@@ -48,6 +49,7 @@ export default class Map extends Component {
     this.map = L.map('map', mapOptions)
 
     // add map events
+    this.map.on('dragend', this.onMapDragEnd)
     this.map.on('zoomend', this.onMapZoomEnd)
 
     // configure Leaflet
@@ -76,9 +78,7 @@ export default class Map extends Component {
   plotMarkers(markers, icon) {
 
     this.tooltipLayer = L.layerGroup()
-    this.markerLayer = L.markerClusterGroup({
-      iconCreateFunction: this.generateClusterIcon
-    })
+    this.markerLayer = L.markerClusterGroup({ iconCreateFunction: this.generateClusterIcon })
 
     markers.map( ({ coordinates: [ lng, lat ], name }) => {
 
@@ -111,6 +111,15 @@ export default class Map extends Component {
 
     if (isTooltipZoomLevel && !isLayerOnMap) return tooltipLayer.addTo(this.map)
     else if (!isTooltipZoomLevel && isLayerOnMap) return tooltipLayer.removeFrom(this.map)
+
+  }
+
+  onMapDragEnd() {
+
+    // TODO - fire pub search with new centre coords and applied filters
+    // blocker is results/markers should not be clearerd just added to
+    // so no maxDistance etc
+    // maybe this ties into free-roam mode? work on that first (search needs to be more flexible)
 
   }
 

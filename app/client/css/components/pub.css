@@ -1,5 +1,5 @@
-/* pub/pub */
+/* component/pub */
 
 .base {
-  /*composes: wrapper from "./shared/layout.css";*/
+  color: indianred;
 }

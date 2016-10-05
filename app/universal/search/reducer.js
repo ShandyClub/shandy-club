@@ -4,8 +4,6 @@ import { createReducer } from 'redux-immutablejs'
 import * as actions from './actionTypes'
 import { MAX_DISTANCE } from './constants'
 
-// TODO - use Records for geolocation|point|other?
-
 export const initialState = Immutable.fromJS({
   features: {
     architecture: false,

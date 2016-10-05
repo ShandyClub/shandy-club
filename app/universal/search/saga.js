@@ -7,7 +7,6 @@ import * as Geolocation from '../shared/services/geolocation'
 
 // actions/selectors
 import * as actions from './actionTypes'
-import { actionTypes as ui } from '../ui'
 import selectors from './selectors'
 
 // -----
@@ -20,30 +19,19 @@ export function* geocode() {
 
 }
 
-export function* watchGeocode() {
-
-  yield* takeLatest(actions.GEOCODE_SUCCESS, updateUI, { requesting: false })
-
-}
-
 function* fetchGeocode(action) {
 
   try {
-
-    yield call(updateUI, { error: null, requesting: true }, action)
 
     const res = yield call(API.get, `search/geocode/${action.payload.term}`)
     const data = yield res.json()
     const geocodes = data.geocode
 
-    yield put({ type: ui.UPDATE, payload: { requesting: false } })
     yield put({ type: actions.GEOCODE_SUCCESS, payload: { geocodes } })
 
   } catch (error) {
 
-    yield call(updateUI, { error, requesting: false }, action)
-
-    yield put({ type: actions.GEOCODE_FAILURE })
+    yield put({ type: actions.GEOCODE_FAILURE, payload: { error } })
 
   }
 
@@ -55,21 +43,13 @@ function* fetchGeocode(action) {
 
 export function* lucky() {
 
-  yield* takeLatest(actions.LUCKY_REQUEST, checkGeolocation, fetchLucky)
+  yield* takeLatest(actions.LUCKY_REQUEST, checkGeolocation, fetchLucky, actions.LUCKY_FAILURE)
 
 }
 
-export function* watchLucky() {
-
-  yield* takeLatest(actions.LUCKY_SUCCESS, updateUI, { requesting: false })
-
-}
-
-function* fetchLucky(action) {
+function* fetchLucky() {
 
   try {
-
-    yield call(updateUI, { error: null, requesting: true }, action)
 
     // get geolocation data
     const geolocation = yield select(selectors.geolocation)
@@ -78,14 +58,11 @@ function* fetchLucky(action) {
     const data = yield res.json()
     const results = data.pubs
 
-    yield put({ type: ui.UPDATE, payload: { requesting: false } })
     yield put({ type: actions.LUCKY_SUCCESS, payload: { results } })
 
   } catch (error) {
 
-    yield call(updateUI, { error, requesting: false }, action)
-
-    yield put({ type: actions.LUCKY_FAILURE })
+    yield put({ type: actions.LUCKY_FAILURE, payload: { error } })
 
   }
 
@@ -101,17 +78,9 @@ export function* submit() {
 
 }
 
-export function* watchSubmit() {
-
-  yield* takeLatest(actions.SUBMIT_SUCCESS, updateUI, { requesting: false })
-
-}
-
-function* fetchSubmit(action) {
+function* fetchSubmit() {
 
   try {
-
-    yield call(updateUI, { error: null, requesting: true }, action)
 
     // get search criteria
     const point = yield select(selectors.point)
@@ -126,9 +95,7 @@ function* fetchSubmit(action) {
 
   } catch (error) {
 
-    yield call(updateUI, { error, requesting: false }, action)
-
-    yield put({ type: actions.SUBMIT_FAILURE })
+    yield put({ type: actions.SUBMIT_FAILURE, payload: { error } })
 
   }
 
@@ -138,7 +105,7 @@ function* fetchSubmit(action) {
 // GEOLOCATION
 // -----
 
-function* checkGeolocation(callback, action) {
+function* checkGeolocation(callback, failure, action) {
 
   try {
 
@@ -151,19 +118,9 @@ function* checkGeolocation(callback, action) {
 
   } catch (error) {
 
-    yield call(updateUI, { error })
+    yield put({ type: failure, payload: { error } })
 
   }
-
-}
-
-// -----
-// UI
-// -----
-
-function* updateUI(props) {
-
-  yield put({ type: ui.UPDATE, payload: { ...props } })
 
 }
 
@@ -171,12 +128,7 @@ function* updateUI(props) {
 export default function* root() {
 
   yield fork(geocode)
-  yield fork(watchGeocode)
-
   yield fork(lucky)
-  yield fork(watchLucky)
-
   yield fork(submit)
-  yield fork(watchSubmit)
 
 }

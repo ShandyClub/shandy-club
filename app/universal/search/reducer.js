@@ -37,14 +37,11 @@ export default createReducer(initialState, {
 
   [actions.GEOCODE_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.GEOCODE_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
-  [actions.GEOCODE_FAILURE]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.SUBMIT_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.SUBMIT_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
-  [actions.SUBMIT_FAILURE]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.LUCKY_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.LUCKY_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
-  [actions.LUCKY_FAILURE]: (state, action) => state.merge({ ...action.payload }),
 
 })

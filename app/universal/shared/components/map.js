@@ -20,6 +20,7 @@ export default class Map extends Component {
 
     this.onMapDragEnd = this.onMapDragEnd.bind(this)
     this.onMapZoomEnd = this.onMapZoomEnd.bind(this)
+    this.onMarkerClick = this.onMarkerClick.bind(this)
 
   }
 
@@ -77,21 +78,33 @@ export default class Map extends Component {
 
   plotMarkers(markers, icon) {
 
+    // init layers
     this.tooltipLayer = L.layerGroup()
     this.markerLayer = L.markerClusterGroup({ iconCreateFunction: this.generateClusterIcon })
 
-    markers.map( ({ coordinates: [ lng, lat ], name }) => {
+    markers.map( ({ coordinates: [ lng, lat ], name }, index) => {
 
+      // init tooltip
       let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 20 ], permanent: true })
         .setLatLng([ lat, lng ])
         .setContent(name)
 
+      // add tooltip to layer
       this.tooltipLayer.addLayer(tooltip)
 
-      return this.markerLayer.addLayer( L.marker([ lat, lng ], { icon }).bindPopup(name) )
+      // init marker
+      let marker = new L.marker([ lat, lng ], { icon })
+        .bindPopup(name)
+
+      // marker events
+      marker.on('click', () => this.onMarkerClick(index))
+
+      // add marker to layer
+      return this.markerLayer.addLayer(marker)
 
     } )
 
+    // add layer to map
     this.markerLayer.addTo(this.map)
 
   }
@@ -126,6 +139,14 @@ export default class Map extends Component {
   onMapZoomEnd() {
 
     this.toggleTooltips()
+
+  }
+
+  onMarkerClick(index) {
+
+    const { setSelectedResult } = this.props
+
+    setSelectedResult(index)
 
   }
 

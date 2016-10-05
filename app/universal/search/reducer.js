@@ -13,7 +13,7 @@ export const initialState = Immutable.fromJS({
     games: false,
     garden: false,
     peace: false,
-    tv: false
+    tv: false,
   },
   geocodes: [],
   geolocation: {
@@ -23,6 +23,7 @@ export const initialState = Immutable.fromJS({
   maxDistance: MAX_DISTANCE,
   point: [],
   results: [],
+  selectedResultIndex: null,
   term: null,
 })
 
@@ -34,6 +35,8 @@ export default createReducer(initialState, {
   [actions.GEOCODE_RESET]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.GEOLOCATION_SET]: (state, action) => state.merge({ ...action.payload }),
+
+  [actions.SELECTED_RESULT_SET]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.GEOCODE_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.GEOCODE_SUCCESS]: (state, action) => state.merge({ ...action.payload }),

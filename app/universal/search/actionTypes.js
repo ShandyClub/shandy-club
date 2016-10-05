@@ -7,6 +7,8 @@ export const GEOCODE_RESET = `${name}/GEOCODE_RESET`
 
 export const GEOLOCATION_SET = `${name}/GEOLOCATION_SET`
 
+export const SELECTED_RESULT_SET = `${name}/SELECTED_RESULT_SET`
+
 export const GEOCODE_REQUEST = `${name}/GEOCODE_REQUEST`
 export const GEOCODE_SUCCESS = `${name}/GEOCODE_SUCCESS`
 export const GEOCODE_FAILURE = `${name}/GEOCODE_FAILURE`

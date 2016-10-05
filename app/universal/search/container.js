@@ -88,14 +88,21 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, mapMarkers, term, isSearchFeatures, showSuggestions } = this.props
-    const { getGeocode, setGeocode, clearGeocode, toggleFeature, submitSearch, submitLucky } = actions
+    const { actions, features, geocodes, mapMarkers, term, isPanelOpen, isSearchFeatures, selectedResult, showSuggestions } = this.props
+    const { getGeocode, setGeocode, clearGeocode, toggleFeature, setSelectedResult, submitSearch, submitLucky } = actions
 
     const { toggleInputFocus, toggleFeatures } = this
 
     const renderFeatures = isSearchFeatures ? (
       <Components.features features={features} toggleFeature={toggleFeature} />
     ): null
+
+    // TODO - controls (next/prev)
+    const renderPanel = isPanelOpen ? (
+      <Shared.panel>
+        <Shared.pub { ...selectedResult } />
+      </Shared.panel>
+    ) : null
 
     const renderSuggestions = showSuggestions ? (
       <Components.suggestions geocodes={geocodes} setGeocode={setGeocode} />
@@ -133,7 +140,11 @@ export class Search extends Component {
           markers={mapMarkers}
           mapOptions={MAP_OPTIONS}
           tileOptions={MAP_TILE_OPTIONS}
-          tileURL={MAP_TILE_URL} />
+          tileURL={MAP_TILE_URL}
+          setSelectedResult={setSelectedResult} />
+
+        { renderPanel }
+
       </div>
     )
 

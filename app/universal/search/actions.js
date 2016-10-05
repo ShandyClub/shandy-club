@@ -23,6 +23,13 @@ export const clearGeocode = () => ({
   }
 })
 
+export const setSelectedResult = (selectedResultIndex=null) => ({
+  type: actions.SELECTED_RESULT_SET,
+  payload: {
+    selectedResultIndex,
+  }
+})
+
 export const toggleFeature = feature => ({
   type: actions.FEATURE,
   payload: {

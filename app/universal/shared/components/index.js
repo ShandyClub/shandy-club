@@ -5,7 +5,6 @@ import header from './header'
 import loader from './loader'
 import logo from './logo'
 import map from './map'
-import panel from './panel'
 import pub from './pub'
 
 export {
@@ -16,6 +15,5 @@ export {
   loader,
   logo,
   map,
-  panel,
   pub,
 }

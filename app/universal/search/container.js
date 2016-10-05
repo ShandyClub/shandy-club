@@ -88,7 +88,7 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, mapMarkers, term, isPanelOpen, isSearchFeatures, selectedResult, showSuggestions } = this.props
+    const { actions, features, geocodes, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, selectedResult, showSuggestions, totalResults } = this.props
     const { getGeocode, setGeocode, clearGeocode, toggleFeature, setSelectedResult, submitSearch, submitLucky } = actions
 
     const { toggleInputFocus, toggleFeatures } = this
@@ -97,11 +97,8 @@ export class Search extends Component {
       <Components.features features={features} toggleFeature={toggleFeature} />
     ): null
 
-    // TODO - controls (next/prev)
     const renderPanel = isPanelOpen ? (
-      <Shared.panel>
-        <Shared.pub { ...selectedResult } />
-      </Shared.panel>
+      <Components.panel selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} totalResults={totalResults} setSelectedResult={setSelectedResult} />
     ) : null
 
     const renderSuggestions = showSuggestions ? (

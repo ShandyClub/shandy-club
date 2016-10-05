@@ -21,6 +21,7 @@ const getSearchFocus = ui.getSearchFocus
 // ------
 // COMPUTED
 // ------
+const getTotalResults = createSelector( getResults, results => results.size )
 const getSelectedResult = createSelector( [ getResults, getSelectedResultIndex ], (results, index) => results.get(index) && results.get(index).toObject() )
 const getIsPanelOpen = createSelector( getSelectedResult, selectedResult => selectedResult )
 const getShowSuggestions = createSelector( [ getTerm, getGeocodes, getSearchFocus ], (term, geocodes, focus) => term && geocodes.size && focus )
@@ -35,6 +36,7 @@ export default {
   maxDistance: getMaxDistance,
   point: getPoint,
   results: getResults,
+  selectedResultIndex: getSelectedResultIndex,
   term: getTerm,
   mapMarkers: getMapMarkers,
   isPanelOpen: getIsPanelOpen,
@@ -42,4 +44,5 @@ export default {
   isSearchFocused: getSearchFocus,
   selectedResult: getSelectedResult,
   showSuggestions: getShowSuggestions,
+  totalResults: getTotalResults,
 }

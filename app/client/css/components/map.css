@@ -1,4 +1,4 @@
-/* map */
+/* component/map */
 
 .base {
   width: 100%;
@@ -7,4 +7,11 @@
 
 .icon {
   background: url('img/marker-icon.png');
+}
+
+.cluster {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: indianred;
 }

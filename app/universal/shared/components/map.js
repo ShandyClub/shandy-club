@@ -3,9 +3,14 @@ import { isBrowser } from '../util'
 import styles from 'css/components/map.css'
 import { MAP_TOOLTIP_ZOOM_LEVEL } from '../constants'
 
-// conditionally import Leaflet -> requires `window`
+// conditionally import Leaflet + plugins -> requires `window`
 let L
-if (isBrowser) L = require('leaflet')
+if (isBrowser) {
+
+  L = require('leaflet')
+  require('leaflet.markercluster')
+
+}
 
 export default class Map extends Component {
 
@@ -19,7 +24,6 @@ export default class Map extends Component {
 
   componentDidMount() {
 
-    this.initIcon()
     this.initMap()
 
   }
@@ -32,13 +36,7 @@ export default class Map extends Component {
     this.clearMarkers()
 
     // TODO - really should check if markers != prevProps.markers
-    this.plotMarkers(markers, this.markerIcon)
-
-  }
-
-  initIcon() {
-
-    this.markerIcon = L.divIcon({ className: styles.icon, iconSize: [ 40, 40 ] })
+    this.plotMarkers(markers, this.generateMarkerIcon())
 
   }
 
@@ -59,14 +57,28 @@ export default class Map extends Component {
     this.clearMarkers()
 
     // plot pubs
-    this.plotMarkers(markers, this.markerIcon)
+    this.plotMarkers(markers, this.generateMarkerIcon())
+
+  }
+
+  generateClusterIcon(cluster) {
+
+    return L.divIcon({ html: `<span>${cluster.getChildCount()}</span>`, className: styles.cluster, iconSize: [ 30, 30 ] })
+
+  }
+
+  generateMarkerIcon() {
+
+    return L.divIcon({ className: styles.icon, iconSize: [ 40, 40 ] })
 
   }
 
   plotMarkers(markers, icon) {
 
-    this.markerLayer = L.layerGroup()
     this.tooltipLayer = L.layerGroup()
+    this.markerLayer = L.markerClusterGroup({
+      iconCreateFunction: this.generateClusterIcon
+    })
 
     markers.map( ({ coordinates: [ lng, lat ], name }) => {
 

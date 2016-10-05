@@ -108,6 +108,7 @@
     "immutable": "^3.7.6",
     "immutable-props": "^1.1.0",
     "leaflet": "^1.0.1",
+    "leaflet.markercluster": "^1.0.0",
     "mapbox": "^1.0.0-beta1",
     "mongoose": "^4.5.3",
     "mongoose-simple-random": "^0.3.3",

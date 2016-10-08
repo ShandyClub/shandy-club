@@ -129,6 +129,7 @@ export default class Map extends Component {
   clearMarkers() {
 
     this.markerLayer && this.markerLayer.clearLayers()
+    this.tooltipLayer && this.tooltipLayer.clearLayers()
 
   }
 

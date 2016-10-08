@@ -107,6 +107,8 @@ export default class Map extends Component {
     // add layer to map
     this.markerLayer.addTo(this.map)
 
+    // TODO - center/zoom map based on markerLayer bounds
+
   }
 
   clearMarkers() {

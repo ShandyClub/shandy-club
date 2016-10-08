@@ -1,4 +1,5 @@
 import * as actions from './actionTypes'
+import { DEFAULT_POINT } from './constants'
 
 export const getGeocode = term => ({
   type: actions.GEOCODE_REQUEST,
@@ -23,7 +24,7 @@ export const clearGeocode = () => ({
   }
 })
 
-export const setPoint = point => ({
+export const setPoint = (point=DEFAULT_POINT) => ({
   type: actions.POINT_SET,
   payload: {
     point

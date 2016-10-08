@@ -127,7 +127,8 @@ export class Search extends Component {
           callback={submitSearch} />
 
         <Shared.button
-          label={'roam free'} />
+          label={'roam free'}
+          callback={setPoint} />
 
         <Shared.button
           label={'lucky pint!'}

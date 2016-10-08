@@ -64,6 +64,14 @@ export default class Map extends Component {
 
   }
 
+  fitMapToBounds(bounds) {
+
+    const { map } = this
+
+    map.fitBounds(bounds)
+
+  }
+
   generateClusterIcon(cluster) {
 
     return L.divIcon({ html: `<span>${cluster.getChildCount()}</span>`, className: styles.cluster, iconSize: [ 30, 30 ] })
@@ -77,6 +85,9 @@ export default class Map extends Component {
   }
 
   plotMarkers(markers, icon) {
+
+    // no markers? abort!
+    if (!markers.length) return
 
     // init layers
     this.tooltipLayer = L.layerGroup()
@@ -107,7 +118,11 @@ export default class Map extends Component {
     // add layer to map
     this.markerLayer.addTo(this.map)
 
-    // TODO - center/zoom map based on markerLayer bounds
+    // get layer bounds
+    const layerBounds = this.markerLayer.getBounds()
+
+    // center/zoom map to markerLayer bounds
+    this.fitMapToBounds(layerBounds)
 
   }
 

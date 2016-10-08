@@ -36,6 +36,8 @@ export default createReducer(initialState, {
 
   [actions.GEOLOCATION_SET]: (state, action) => state.merge({ ...action.payload }),
 
+  [actions.POINT_SET]: (state, action) => state.merge({ ...action.payload }),
+
   [actions.SELECTED_RESULT_SET]: (state, action) => state.merge({ ...action.payload }),
 
   [actions.GEOCODE_REQUEST]: (state, action) => state.merge({ ...action.payload }),

@@ -129,10 +129,10 @@ export default class Map extends Component {
 
   onMapDragEnd() {
 
-    // TODO - fire pub search with new centre coords and applied filters
-    // blocker is results/markers should not be clearerd just added to
-    // so no maxDistance etc
-    // maybe this ties into free-roam mode? work on that first (search needs to be more flexible)
+    const { setPoint } = this.props
+    const { lat, lng } = this.map.getCenter()
+
+    setPoint([ lng, lat ])
 
   }
 

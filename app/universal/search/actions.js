@@ -23,6 +23,12 @@ export const clearGeocode = () => ({
   }
 })
 
+export const setPoint = point => ({
+  type: actions.POINT_SET,
+  payload: {
+    point
+  }
+})
 export const setSelectedResult = (selectedResultIndex=null) => ({
   type: actions.SELECTED_RESULT_SET,
   payload: {

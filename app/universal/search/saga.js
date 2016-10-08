@@ -101,6 +101,12 @@ function* fetchSubmit() {
 
 }
 
+function* requestSubmit() {
+
+  yield put({ type: actions.SUBMIT_REQUEST })
+
+}
+
 // -----
 // GEOLOCATION
 // -----
@@ -124,11 +130,37 @@ function* checkGeolocation(callback, failure, action) {
 
 }
 
+// ----
+// OBSERVERS
+// ----
+
+export function* observeFeature() {
+
+  yield* takeLatest(actions.FEATURE, handleFeature)
+
+}
+
+function* handleFeature() {
+
+  const isSearchOverlayed = select(selectors.isSearchOverlayed)
+
+  if (!isSearchOverlayed) yield* requestSubmit()
+
+}
+
+export function* observePoint() {
+
+  yield* takeLatest(actions.POINT_SET, requestSubmit)
+
+}
+
 // export the root saga containing forks of all the sagas
 export default function* root() {
 
   yield fork(geocode)
   yield fork(lucky)
   yield fork(submit)
+  yield fork(observeFeature)
+  yield fork(observePoint)
 
 }

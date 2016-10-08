@@ -17,6 +17,7 @@ const getSelectedResultIndex = createSelector( getAll, state => state.get('selec
 const getTerm = createSelector( getAll, state => state.get('term') )
 const getSearchFeatures = ui.getSearchFeatures
 const getSearchFocus = ui.getSearchFocus
+const getSearchOverlay = ui.getSearchOverlay
 
 // ------
 // COMPUTED
@@ -42,6 +43,7 @@ export default {
   isPanelOpen: getIsPanelOpen,
   isSearchFeatures: getSearchFeatures,
   isSearchFocused: getSearchFocus,
+  isSearchOverlayed: getSearchOverlay,
   selectedResult: getSelectedResult,
   showSuggestions: getShowSuggestions,
   totalResults: getTotalResults,

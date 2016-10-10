@@ -1,19 +1,24 @@
 import Immutable from 'immutable'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { browserHistory } from 'react-router'
+import analyticsMiddleware from 'redux-analytics'
 import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import createSagaMiddleware, { END } from 'redux-saga'
-import { isBrowser, isDevelopment } from '../util'
 import rootReducer from '../reducers'
 import * as Storage from '../services/storage'
 import { STATE_KEY } from '../constants'
 
+// utils
+import { isBrowser, isDevelopment } from '../util'
+import { track } from '../util/track'
+
 // middleware
 const router = routerMiddleware(browserHistory)
 const saga = createSagaMiddleware()
+const analytics = analyticsMiddleware( ({ type, payload }) => track(type, payload) )
 
-let middleware = [ router, saga ]
+let middleware = [ router, saga, analytics ]
 
 // logger middleware in development
 if (isDevelopment) middleware.push( createLogger({ collapsed: true }) )

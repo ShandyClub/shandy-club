@@ -41,7 +41,15 @@ export const toggleFeature = feature => ({
   type: actions.FEATURE,
   payload: {
     feature
-  }
+  },
+  meta: {
+    analytics: {
+      type: 'toggleFeature',
+      payload: {
+        feature,
+      }
+    },
+  },
 })
 
 export const submitSearch = () => ({

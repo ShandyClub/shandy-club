@@ -1,6 +1,9 @@
 export const STATE_KEY = '@ShandyClub:search'
 export const API = '/api'
 
+// Mixpanel API token
+export const MIXPANEL = '4670e2da815010a85c9c12a1cdd0900e'
+
 // Leaflet
 export const MAP_OPTIONS = {
   center: [ 51.507463, -0.127694 ],

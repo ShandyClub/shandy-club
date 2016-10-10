@@ -49,7 +49,7 @@ test(`Search:Action[${types.FEATURE}] - Toggle feature action`, t => {
   const feature = 'beer'
 
   const actual = actions.toggleFeature(feature)
-  const expected = { type: types.FEATURE, payload: { feature } }
+  const expected = { type: types.FEATURE, payload: { feature }, meta: { analytics: { type: 'toggleFeature', payload: { feature } } } }
 
   t.deepEqual(actual, expected,
     'toggleFeature() should toggle `feature`')

@@ -111,6 +111,7 @@
     "leaflet.markercluster": "^1.0.0",
     "mapbox": "^1.0.0-beta1",
     "mixpanel-browser": "^2.9.15",
+    "mo-js": "^0.288.1",
     "mongoose": "^4.5.3",
     "mongoose-simple-random": "^0.3.3",
     "node-uuid": "^1.4.7",

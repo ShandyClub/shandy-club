@@ -49,11 +49,7 @@ export const lucky = (point) => {
 
   return new Promise( (resolve, reject) => {
 
-    Pub.findRandom(filter, {}, { limit: 3 }, (err, pubs) => {
-
-      return err ? reject(err) : resolve(pubs)
-
-    })
+    Pub.findRandom(filter, {}, { limit: 3 }, (err, pubs) => err ? reject(err) : resolve(pubs) )
 
   })
 

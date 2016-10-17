@@ -88,16 +88,27 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, selectedResult, showSuggestions, totalResults } = this.props
+    const { actions, features, geocodes, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
     const { getGeocode, setGeocode, clearGeocode, toggleFeature, setPoint, setSelectedResult, submitSearch, submitLucky } = actions
 
     const { toggleInputFocus, toggleFeatures } = this
 
     const renderFeatures = isSearchFeatures ? (
       <Components.features features={features} toggleFeature={toggleFeature} />
-    ): null
+    ) : null
 
-    const renderPanel = isPanelOpen ? (
+    const renderMap = !isSearchOverlayed ? (
+      <Shared.map
+        center={point}
+        markers={mapMarkers}
+        mapOptions={MAP_OPTIONS}
+        tileOptions={MAP_TILE_OPTIONS}
+        tileURL={MAP_TILE_URL}
+        setPoint={setPoint}
+        setSelectedResult={setSelectedResult} />
+    ) : null
+
+    const renderPanel = !isSearchOverlayed && isPanelOpen ? (
       <Components.panel selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} totalResults={totalResults} setSelectedResult={setSelectedResult} />
     ) : null
 
@@ -134,13 +145,7 @@ export class Search extends Component {
           label={'lucky pint!'}
           callback={submitLucky} />
 
-        <Shared.map
-          markers={mapMarkers}
-          mapOptions={MAP_OPTIONS}
-          tileOptions={MAP_TILE_OPTIONS}
-          tileURL={MAP_TILE_URL}
-          setPoint={setPoint}
-          setSelectedResult={setSelectedResult} />
+        { renderMap }
 
         { renderPanel }
 

@@ -40,14 +40,20 @@ export default class Map extends Component {
     // TODO - really should check if markers != prevProps.markers
     this.plotMarkers(markers, this.generateMarkerIcon())
 
+    // TODO - and center map if markers AND point changed
+    // if (center.length) this.setMapCenter(center)
+
   }
 
   initMap() {
 
-    const { markers, mapOptions, tileOptions, tileURL } = this.props
+    const { center: [ lng, lat ], markers, mapOptions, tileOptions, tileURL } = this.props
+
+    // override default center if available
+    if (lat && lng) mapOptions.center = { lat, lng }
 
     // init Leaflet map
-    this.map = L.map('map', mapOptions)
+    this.map = L.map('map', mapOptions )
 
     // add map events
     this.map.on('dragend', this.onMapDragEnd)
@@ -64,11 +70,11 @@ export default class Map extends Component {
 
   }
 
-  fitMapToBounds(bounds) {
+  setMapCenter([ lng, lat ]) {
 
     const { map } = this
 
-    map.fitBounds(bounds)
+    map.panTo({ lat, lng })
 
   }
 
@@ -117,12 +123,6 @@ export default class Map extends Component {
 
     // add layer to map
     this.markerLayer.addTo(this.map)
-
-    // get layer bounds
-    const layerBounds = this.markerLayer.getBounds()
-
-    // center/zoom map to markerLayer bounds
-    this.fitMapToBounds(layerBounds)
 
   }
 

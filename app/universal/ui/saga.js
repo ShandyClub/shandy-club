@@ -30,9 +30,11 @@ export function* watchSuccess() {
 
 }
 
-function* handleSuccess() {
+function* handleSuccess({ payload }) {
 
-  yield put({ type: actions.UPDATE, payload: { requesting: false } })
+  const { ui } = payload
+
+  yield put({ type: actions.UPDATE, payload: { requesting: false, ...ui } })
 
 }
 

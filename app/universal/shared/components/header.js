@@ -1,13 +1,14 @@
 import React from 'react'
+import Logo from './logo'
 
-const Component = () => {
+const Header = () => {
 
   return (
     <div>
-      Header
+      <Logo />
     </div>
   )
 
 }
 
-export default Component
+export default Header

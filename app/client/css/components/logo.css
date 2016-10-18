@@ -1,0 +1,8 @@
+/* component/logo */
+
+.base {
+  width: 40px;
+  height: 40px;
+  background: url('img/shandy-club-logo.png') no-repeat center;
+  background-size: contain;
+}

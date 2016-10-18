@@ -1,13 +1,12 @@
 import React from 'react'
+import styles from 'css/components/logo.css'
 
-const Component = () => {
+const Logo = () => {
 
   return (
-    <div>
-      Logo
-    </div>
+    <div className={styles.base}></div>
   )
 
 }
 
-export default Component
+export default Logo

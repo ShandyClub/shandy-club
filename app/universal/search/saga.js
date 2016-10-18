@@ -87,11 +87,22 @@ function* fetchSubmit() {
     const features = yield select(selectors.features)
     const maxDistance = yield select(selectors.maxDistance)
 
+    // perform request
     const res = yield call(API.post, 'search/pubs', { point, features, maxDistance })
     const data = yield res.json()
     const results = data.pubs
 
-    yield put({ type: actions.SUBMIT_SUCCESS, payload: { results } })
+    // get search ui state
+    const isSearchOverlayed = yield select(selectors.isSearchOverlayed)
+
+    // construct payload
+    const payload = { results }
+
+    // update search ui state if necessary
+    if (isSearchOverlayed) payload.ui = { search: { overlay: !isSearchOverlayed } }
+
+    // success!
+    yield put({ type: actions.SUBMIT_SUCCESS, payload })
 
   } catch (error) {
 
@@ -142,7 +153,7 @@ export function* observeFeature() {
 
 function* handleFeature() {
 
-  const isSearchOverlayed = select(selectors.isSearchOverlayed)
+  const isSearchOverlayed = yield select(selectors.isSearchOverlayed)
 
   if (!isSearchOverlayed) yield* requestSubmit()
 

@@ -22,9 +22,10 @@
   font-size: font-size-h4;
 }
 
+/* TODO - should compose from .secondary */
+
 .h3 {
   font-size: font-size-h3;
-  /* TODO - should compose from .secondary */
   font-family: font-family-secondary;
   text-transform: uppercase;
   letter-spacing: 4px;

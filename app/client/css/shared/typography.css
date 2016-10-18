@@ -1,9 +1,13 @@
 /* TYPOGRAPHY */
 
-@value font-size-small, font-size-body, font-size-h4, font-size-h3, font-size-h2, font-size-h1 from './settings.css';
+@value font-family-primary, font-family-secondary, font-size-small, font-size-body, font-size-h4, font-size-h3, font-size-h2, font-size-h1 from './settings.css';
 
 .primary {
   font-family: font-family-primary;
+}
+
+.secondary {
+  font-family: font-family-secondary;
 }
 
 .small {
@@ -20,6 +24,10 @@
 
 .h3 {
   font-size: font-size-h3;
+  /* TODO - should compose from .secondary */
+  font-family: font-family-secondary;
+  text-transform: uppercase;
+  letter-spacing: 4px;
 }
 
 .h2 {

@@ -1,3 +1,4 @@
+export const APP_NAME = 'Shandy Club'
 export const STATE_KEY = '@ShandyClub:search'
 export const API = '/api'
 

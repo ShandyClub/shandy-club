@@ -12,6 +12,7 @@
 
 /* fonts */
 @value font-family-primary: helvetica, arial, sans-serif;
+@value font-family-secondary: Lato, helvetica, arial, sans-serif;
 @value font-size-small: 12px;
 @value font-size-body: 16px;
 @value font-size-h4: 21px;

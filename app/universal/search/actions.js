@@ -24,12 +24,17 @@ export const clearGeocode = () => ({
   }
 })
 
+export const getGeolocation = () => ({
+  type: actions.GEOLOCATION_REQUEST
+})
+
 export const setPoint = (point=DEFAULT_POINT) => ({
   type: actions.POINT_SET,
   payload: {
     point
   }
 })
+
 export const setSelectedResult = (selectedResultIndex=null) => ({
   type: actions.SELECTED_RESULT_SET,
   payload: {
@@ -54,8 +59,4 @@ export const toggleFeature = feature => ({
 
 export const submitSearch = () => ({
   type: actions.SUBMIT_REQUEST
-})
-
-export const submitLucky = () => ({
-  type: actions.LUCKY_REQUEST
 })

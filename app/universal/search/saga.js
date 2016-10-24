@@ -38,31 +38,32 @@ function* fetchGeocode(action) {
 }
 
 // -----
-// LUCKY
+// GEOLOCATION
 // -----
 
-export function* lucky() {
+export function* geolocation() {
 
-  yield* takeLatest(actions.LUCKY_REQUEST, checkGeolocation, fetchLucky, actions.LUCKY_FAILURE)
+  yield* takeLatest(actions.GEOLOCATION_REQUEST, fetchGeolocation, requestSubmit)
 
 }
 
-function* fetchLucky() {
+function* fetchGeolocation(callback, action) {
 
   try {
 
-    // get geolocation data
-    const geolocation = yield select(selectors.geolocation)
+    // request user geolocation
+    const { coords: { longitude: lng, latitude: lat } } = yield call(Geolocation.getCurrentPosition)
 
-    const res = yield call(API.post, 'search/lucky', { ...geolocation })
-    const data = yield res.json()
-    const results = data.pubs
+    // success!
+    yield put({ type: actions.GEOLOCATION_SUCCESS, payload: { point: [ lng, lat ] } })
 
-    yield put({ type: actions.LUCKY_SUCCESS, payload: { results } })
+    // continue
+    yield call(callback, action)
 
   } catch (error) {
 
-    yield put({ type: actions.LUCKY_FAILURE, payload: { error } })
+    // failure!
+    yield put({ type: actions.GEOLOCATION_FAILURE, payload: { error } })
 
   }
 
@@ -106,6 +107,7 @@ function* fetchSubmit() {
 
   } catch (error) {
 
+    // failure!
     yield put({ type: actions.SUBMIT_FAILURE, payload: { error } })
 
   }
@@ -115,29 +117,6 @@ function* fetchSubmit() {
 function* requestSubmit() {
 
   yield put({ type: actions.SUBMIT_REQUEST })
-
-}
-
-// -----
-// GEOLOCATION
-// -----
-
-function* checkGeolocation(callback, failure, action) {
-
-  try {
-
-    // request user geolocation
-    const { coords: { longitude: lng, latitude: lat } } = yield call(Geolocation.getCurrentPosition)
-
-    yield put({ type: actions.GEOLOCATION_SET, payload: { geolocation: { lng, lat } } })
-
-    yield call(callback, action)
-
-  } catch (error) {
-
-    yield put({ type: failure, payload: { error } })
-
-  }
 
 }
 
@@ -169,7 +148,7 @@ export function* observePoint() {
 export default function* root() {
 
   yield fork(geocode)
-  yield fork(lucky)
+  yield fork(geolocation)
   yield fork(submit)
   yield fork(observeFeature)
   yield fork(observePoint)

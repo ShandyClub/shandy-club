@@ -58,20 +58,6 @@ test(`Search:Reducer[${types.GEOCODE_RESET}] - Search reducer reset geocode outp
 
 })
 
-test(`Search:Reducer[${types.GEOLOCATION_SET}] - Search reducer set geolocation output`, t => {
-
-  const payload = { geolocation: { lng: -0.101729, lat: 51.569542 } }
-
-  const actual = reducer(initialState, { type: types.GEOLOCATION_SET, payload })
-  const expected = initialState.merge({ ...payload })
-
-  t.ok(Immutable.is(actual, expected),
-    'reducer() should return set geolocation state')
-
-  t.end()
-
-})
-
 test(`Search:Reducer[${types.GEOCODE_REQUEST}] - Search reducer geocode API request output`, t => {
 
   const payload = { term: 'Shoreditch' }
@@ -151,48 +137,6 @@ test(`Search:Reducer[${types.SUBMIT_FAILURE}] - Search reducer submit API failur
 
   t.ok(Immutable.is(actual, expected),
     'reducer() should return submit API failure state')
-
-  t.end()
-
-})
-
-test(`Search:Reducer[${types.LUCKY_REQUEST}] - Search reducer lucky API request output`, t => {
-
-  const payload = {}
-
-  const actual = reducer(initialState, { type: types.LUCKY_REQUEST, payload })
-  const expected = initialState.merge({ ...payload })
-
-  t.ok(Immutable.is(actual, expected),
-    'reducer() should return lucky API request state')
-
-  t.end()
-
-})
-
-test(`Search:Reducer[${types.LUCKY_SUCCESS}] - Search reducer lucky API success output`, t => {
-
-  const payload = { results: [] }
-
-  const actual = reducer(initialState, { type: types.LUCKY_SUCCESS, payload })
-  const expected = initialState.merge({ ...payload })
-
-  t.ok(Immutable.is(actual, expected),
-    'reducer() should return lucky API success state')
-
-  t.end()
-
-})
-
-test(`Search:Reducer[${types.LUCKY_FAILURE}] - Search reducer lucky API failure output`, t => {
-
-  const payload = {}
-
-  const actual = reducer(initialState, { type: types.LUCKY_FAILURE, payload })
-  const expected = initialState.merge({ ...payload })
-
-  t.ok(Immutable.is(actual, expected),
-    'reducer() should return lucky API failure state')
 
   t.end()
 

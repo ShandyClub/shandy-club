@@ -138,6 +138,12 @@ function* handleFeature() {
 
 }
 
+export function* observeGeocode() {
+
+  yield* takeLatest(actions.GEOCODE_SET, requestSubmit)
+
+}
+
 export function* observePoint() {
 
   yield* takeLatest(actions.POINT_SET, requestSubmit)
@@ -150,7 +156,9 @@ export default function* root() {
   yield fork(geocode)
   yield fork(geolocation)
   yield fork(submit)
+
   yield fork(observeFeature)
+  yield fork(observeGeocode)
   yield fork(observePoint)
 
 }

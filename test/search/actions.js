@@ -69,15 +69,3 @@ test(`Search:Action[${types.SUBMIT_REQUEST}] - Submit search action`, t => {
   t.end()
 
 })
-
-test(`Search:Action[${types.LUCKY_REQUEST}] - Submit lucky action`, t => {
-
-  const actual = actions.submitLucky()
-  const expected = { type: types.LUCKY_REQUEST }
-
-  t.deepEqual(actual, expected,
-    'submitLucky() should start lucky request')
-
-  t.end()
-
-})

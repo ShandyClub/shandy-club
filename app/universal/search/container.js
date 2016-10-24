@@ -89,7 +89,7 @@ export class Search extends Component {
   render() {
 
     const { actions, features, geocodes, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
-    const { getGeocode, setGeocode, clearGeocode, getGeolocation, toggleFeature, setPoint, setSelectedResult, submitSearch } = actions
+    const { getGeocode, setGeocode, clearGeocode, getGeolocation, toggleFeature, setPoint, setSelectedResult } = actions
 
     const { toggleInputFocus, toggleFeatures } = this
 
@@ -132,10 +132,6 @@ export class Search extends Component {
           callback={toggleFeatures} />
 
         { renderFeatures }
-
-        <Shared.button
-          label={'beer me'}
-          callback={submitSearch} />
 
         <Shared.button
           label={'explore nearby'}

@@ -49,7 +49,7 @@ export default function configureStore(state = initialState) {
   store.subscribe( () => {
 
     // remove routing|ui from state before storing
-    let stateTrimmed = store.getState().delete('routing').delete('ui')
+    let stateTrimmed = store.getState().delete('routing').delete('search').delete('ui')
 
     isBrowser && Storage.setItem(STATE_KEY, stateTrimmed)
 

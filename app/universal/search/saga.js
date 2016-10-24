@@ -96,14 +96,14 @@ function* fetchSubmit() {
     // get search ui state
     const isSearchOverlayed = yield select(selectors.isSearchOverlayed)
 
-    // construct payload
-    const payload = { results }
+    // construct meta
+    const meta = {}
 
     // update search ui state if necessary
-    if (isSearchOverlayed) payload.ui = { search: { overlay: !isSearchOverlayed } }
+    if (isSearchOverlayed) meta.ui = { search: { overlay: !isSearchOverlayed } }
 
     // success!
-    yield put({ type: actions.SUBMIT_SUCCESS, payload })
+    yield put({ type: actions.SUBMIT_SUCCESS, payload: { results }, meta })
 
   } catch (error) {
 

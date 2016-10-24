@@ -93,6 +93,12 @@ export class Search extends Component {
 
     const { toggleInputFocus, toggleFeatures } = this
 
+    const renderFeaturesToggle = !isSearchOverlayed ? (
+      <Shared.button
+        label={'toggle features'}
+        callback={toggleFeatures} />
+    ) : null
+
     const renderFeatures = isSearchFeatures ? (
       <Components.features features={features} toggleFeature={toggleFeature} />
     ) : null
@@ -127,9 +133,7 @@ export class Search extends Component {
 
         { renderSuggestions }
 
-        <Shared.button
-          label={'toggle features'}
-          callback={toggleFeatures} />
+        { renderFeaturesToggle }
 
         { renderFeatures }
 

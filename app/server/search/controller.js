@@ -12,9 +12,7 @@ export const geocode = (req, res, next) => {
 
   }).then( geocode => {
 
-    res.json({ geocode })
-
-    res.sendStatus(200)
+    res.status(200).json({ geocode })
 
     return next()
 
@@ -32,9 +30,7 @@ export const pubs = (req, res, next) => {
 
   }).then( pubs => {
 
-    res.json({ pubs })
-
-    res.sendStatus(200)
+    res.status(200).json({ pubs })
 
     return next()
 
@@ -52,9 +48,7 @@ export const lucky = (req, res, next) => {
 
   }).then( pubs => {
 
-    res.json({ pubs })
-
-    res.sendStatus(200)
+    res.status(200).json({ pubs })
 
     return next()
 

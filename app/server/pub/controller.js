@@ -12,9 +12,7 @@ export const create = (req, res, next) => {
 
   }).then( pub => {
 
-    res.json({ pub })
-
-    res.sendStatus(200)
+    res.status(200).json({ pub })
 
     return next()
 
@@ -32,7 +30,7 @@ export const read = (req, res, next) => {
 
   }).then( pub => {
 
-    res.json({ pub })
+    res.status(200).json({ pub })
 
     return next()
 
@@ -50,7 +48,7 @@ export const update = (req, res, next) => {
 
   }).then( pub => {
 
-    res.json({ pub })
+    res.status(200).json({ pub })
 
     return next()
 
@@ -68,7 +66,7 @@ export const remove = (req, res, next) => {
 
   }).then( () => {
 
-    res.sendStatus(200)
+    res.status(200)
 
     return next()
 

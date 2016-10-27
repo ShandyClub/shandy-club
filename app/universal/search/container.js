@@ -88,7 +88,7 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
+    const { actions, features, geocodes, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, isSearchFitToBounds, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
     const { getGeocode, setGeocode, clearGeocode, getGeolocation, toggleFeature, setPoint, setSelectedResult } = actions
 
     const { toggleInputFocus, toggleFeatures } = this
@@ -106,6 +106,7 @@ export class Search extends Component {
     const renderMap = !isSearchOverlayed ? (
       <Shared.map
         center={point}
+        fitToBounds={isSearchFitToBounds}
         markers={mapMarkers}
         mapOptions={MAP_OPTIONS}
         tileOptions={MAP_TILE_OPTIONS}

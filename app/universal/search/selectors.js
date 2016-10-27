@@ -15,6 +15,7 @@ const getResults = createSelector( getAll, state => state.get('results') )
 const getSelectedResultIndex = createSelector( getAll, state => state.get('selectedResultIndex') )
 const getTerm = createSelector( getAll, state => state.get('term') )
 const getSearchFeatures = ui.getSearchFeatures
+const getSearchFitToBounds = ui.getSearchFitToBounds
 const getSearchFocus = ui.getSearchFocus
 const getSearchOverlay = ui.getSearchOverlay
 
@@ -40,6 +41,7 @@ export default {
   mapMarkers: getMapMarkers,
   isPanelOpen: getIsPanelOpen,
   isSearchFeatures: getSearchFeatures,
+  isSearchFitToBounds: getSearchFitToBounds,
   isSearchFocused: getSearchFocus,
   isSearchOverlayed: getSearchOverlay,
   selectedResult: getSelectedResult,

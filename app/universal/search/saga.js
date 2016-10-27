@@ -47,7 +47,7 @@ export function* geolocation() {
 
 }
 
-function* fetchGeolocation(callback, action) {
+function* fetchGeolocation(callback) {
 
   try {
 
@@ -58,7 +58,7 @@ function* fetchGeolocation(callback, action) {
     yield put({ type: actions.GEOLOCATION_SUCCESS, payload: { point: [ lng, lat ] } })
 
     // continue
-    yield call(callback, action)
+    yield call(callback)
 
   } catch (error) {
 
@@ -114,9 +114,9 @@ function* fetchSubmit() {
 
 }
 
-function* requestSubmit() {
+function* requestSubmit({ fitToBounds=true }={}) {
 
-  yield put({ type: actions.SUBMIT_REQUEST })
+  yield put({ type: actions.SUBMIT_REQUEST, meta: { ui: { search: { fitToBounds } } } })
 
 }
 
@@ -134,7 +134,7 @@ function* handleFeature() {
 
   const isSearchOverlayed = yield select(selectors.isSearchOverlayed)
 
-  if (!isSearchOverlayed) yield* requestSubmit()
+  if (!isSearchOverlayed) yield* requestSubmit({ fitToBounds: false })
 
 }
 
@@ -146,7 +146,7 @@ export function* observeGeocode() {
 
 export function* observePoint() {
 
-  yield* takeLatest(actions.POINT_SET, requestSubmit)
+  yield* takeLatest(actions.POINT_SET, requestSubmit, { fitToBounds: false })
 
 }
 

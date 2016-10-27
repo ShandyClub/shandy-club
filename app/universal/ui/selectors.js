@@ -7,5 +7,6 @@ export const getRequesting = state => state.getIn([ name, 'requesting' ])
 
 export const getSearch = state => state.getIn([ name, 'search' ])
 export const getSearchFeatures = state => state.getIn([ name, 'search', 'features' ])
+export const getSearchFitToBounds = state => state.getIn([ name, 'search', 'fitToBounds' ])
 export const getSearchFocus = state => state.getIn([ name, 'search', 'focus' ])
 export const getSearchOverlay = state => state.getIn([ name, 'search', 'overlay' ])

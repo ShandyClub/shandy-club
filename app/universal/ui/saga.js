@@ -14,9 +14,11 @@ export function* watchRequest() {
 
 }
 
-function* handleRequest() {
+function* handleRequest({ meta={} }) {
 
-  yield put({ type: actions.UPDATE, payload: { error: null, requesting: true } })
+  const { ui } = meta
+
+  yield put({ type: actions.UPDATE, payload: { error: null, requesting: true, ...ui } })
 
 }
 

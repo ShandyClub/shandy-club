@@ -32,22 +32,19 @@ export default class Map extends Component {
 
   componentDidUpdate() {
 
-    const { markers } = this.props
+    const { fitToBounds, markers } = this.props
 
     // clear pubs
     this.clearMarkers()
 
     // TODO - really should check if markers != prevProps.markers
-    this.plotMarkers(markers, this.generateMarkerIcon())
-
-    // TODO - and center map if markers AND point changed
-    // if (center.length) this.setMapCenter(center)
+    this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
 
   }
 
   initMap() {
 
-    const { center: [ lng, lat ], markers, mapOptions, tileOptions, tileURL } = this.props
+    const { center: [ lng, lat ], fitToBounds, markers, mapOptions, tileOptions, tileURL } = this.props
 
     // override default center if available
     if (lat && lng) mapOptions.center = { lat, lng }
@@ -66,7 +63,15 @@ export default class Map extends Component {
     this.clearMarkers()
 
     // plot pubs
-    this.plotMarkers(markers, this.generateMarkerIcon())
+    this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
+
+  }
+
+  fitMapToBounds(bounds) {
+
+    const { map } = this
+
+    map.fitBounds(bounds)
 
   }
 
@@ -90,7 +95,7 @@ export default class Map extends Component {
 
   }
 
-  plotMarkers(markers, icon) {
+  plotMarkers(markers, icon, fitToBounds) {
 
     // no markers? abort!
     if (!markers.length) return
@@ -123,6 +128,17 @@ export default class Map extends Component {
 
     // add layer to map
     this.markerLayer.addTo(this.map)
+
+    // should map be fitted to bounds?
+    if (fitToBounds) {
+
+      // get layer bounds
+      const layerBounds = this.markerLayer.getBounds()
+
+      // center/zoom map to markerLayer bounds if required
+      this.fitMapToBounds(layerBounds)
+
+    }
 
   }
 

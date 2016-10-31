@@ -1,5 +1,3 @@
-import './css/app.css'
-
 import React from 'react'
 import { render } from 'react-dom'
 import { init as initAnalytics } from '../universal/shared/util/track'

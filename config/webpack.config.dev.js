@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PATHS = {
   src: path.join(__dirname, '../app/client'),
   dist: path.join(__dirname, '../public'),
-  css: path.join(__dirname, '../app/client/css'),
   img: path.join(__dirname, '../static/img')
 }
 
@@ -25,8 +24,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      css: PATHS.css,
-      img: PATHS.img
+      img: PATHS.img,
     }
   },
 
@@ -36,7 +34,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-    new CleanPlugin(['index.html', 'bundle.js', 'bundle.js.map', 'style.css', 'style.css.map'], PATHS.dist),
+    new CleanPlugin([ 'index.html', 'bundle.js', 'bundle.js.map' ], PATHS.dist),
     new CopyPlugin([
       { from: './app/client/index.html', to: 'index.html' }
     ]),
@@ -67,10 +65,6 @@ module.exports = {
         loaders: [ 'babel?cacheDirectory', 'eslint' ]
       },
       {
-        test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
-      },
-      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           'file?hash=sha512&digest=hex&name=[hash].[ext]',
@@ -78,8 +72,6 @@ module.exports = {
         ]
       }
     ]
-  },
-
-  postcss: [ require('postcss-cssnext') ]
+  }
 
 }

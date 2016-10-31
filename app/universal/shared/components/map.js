@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { isBrowser } from '../util'
-import styles from 'css/components/map.css'
 import { MAP_TOOLTIP_ZOOM_LEVEL } from '../constants'
 
 // conditionally import Leaflet + plugins -> requires `window`
@@ -85,13 +84,13 @@ export default class Map extends Component {
 
   generateClusterIcon(cluster) {
 
-    return L.divIcon({ html: `<span>${cluster.getChildCount()}</span>`, className: styles.cluster, iconSize: [ 30, 30 ] })
+    return L.divIcon({ html: `<span>${cluster.getChildCount()}</span>`, className: 'TODO', iconSize: [ 30, 30 ] })
 
   }
 
   generateMarkerIcon() {
 
-    return L.divIcon({ className: styles.icon, iconSize: [ 40, 40 ] })
+    return L.divIcon({ className: 'TODO', iconSize: [ 40, 40 ] })
 
   }
 
@@ -187,7 +186,7 @@ export default class Map extends Component {
   render() {
 
     return (
-      <div id='map' className={styles.base}></div>
+      <div id='map'></div>
     )
 
   }

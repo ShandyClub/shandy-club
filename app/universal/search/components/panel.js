@@ -1,6 +1,5 @@
 import React from 'react'
 import * as Shared from '../../shared/components'
-import styles from 'css/components/search/panel.css'
 
 const Panel = ({ selectedResult, selectedResultIndex, totalResults, setSelectedResult }) => {
 
@@ -28,7 +27,7 @@ const Panel = ({ selectedResult, selectedResultIndex, totalResults, setSelectedR
   }
 
   return (
-    <div className={styles.base}>
+    <div>
 
       <Shared.button label='close' callback={onCloseClick} />
 

@@ -1,15 +1,9 @@
 import React, { PropTypes } from 'react'
-import classNames from 'classnames/bind'
-import styles from 'css/components/icon.css'
-
-const cx = classNames.bind(styles)
 
 const Icon = ({ name, theme }) => {
 
-  let className = cx({ [`${theme}`]: theme })
-
   return (
-    <i className={`material-icons ${className}`}>
+    <i className={`material-icons ${theme}`}>
       { name }
     </i>
   )

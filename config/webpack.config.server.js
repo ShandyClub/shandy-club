@@ -6,7 +6,6 @@ const PATHS = {
   server: path.resolve(__dirname, '../app/server'),
   dist: path.resolve(__dirname, '../public'),
   modules: path.resolve(__dirname, '../node_modules'),
-  css: path.resolve(__dirname, '../app/client/css')
 }
 
 module.exports = {
@@ -16,12 +15,6 @@ module.exports = {
   output: {
     path: PATHS.dist,
     filename: 'server.bundle.js'
-  },
-
-  resolve: {
-    alias: {
-      css: PATHS.css
-    }
   },
 
   plugins: [
@@ -58,10 +51,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [ 'babel', 'eslint' ]
-      },
-      {
-        test: /\.css$/,
-        loader: 'css/locals??modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       }
     ]
   }

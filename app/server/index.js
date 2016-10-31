@@ -31,6 +31,7 @@ const renderPage = (html, initialState) => `
   <meta charset="utf-8">
   <title>Shandy Club</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" media="(device-height: 568px)" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/4.1.0/sanitize.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="shortcut icon" href="/favicon.png">
   <div id="root">${html}</div>

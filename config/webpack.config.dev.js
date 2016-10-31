@@ -1,7 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
-const CleanPlugin = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const CleanPlugin = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const PATHS = {

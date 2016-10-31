@@ -1,8 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CleanPlugin = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const PATHS = {
   src: path.join(__dirname, '../app/client'),
@@ -42,14 +42,12 @@ module.exports = {
         warnings: false
       }
     }),
+    new CleanPlugin([ './public' ], process.cwd()),
     new ExtractTextPlugin('style.css', { allChunks: true }),
     new CopyPlugin([
-      { from: 'package.json', to: 'package.json' }
-    ]),
-    new HtmlWebpackPlugin({
-      template: 'app/client/index.html',
-      favicon: 'static/img/favicon.png'
-    })
+      { from: 'package.json', to: 'package.json' },
+      { from: 'static/img/favicon.png', to: 'favicon.png' }
+    ])
   ],
 
   eslint: {

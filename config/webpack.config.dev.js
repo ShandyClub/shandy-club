@@ -7,7 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PATHS = {
   src: path.join(__dirname, '../app/client'),
   dist: path.join(__dirname, '../public'),
-  img: path.join(__dirname, '../static/img')
+  img: path.join(__dirname, '../static/img'),
+  components: path.join(__dirname, '../app/universal/shared/components'),
+  style: path.join(__dirname, '../app/universal/shared/style'),
 }
 
 module.exports = {
@@ -25,6 +27,8 @@ module.exports = {
   resolve: {
     alias: {
       img: PATHS.img,
+      components: PATHS.components,
+      style: PATHS.style,
     }
   },
 

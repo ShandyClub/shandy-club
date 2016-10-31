@@ -12,7 +12,8 @@ import selectors from './selectors'
 
 // components
 import * as Components from './components'
-import * as Shared from '../shared/components'
+import { Button } from '../shared/components/button'
+import Map from '../shared/components/map'
 
 // constants
 import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS } from '../shared/constants'
@@ -94,9 +95,7 @@ export class Search extends Component {
     const { toggleInputFocus, toggleFeatures } = this
 
     const renderFeaturesToggle = !isSearchOverlayed ? (
-      <Shared.button
-        label={'toggle features'}
-        callback={toggleFeatures} />
+      <Button onClick={toggleFeatures}>toggle features</Button>
     ) : null
 
     const renderFeatures = isSearchFeatures ? (
@@ -104,7 +103,7 @@ export class Search extends Component {
     ) : null
 
     const renderMap = !isSearchOverlayed ? (
-      <Shared.map
+      <Map
         center={point}
         fitToBounds={isSearchFitToBounds}
         markers={mapMarkers}
@@ -138,9 +137,7 @@ export class Search extends Component {
 
         { renderFeatures }
 
-        <Shared.button
-          label={'explore nearby'}
-          callback={getGeolocation} />
+        <Button onClick={getGeolocation}>explore nearby</Button>
 
         { renderMap }
 

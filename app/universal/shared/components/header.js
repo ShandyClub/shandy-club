@@ -1,18 +1,3 @@
-import React from 'react'
-import Logo from './logo'
-import Text from './text'
+import styled from 'styled-components'
 
-import { APP_NAME } from '../constants'
-
-const Header = () => {
-
-  return (
-    <div>
-      <Logo />
-      <Text tag={'h3'} content={APP_NAME} />
-    </div>
-  )
-
-}
-
-export default Header
+export const Header = styled.header``

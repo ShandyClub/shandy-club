@@ -1,13 +1,3 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Component = () => {
-
-  return (
-    <div>
-      Footer
-    </div>
-  )
-
-}
-
-export default Component
+export const Footer = styled.footer``

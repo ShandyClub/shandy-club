@@ -1,13 +1,10 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Component = () => {
+import { colours, space } from '../style'
 
-  return (
-    <div>
-      Error
-    </div>
-  )
-
-}
-
-export default Component
+export const Error = styled.p`
+  color: ${ colours.light };
+  background: ${ colours.error };
+  ${ space.m(3) }
+  ${ space.fs(3) }
+`

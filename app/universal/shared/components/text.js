@@ -1,5 +1,14 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Text = ({ tag: Tag, content }) => <Tag>{ content }</Tag>
+import { colours, space } from '../style'
 
-export default Text
+export const Text = styled.p`
+  color: ${ colours.dark };
+  ${ space.m(3) }
+  ${ space.fs(3) }
+`
+
+export const TitleText = styled.h1`
+  color: ${ colours.dark };
+  ${ space.fs(6) }
+`

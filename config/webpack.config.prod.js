@@ -6,9 +6,10 @@ const CopyPlugin = require('copy-webpack-plugin')
 const PATHS = {
   src: path.join(__dirname, '../app/client'),
   dist: path.join(__dirname, '../public'),
+  universal: path.join(__dirname, '../app/universal'),
   img: path.join(__dirname, '../static/img'),
-  components: path.join(__dirname, '../app/universal/shared/components'),
-  style: path.join(__dirname, '../app/universal/shared/style'),
+  components: 'shared/components',
+  style: 'shared/style',
 }
 
 module.exports = {
@@ -24,8 +25,8 @@ module.exports = {
   },
 
   resolve: {
+    root: PATHS.universal,
     alias: {
-      img: PATHS.img,
       components: PATHS.components,
       style: PATHS.style,
     }
@@ -46,7 +47,8 @@ module.exports = {
     new CleanPlugin([ './public' ], process.cwd()),
     new CopyPlugin([
       { from: 'package.json', to: 'package.json' },
-      { from: 'static/img/favicon.png', to: 'favicon.png' }
+      { from: 'static/img/favicon.png', to: 'favicon.png' },
+      { from: PATHS.img }
     ])
   ],
 

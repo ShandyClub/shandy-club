@@ -7,9 +7,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PATHS = {
   src: path.join(__dirname, '../app/client'),
   dist: path.join(__dirname, '../public'),
+  universal: path.join(__dirname, '../app/universal'),
   img: path.join(__dirname, '../static/img'),
-  components: path.join(__dirname, '../app/universal/shared/components'),
-  style: path.join(__dirname, '../app/universal/shared/style'),
+  components: 'shared/components',
+  style: 'shared/style',
 }
 
 module.exports = {
@@ -25,8 +26,8 @@ module.exports = {
   },
 
   resolve: {
+    root: PATHS.universal,
     alias: {
-      img: PATHS.img,
       components: PATHS.components,
       style: PATHS.style,
     }
@@ -40,7 +41,8 @@ module.exports = {
     }),
     new CleanPlugin([ 'index.html', 'bundle.js', 'bundle.js.map' ], PATHS.dist),
     new CopyPlugin([
-      { from: './app/client/index.html', to: 'index.html' }
+      { from: './app/client/index.html', to: 'index.html' },
+      { from: PATHS.img }
     ]),
     new HtmlWebpackPlugin({
       template: 'app/client/index.html',

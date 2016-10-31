@@ -1,13 +1,8 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Button = ({ label, callback }) => {
+import { colours, space } from '../style'
 
-  return (
-    <div onClick={ () => callback() }>
-      { label }
-    </div>
-  )
-
-}
-
-export default Button
+export const Button = styled.button`
+  color: ${ props => props.color || colours.dark };
+  ${ space.fs(3) }
+`

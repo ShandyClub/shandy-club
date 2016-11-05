@@ -1,5 +1,6 @@
 import React from 'react'
-import * as Shared from '../../shared/components'
+import { Button } from 'components/button'
+import Pub from 'components/pub'
 
 const Panel = ({ selectedResult, selectedResultIndex, totalResults, setSelectedResult }) => {
 
@@ -29,13 +30,13 @@ const Panel = ({ selectedResult, selectedResultIndex, totalResults, setSelectedR
   return (
     <div>
 
-      <Shared.button label='close' callback={onCloseClick} />
+      <Button label='close' callback={onCloseClick} />
 
-      <Shared.pub { ...selectedResult } />
+      <Pub { ...selectedResult } />
 
-      <Shared.button label='prev' callback={onPrevClick} />
+      <Button label='prev' callback={onPrevClick} />
 
-      <Shared.button label='next' callback={onNextClick} />
+      <Button label='next' callback={onNextClick} />
 
     </div>
   )

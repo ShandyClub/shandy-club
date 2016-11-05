@@ -50,6 +50,7 @@ export class Search extends Component {
 
     // reset UI state
     handleClickOutside()
+    // TODO - don't need this?
     toggleInputFocus(false)
 
   }

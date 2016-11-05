@@ -12,11 +12,12 @@ import selectors from './selectors'
 
 // components
 import * as Components from './components'
-import { Button } from '../shared/components/button'
-import Map from '../shared/components/map'
+import { Button } from 'components/button'
+import Map from 'components/map'
+import Panel from 'components/panel'
 
 // constants
-import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS } from '../shared/constants'
+import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS } from 'constants'
 
 export class Search extends Component {
 
@@ -43,15 +44,13 @@ export class Search extends Component {
 
   componentWillUnmount() {
 
-    const { handleClickOutside, toggleInputFocus } = this
+    const { handleClickOutside } = this
 
     // stop listening for clicks outside
     window.removeEventListener('click', handleClickOutside)
 
     // reset UI state
     handleClickOutside()
-    // TODO - don't need this?
-    toggleInputFocus(false)
 
   }
 
@@ -116,7 +115,7 @@ export class Search extends Component {
     ) : null
 
     const renderPanel = !isSearchOverlayed && isPanelOpen ? (
-      <Components.panel selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} totalResults={totalResults} setSelectedResult={setSelectedResult} />
+      <Panel selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} totalResults={totalResults} setSelectedResult={setSelectedResult} />
     ) : null
 
     const renderSuggestions = showSuggestions ? (

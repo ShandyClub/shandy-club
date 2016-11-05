@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import { init as initAnalytics } from '../universal/shared/util/track'
-import Root from '../universal/shared/containers/Root'
+import { init as initAnalytics } from 'util/track'
+import Root from 'containers/Root'
 
 import 'style/global'
 

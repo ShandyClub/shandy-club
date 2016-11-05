@@ -2,8 +2,8 @@ import { takeLatest } from 'redux-saga'
 import { call, put, fork, select } from 'redux-saga/effects'
 
 // services
-import * as API from '../shared/services/api'
-import * as Geolocation from '../shared/services/geolocation'
+import * as API from 'services/api'
+import * as Geolocation from 'services/geolocation'
 
 // actions/selectors
 import * as actions from './actionTypes'

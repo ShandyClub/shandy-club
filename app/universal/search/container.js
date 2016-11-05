@@ -13,6 +13,7 @@ import selectors from './selectors'
 // components
 import * as Components from './components'
 import { Button } from 'components/button'
+import { Input } from 'components/input'
 import Map from 'components/map'
 import Panel from 'components/panel'
 
@@ -125,9 +126,11 @@ export class Search extends Component {
     return (
       <div>
 
-        <Components.input
-          term={term}
-          handleSearchTerm={ (term) => term ? getGeocode(term) : clearGeocode() }
+        <Input
+          type='text'
+          value={ term || '' }
+          innerRef={ r => Search._input = r }
+          onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
           onFocus={ () => toggleInputFocus() }
           onClick={ e => e.stopPropagation() } />
 

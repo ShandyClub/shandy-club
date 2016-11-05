@@ -2,9 +2,8 @@
   * @desc Colour palette
 */
 
-export const dark = '#04160F'
-export const light = '#F1DBE5'
+export const dark = '#47444F'
+export const light = '#FFFBF3'
 export const shandy = '#FBB80C'
-// export const secondary = '#27A5F9'
-// export const accent = '#FFBA29'
-export const error = '#FF60A2'
+export const accent = '#27A5F9'
+export const error = '#AC6F76'

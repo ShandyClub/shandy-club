@@ -1,14 +1,19 @@
 import styled from 'styled-components'
 
-import { colours, space } from '../style'
+import { scale, space, typography } from '../style'
 
 export const Text = styled.p`
-  color: ${ colours.dark };
   ${ space.m(3) }
   ${ space.fs(3) }
+  ${ typography.ff() }
 `
 
 export const TitleText = styled.h1`
-  color: ${ colours.dark };
+  ${ scale.getScaledProperty('margin-top', 3) }
+  ${ scale.getScaledProperty('margin-bottom', 3) }
   ${ space.fs(6) }
+  ${ typography.ff('secondary') }
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
 `

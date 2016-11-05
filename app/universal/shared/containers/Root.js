@@ -17,11 +17,9 @@ export default class Root extends Component {
   render() {
 
     return (
-      <div>
-        <Provider store={store}>
-          <Router routes={routes} history={history} />
-        </Provider>
-      </div>
+      <Provider store={store}>
+        <Router routes={routes} history={history} />
+      </Provider>
     )
 
   }

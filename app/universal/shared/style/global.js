@@ -1,7 +1,12 @@
 import { injectGlobal } from 'styled-components'
 
+import { colours, space, typography } from '../style'
+
 injectGlobal`
   body {
+    ${ typography.ff() }
+    ${ space.fs(3) }
+    color: ${ colours.dark };
     -webkit-font-smoothing: antialiased;
   }
 

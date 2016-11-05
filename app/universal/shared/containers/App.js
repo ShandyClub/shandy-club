@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 
-import { Header } from '../components/header'
-import { Footer } from '../components/footer'
-import { Image } from '../components/image'
-import { TitleText } from '../components/text'
+import { Image } from 'components/image'
+import { TitleText } from 'components/text'
+import { View } from 'components/layout'
 
 import { APP_NAME } from '../constants'
 
@@ -14,18 +13,14 @@ export default class App extends Component {
     const { children } = this.props
 
     return (
-      <div>
+      <View>
 
-        <Header>
-          <Image src='shandy-club-logo.png' width='40px' height='40px' />
-          <TitleText>{ APP_NAME }</TitleText>
-        </Header>
+        <Image src='shandy-club.png' width='50px' height='50px' center />
+        <TitleText>{ APP_NAME }</TitleText>
 
         { children }
 
-        <Footer />
-
-      </div>
+      </View>
     )
 
   }

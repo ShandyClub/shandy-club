@@ -12,8 +12,12 @@ import selectors from './selectors'
 
 // components
 import * as Components from './components'
+import { Anchor } from 'components/anchor'
 import { Button } from 'components/button'
+import { Image } from 'components/image'
 import { Input } from 'components/input'
+import { IntroText, TitleText } from 'components/text'
+import { HAlign, View } from 'components/layout'
 import Map from 'components/map'
 import Panel from 'components/panel'
 
@@ -57,12 +61,10 @@ export class Search extends Component {
 
   toggleClickOutsideEvent(enabled) {
 
-    const handleClickOutside = this.handleClickOutside
-
     // listen for clicks outside || stop listening for clicks outside
     const listener = enabled ? window.addEventListener : window.removeEventListener
 
-    listener('click', handleClickOutside)
+    listener('click', this.handleClickOutside)
 
   }
 
@@ -124,15 +126,47 @@ export class Search extends Component {
     ) : null
 
     return (
-      <div>
+      <View padded paddedTop>
 
-        <Input
-          type='text'
-          value={ term || '' }
-          innerRef={ r => Search._input = r }
-          onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
-          onFocus={ () => toggleInputFocus() }
-          onClick={ e => e.stopPropagation() } />
+        <HAlign media='half'>
+
+          <Image src='shandy-club.png' width='50px' height='50px' center />
+
+          <TitleText>
+            Shandy Club
+          </TitleText>
+
+          <IntroText>
+
+            Fancy a pint? Silly question.<br/>
+            So, where to?<br/>
+            Now that’s a little tougher.<br/>
+
+            <Anchor onClick={getGeolocation}>
+              Luckily we know a few nearby
+            </Anchor>
+
+          </IntroText>
+
+          <IntroText>
+
+            But maybe you’re a savvy old sort<br/>
+            planning a trip to
+
+            <Input
+              autoFocus
+              type='text'
+              placeholder='Islington'
+              width='100px'
+              value={ term || '' }
+              innerRef={ r => Search._input = r }
+              onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
+              onFocus={ () => toggleInputFocus() }
+              onClick={ e => e.stopPropagation() } />
+
+          </IntroText>
+
+        </HAlign>
 
         { renderSuggestions }
 
@@ -140,13 +174,11 @@ export class Search extends Component {
 
         { renderFeatures }
 
-        <Button onClick={getGeolocation}>explore nearby</Button>
-
         { renderMap }
 
         { renderPanel }
 
-      </div>
+      </View>
     )
 
   }

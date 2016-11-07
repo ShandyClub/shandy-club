@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { isBrowser } from '../util'
 import { MAP_TOOLTIP_ZOOM_LEVEL } from '../constants'
+import { colours } from 'style'
 
 // conditionally import Leaflet + plugins -> requires `window`
 let L
@@ -84,7 +85,7 @@ export default class Map extends Component {
 
   generateClusterIcon(cluster) {
 
-    return L.divIcon({ html: `<span>${cluster.getChildCount()}</span>`, className: 'TODO', iconSize: [ 30, 30 ] })
+    return L.divIcon({ html: `<span>${cluster.getChildCount()}</span>`, className: 'marker-cluster', iconSize: [ 30, 30 ] })
 
   }
 
@@ -101,7 +102,7 @@ export default class Map extends Component {
 
     // init layers
     this.tooltipLayer = L.layerGroup()
-    this.markerLayer = L.markerClusterGroup({ iconCreateFunction: this.generateClusterIcon })
+    this.markerLayer = L.markerClusterGroup({ iconCreateFunction: this.generateClusterIcon, polygonOptions: { color: colours.dark } })
 
     markers.map( ({ coordinates: [ lng, lat ], name }, index) => {
 

@@ -21,8 +21,38 @@ injectGlobal`
     transition: transform 0.3s ease-out, opacity 0.3s ease-in;
   }
 
-  .leaflet-cluster-spider-leg {
-    color: red;
+  .marker-cluster {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: rgba(71, 68, 79, 0.6);
+
+    &:after {
+      content: '';
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(71, 68, 79, 0.3);
+    }
+  }
+
+  .marker-cluster span {
+    color: ${ colours.light };
+    line-height: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
   }
 
   ::-moz-selection {

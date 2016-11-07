@@ -14,10 +14,10 @@ const getPoint = createSelector( getAll, state => state.get('point').toArray() )
 const getResults = createSelector( getAll, state => state.get('results') )
 const getSelectedResultIndex = createSelector( getAll, state => state.get('selectedResultIndex') )
 const getTerm = createSelector( getAll, state => state.get('term') )
-const getSearchFeatures = ui.getSearchFeatures
-const getSearchFitToBounds = ui.getSearchFitToBounds
-const getSearchFocus = ui.getSearchFocus
-const getSearchOverlay = ui.getSearchOverlay
+const getSearchFeatures = ui.searchFeatures
+const getSearchFitToBounds = ui.searchFitToBounds
+const getSearchFocus = ui.searchFocus
+const getSearchOverlay = ui.searchOverlay
 
 // ------
 // COMPUTED

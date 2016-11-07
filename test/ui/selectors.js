@@ -8,15 +8,15 @@ const initialState = Immutable.fromJS({ ui: state })
 
 // config
 const selectors = createStructuredSelector({
-  ui: UISelectors.getAll,
-  error: UISelectors.getError,
-  requesting: UISelectors.getRequesting,
-  search: UISelectors.getSearch,
-  searchFocus: UISelectors.getSearchFocus,
-  searchOverlay: UISelectors.getSearchOverlay,
+  ui: UISelectors.all,
+  error: UISelectors.error,
+  requesting: UISelectors.requesting,
+  search: UISelectors.search,
+  searchFocus: UISelectors.searchFocus,
+  searchOverlay: UISelectors.searchOverlay,
 })(initialState)
 
-test('UI:Selector[getAll] - UI selector getAll output', t => {
+test('UI:Selector[all] - UI selector all output', t => {
 
   const { ui } = selectors
 
@@ -24,13 +24,13 @@ test('UI:Selector[getAll] - UI selector getAll output', t => {
   const expected = state
 
   t.deepEqual(actual, expected,
-    'getAll() selector should return full UI state')
+    'all() selector should return full UI state')
 
   t.end()
 
 })
 
-test('UI:Selector[getError] - UI selector getError output', t => {
+test('UI:Selector[error] - UI selector error output', t => {
 
   const { error } = selectors
 
@@ -38,13 +38,13 @@ test('UI:Selector[getError] - UI selector getError output', t => {
   const expected = initialState.getIn([ name, 'error' ])
 
   t.deepEqual(actual, expected,
-    'getError() selector should return error from UI state')
+    'error() selector should return error from UI state')
 
   t.end()
 
 })
 
-test('UI:Selector[getRequesting] - UI selector getRequesting output', t => {
+test('UI:Selector[requesting] - UI selector requesting output', t => {
 
   const { requesting } = selectors
 
@@ -52,13 +52,13 @@ test('UI:Selector[getRequesting] - UI selector getRequesting output', t => {
   const expected = initialState.getIn([ name, 'requesting' ])
 
   t.deepEqual(actual, expected,
-    'getRequesting() selector should return requesting from UI state')
+    'requesting() selector should return requesting from UI state')
 
   t.end()
 
 })
 
-test('UI:Selector[getSearch] - UI selector getSearch output', t => {
+test('UI:Selector[search] - UI selector search output', t => {
 
   const { search } = selectors
 
@@ -66,13 +66,13 @@ test('UI:Selector[getSearch] - UI selector getSearch output', t => {
   const expected = initialState.getIn([ name, 'search' ])
 
   t.deepEqual(actual, expected,
-    'getSearch() selector should return search from UI state')
+    'search() selector should return search from UI state')
 
   t.end()
 
 })
 
-test('UI:Selector[getSearchFocus] - UI selector getSearchFocus output', t => {
+test('UI:Selector[searchFocus] - UI selector searchFocus output', t => {
 
   const { searchFocus } = selectors
 
@@ -80,13 +80,13 @@ test('UI:Selector[getSearchFocus] - UI selector getSearchFocus output', t => {
   const expected = initialState.getIn([ name, 'search', 'focus' ])
 
   t.deepEqual(actual, expected,
-    'getSearchFocus() selector should return searchFocus from UI state')
+    'searchFocus() selector should return searchFocus from UI state')
 
   t.end()
 
 })
 
-test('UI:Selector[getSearchOverlay] - UI selector getSearchOverlay output', t => {
+test('UI:Selector[searchOverlay] - UI selector searchOverlay output', t => {
 
   const { searchOverlay } = selectors
 
@@ -94,7 +94,7 @@ test('UI:Selector[getSearchOverlay] - UI selector getSearchOverlay output', t =>
   const expected = initialState.getIn([ name, 'search', 'overlay' ])
 
   t.deepEqual(actual, expected,
-    'getSearchOverlay() selector should return searchOverlay from UI state')
+    'searchOverlay() selector should return searchOverlay from UI state')
 
   t.end()
 

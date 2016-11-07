@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import uuid from 'node-uuid'
 
 // actions
 import * as actions from './actions'
@@ -11,13 +12,13 @@ import { actions as uiActions } from '../ui'
 import selectors from './selectors'
 
 // components
-import * as Components from './components'
 import { Anchor } from 'components/anchor'
 import { Button } from 'components/button'
 import { Image } from 'components/image'
 import { Input } from 'components/input'
 import { IntroText, TitleText } from 'components/text'
 import { HAlign, View } from 'components/layout'
+import { List } from 'components/list'
 import Map from 'components/map'
 import Panel from 'components/panel'
 
@@ -101,10 +102,6 @@ export class Search extends Component {
       <Button onClick={toggleFeatures}>toggle features</Button>
     ) : null
 
-    const renderFeatures = isSearchFeatures ? (
-      <Components.features features={features} toggleFeature={toggleFeature} />
-    ) : null
-
     const renderMap = !isSearchOverlayed ? (
       <Map
         center={point}
@@ -119,10 +116,6 @@ export class Search extends Component {
 
     const renderPanel = !isSearchOverlayed && isPanelOpen ? (
       <Panel selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} totalResults={totalResults} setSelectedResult={setSelectedResult} />
-    ) : null
-
-    const renderSuggestions = showSuggestions ? (
-      <Components.suggestions geocodes={geocodes} setGeocode={setGeocode} />
     ) : null
 
     return (
@@ -166,13 +159,27 @@ export class Search extends Component {
 
           </IntroText>
 
-        </HAlign>
+          { showSuggestions ? (
+            <List>
+              { geocodes.map( g => (
+                <div key={uuid.v4()} onClick={ () => setGeocode(g.get('center'), g.get('place_name')) }>
+                  { g.get('place_name') }
+                </div>
+              )) }
+            </List>
+          ) : null }
 
-        { renderSuggestions }
+        </HAlign>
 
         { renderFeaturesToggle }
 
-        { renderFeatures }
+        { isSearchFeatures ? (
+          <List>
+            { features.keySeq().map( f => (
+              <div key={uuid.v4()} className={ features.get(f) ? 'TODO active' : 'TODO normal' } onClick={ () => toggleFeature(f) }>{ f }</div>
+            )) }
+          </List>
+        ) : null }
 
         { renderMap }
 

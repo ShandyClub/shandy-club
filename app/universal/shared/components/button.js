@@ -5,6 +5,8 @@ import { colours } from '../style'
 
 export const Button = styled.button`
   color: ${ props => props.color || colours.dark };
+  cursor: pointer;
+  outline: 0;
 
   ${ ({ atomic }) => Atomic({ ...Button.default.atomic, ...atomic }) }
 `

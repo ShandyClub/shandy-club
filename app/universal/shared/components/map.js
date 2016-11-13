@@ -140,7 +140,7 @@ export default class Map extends Component {
     markers.map( ({ coordinates: [ lng, lat ], name }, index) => {
 
       // init tooltip
-      let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 20 ], permanent: true })
+      let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 10 ], permanent: true })
         .setLatLng([ lat, lng ])
         .setContent(name)
 

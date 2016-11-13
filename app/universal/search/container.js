@@ -14,6 +14,8 @@ import selectors from './selectors'
 
 // components
 import { Anchor } from 'components/anchor'
+import { Button } from 'components/button'
+import { Icon } from 'components/icon'
 import { Image } from 'components/image'
 import { Input } from 'components/input'
 import { View } from 'components/layout'
@@ -21,7 +23,6 @@ import { List } from 'components/list'
 import { Section } from 'components/section'
 import { Text } from 'components/text'
 import Map from 'components/map'
-import Panel from 'components/panel'
 
 // constants
 import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS, ZOOM_CONTROL_OPTIONS } from 'constants'
@@ -36,6 +37,9 @@ export class Search extends Component {
     this.toggleClickOutsideEvent = this.toggleClickOutsideEvent.bind(this)
     this.toggleFeatures = this.toggleFeatures.bind(this)
     this.toggleInputFocus = this.toggleInputFocus.bind(this)
+    this.onPubCloseClick = this.onPubCloseClick.bind(this)
+    this.onPubPrevClick = this.onPubPrevClick.bind(this)
+    this.onPubNextClick = this.onPubNextClick.bind(this)
 
   }
 
@@ -92,34 +96,45 @@ export class Search extends Component {
 
   }
 
+  onPubCloseClick() {
+
+    const { actions: { setSelectedResult } } = this.props
+
+    // reset selectedResult to default
+    setSelectedResult()
+
+  }
+
+  onPubPrevClick() {
+
+    const { actions: { setSelectedResult }, selectedResultIndex, totalResults } = this.props
+
+    const prevIndex = selectedResultIndex <= 0 ? totalResults - 1 : selectedResultIndex - 1
+
+    setSelectedResult(prevIndex)
+
+  }
+
+  onPubNextClick() {
+
+    const { actions: { setSelectedResult }, selectedResultIndex, totalResults } = this.props
+
+    const nextIndex = selectedResultIndex >= totalResults - 1 ? 0 : selectedResultIndex + 1
+
+    setSelectedResult(nextIndex)
+
+  }
+
   render() {
 
-    const { actions, geocodes, geolocation, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
+    const { actions, geocodes, geolocation, point, mapMarkers, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, showSuggestions } = this.props
     const { getGeocode, setGeocode, clearGeocode, getGeolocation, setPoint, setSelectedResult } = actions
 
-    const { toggleInputFocus } = this
+    const { toggleInputFocus, onPubCloseClick, onPubPrevClick, onPubNextClick } = this
 
     // const renderFeaturesToggle = !isSearchOverlayed ? (
     //   <Button onClick={toggleFeatures}>toggle features</Button>
     // ) : null
-
-    const renderMap = !isSearchOverlayed ? (
-      <Map
-        center={point}
-        fitToBounds={isSearchFitToBounds}
-        geolocation={geolocation}
-        markers={mapMarkers}
-        mapOptions={MAP_OPTIONS}
-        tileOptions={MAP_TILE_OPTIONS}
-        tileURL={MAP_TILE_URL}
-        zoomControlOptions={ZOOM_CONTROL_OPTIONS}
-        setPoint={setPoint}
-        setSelectedResult={setSelectedResult} />
-    ) : null
-
-    const renderPanel = !isSearchOverlayed && isPanelOpen ? (
-      <Panel selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} totalResults={totalResults} setSelectedResult={setSelectedResult} />
-    ) : null
 
     return (
       <View atomic={{ pt: isSearchOverlayed ? 14 : 0 }}>
@@ -187,10 +202,56 @@ export class Search extends Component {
           </List>
         ) : null } */}
 
-        { renderMap }
+        { !isSearchOverlayed ? (
+          <Map
+            center={point}
+            fitToBounds={isSearchFitToBounds}
+            geolocation={geolocation}
+            markers={mapMarkers}
+            mapOptions={MAP_OPTIONS}
+            tileOptions={MAP_TILE_OPTIONS}
+            tileURL={MAP_TILE_URL}
+            zoomControlOptions={ZOOM_CONTROL_OPTIONS}
+            setPoint={setPoint}
+            setSelectedResult={setSelectedResult} />
+        ) : null }
 
         <Transition transitionName='slide-left' transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          { renderPanel }
+          { !isSearchOverlayed && isPanelOpen ? (
+            <Section atomic={{ p:4, po:'f', t:0, r:0 }} width='300px' height='100%' backgroundColor='light' style={{ boxShadow: '-4px 0 20px 0 rgba(0, 0, 0, 0.2)' }}>
+
+              <Button onClick={ () => onPubCloseClick() }>
+                <Icon>close</Icon>
+              </Button>
+
+              <Text atomic={{ fs:6, mb:1, ta:'c', tt:'u' }} fontStack='secondary' letterSpacing='2px'>
+                { selectedResult.name }
+              </Text>
+
+              <Text atomic={{ fs:3, mt:0, ta:'c' }}>
+                { selectedResult.address } { selectedResult.postcode }
+              </Text>
+
+              <Text atomic={{ fs:5, ta:'c' }}>
+                { selectedResult.desc }
+              </Text>
+
+              { selectedResult.features.keySeq().map( f => selectedResult.features.get(f) ? (
+                <Text key={uuid.v4()} atomic={{ d:'ib', fs:3, fw:'b', mt:0, mr:1, mb:0, ml:1, td:'o', tt:'u' }}>{ f }</Text>
+              ) : null ) }
+
+              <Button atomic={{ po:'a', b:4, l:4 }} onClick={ () => onPubPrevClick() }>
+                <Icon>chevron_left</Icon>
+                <Text atomic={{ d:'ib', fs:3, m:0, tt:'u' }}>Prev</Text>
+              </Button>
+
+              <Button atomic={{ po:'a', b:4, r:4 }} onClick={ () => onPubNextClick() }>
+                <Text atomic={{ d:'ib', fs:3, m:0, tt:'u' }}>Next</Text>
+                <Icon>chevron_right</Icon>
+              </Button>
+
+            </Section>
+          ) : null }
         </Transition>
 
       </View>

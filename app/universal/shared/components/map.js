@@ -116,7 +116,6 @@ export default class Map extends Component {
 
       // init marker
       let marker = new L.marker([ lat, lng ], { icon })
-        .bindPopup(name)
 
       // marker events
       marker.on('click', () => this.onMarkerClick(index))

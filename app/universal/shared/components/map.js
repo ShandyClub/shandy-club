@@ -53,7 +53,7 @@ export default class Map extends Component {
 
   initMap() {
 
-    const { center: [ lng, lat ], fitToBounds, geolocation, markers, mapOptions, tileOptions, tileURL } = this.props
+    const { center: [ lng, lat ], fitToBounds, geolocation, markers, mapOptions, tileOptions, tileURL, zoomControlOptions } = this.props
 
     // override default center if available
     if (lat && lng) mapOptions.center = { lat, lng }
@@ -67,6 +67,9 @@ export default class Map extends Component {
 
     // configure Leaflet
     L.tileLayer(tileURL, tileOptions).addTo(this.map)
+
+    // add zoom control
+    L.control.zoom(zoomControlOptions).addTo(this.map)
 
     // clear pubs
     this.clearMarkers()

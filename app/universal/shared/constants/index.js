@@ -9,6 +9,7 @@ export const MAP_OPTIONS = {
   center: [ 51.507463, -0.127694 ],
   maxBounds: [[ 51.28, -0.489 ], [ 51.686, 0.236 ]],
   zoom: 11,
+  zoomControl: false,
 }
 
 export const MAP_TILE_URL = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}'
@@ -20,3 +21,7 @@ export const MAP_TILE_OPTIONS = {
 }
 
 export const MAP_TOOLTIP_ZOOM_LEVEL = 17
+
+export const ZOOM_CONTROL_OPTIONS = {
+  position:'bottomleft',
+}

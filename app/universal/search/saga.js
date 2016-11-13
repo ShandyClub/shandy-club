@@ -55,7 +55,7 @@ function* fetchGeolocation(callback) {
     const { coords: { longitude: lng, latitude: lat } } = yield call(Geolocation.getCurrentPosition)
 
     // success!
-    yield put({ type: actions.GEOLOCATION_SUCCESS, payload: { point: [ lng, lat ] } })
+    yield put({ type: actions.GEOLOCATION_SUCCESS, payload: { geolocation: [ lat, lng ], point: [ lng, lat ] } })
 
     // continue
     yield call(callback)

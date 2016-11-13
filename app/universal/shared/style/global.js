@@ -1,6 +1,6 @@
 import { injectGlobal } from 'styled-components'
 
-import { colours, space, typography } from '../style'
+import { animation, colours, space, typography } from '../style'
 
 injectGlobal`
   html, body, #root {
@@ -21,8 +21,22 @@ injectGlobal`
     transition: transform 0.3s ease-out, opacity 0.3s ease-in;
   }
 
-  .leaflet-marker-icon {
-    border: none;
+  .leaflet-geolocation-icon {
+    border-radius: 50%;
+    background: ${ colours.accent };
+
+    &:after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+      background: ${ colours.accent };
+      animation: ${ animation.pulse } 1s ease-in-out infinite;
+    }
+  }
+
+  .leaflet-pub-icon {
     border-radius: 50%;
     background: ${ colours.light };
     display: flex;

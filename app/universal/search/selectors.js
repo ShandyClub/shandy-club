@@ -9,6 +9,7 @@ import { selectors as ui } from '../ui'
 const getAll = state => state.get(name)
 const getFeatures = createSelector( getAll, state => state.get('features') )
 const getGeocodes = createSelector( getAll, state => state.get('geocodes') )
+const getGeolocation = createSelector( getAll, state => state.get('geolocation').toArray() )
 const getMaxDistance = createSelector( getAll, state => state.get('maxDistance') )
 const getPoint = createSelector( getAll, state => state.get('point').toArray() )
 const getResults = createSelector( getAll, state => state.get('results') )
@@ -33,6 +34,7 @@ const getMapMarkers = createSelector( getResults, results => results.map( r => (
 export default {
   features: getFeatures,
   geocodes: getGeocodes,
+  geolocation: getGeolocation,
   maxDistance: getMaxDistance,
   point: getPoint,
   results: getResults,

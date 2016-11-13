@@ -16,6 +16,7 @@ export const initialState = Immutable.fromJS({
     tv: false,
   },
   geocodes: [],
+  geolocation: [],
   maxDistance: MAX_DISTANCE,
   point: [],
   results: [],

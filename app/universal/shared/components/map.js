@@ -53,7 +53,7 @@ export default class Map extends Component {
 
   initMap() {
 
-    const { center: [ lng, lat ], fitToBounds, markers, mapOptions, tileOptions, tileURL } = this.props
+    const { center: [ lng, lat ], fitToBounds, geolocation, markers, mapOptions, tileOptions, tileURL } = this.props
 
     // override default center if available
     if (lat && lng) mapOptions.center = { lat, lng }
@@ -70,6 +70,9 @@ export default class Map extends Component {
 
     // clear pubs
     this.clearMarkers()
+
+    // plot geolocation
+    this.plotGeolocation(geolocation, this.generateGeolocationIcon())
 
     // plot pubs
     this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
@@ -101,9 +104,26 @@ export default class Map extends Component {
 
   }
 
+  generateGeolocationIcon() {
+
+    return L.divIcon({ className: 'leaflet-geolocation-icon', iconSize: [ 16, 16 ] })
+
+  }
+
   generateMarkerIcon() {
 
-    return L.divIcon({ iconSize: [ 20, 20 ] })
+    return L.divIcon({ className: 'leaflet-pub-icon', iconSize: [ 20, 20 ] })
+
+  }
+
+  plotGeolocation(geolocation, icon) {
+
+    console.log('plotGeolocation', geolocation, icon)
+
+    // no geolocation? abort!
+    if (!geolocation.length) return
+
+    return L.marker(geolocation, { icon }).addTo(this.map)
 
   }
 

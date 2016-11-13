@@ -8,3 +8,14 @@ export const rotate360 = keyframes`
     transform: rotate(360deg);
   }
 `
+
+export const pulse = keyframes`
+  from {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+`

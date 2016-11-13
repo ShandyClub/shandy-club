@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import uuid from 'node-uuid'
+import Transition from 'react-addons-css-transition-group'
 
 // actions
 import * as actions from './actions'
@@ -187,7 +188,9 @@ export class Search extends Component {
 
         { renderMap }
 
-        { renderPanel }
+        <Transition transitionName='slide-left' transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+          { renderPanel }
+        </Transition>
 
       </View>
     )

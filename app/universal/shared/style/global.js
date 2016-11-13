@@ -16,6 +16,28 @@ injectGlobal`
     -webkit-font-smoothing: antialiased;
   }
 
+  .slide-left-enter, .slide-left-appear {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  .slide-left-enter.slide-left-enter-active, .slide-left-appear.slide-left-appear-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 500ms cubic-bezier(1,0,.31,1), opacity 300ms ease-in;
+  }
+
+  .slide-left-leave {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .slide-left-leave.slide-left-leave-active {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 300ms cubic-bezier(1,0,.31,1);
+  }
+
   .leaflet-cluster-anim .leaflet-marker-icon,
   .leaflet-cluster-anim .leaflet-marker-shadow {
     transition: transform 0.3s ease-out, opacity 0.3s ease-in;

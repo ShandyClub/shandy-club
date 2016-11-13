@@ -121,8 +121,6 @@ export default class Map extends Component {
 
   plotGeolocation(geolocation, icon) {
 
-    console.log('plotGeolocation', geolocation, icon)
-
     // no geolocation? abort!
     if (!geolocation.length) return
 

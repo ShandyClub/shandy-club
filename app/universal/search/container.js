@@ -127,7 +127,7 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, geocodes, geolocation, point, mapMarkers, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, showSuggestions } = this.props
+    const { actions, geocodes, geolocation, point, mapMarkers, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, selectedResultIndex, showSuggestions } = this.props
     const { getGeocode, setGeocode, clearGeocode, getGeolocation, setPoint, setSelectedResult } = actions
 
     const { toggleInputFocus, onPubCloseClick, onPubPrevClick, onPubNextClick } = this
@@ -209,6 +209,7 @@ export class Search extends Component {
             geolocation={geolocation}
             markers={mapMarkers}
             mapOptions={MAP_OPTIONS}
+            selectedResultIndex={selectedResultIndex}
             tileOptions={MAP_TILE_OPTIONS}
             tileURL={MAP_TILE_URL}
             zoomControlOptions={ZOOM_CONTROL_OPTIONS}

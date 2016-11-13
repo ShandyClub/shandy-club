@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import deepEqual from 'deep-equal'
 
 import { isBrowser } from '../util'
-import { MAP_TOOLTIP_ZOOM_LEVEL } from '../constants'
 import { colours } from 'style'
 
 // conditionally import Leaflet + plugins -> requires `window`
@@ -21,8 +20,10 @@ export default class Map extends Component {
     super()
 
     this.onMapDragEnd = this.onMapDragEnd.bind(this)
-    this.onMapZoomEnd = this.onMapZoomEnd.bind(this)
     this.onMarkerClick = this.onMarkerClick.bind(this)
+
+    // init marker layer cache
+    this.markerLayerCache = []
 
   }
 
@@ -34,20 +35,33 @@ export default class Map extends Component {
 
   componentDidUpdate(prevProps) {
 
-    const { fitToBounds, markers } = this.props
-    const { markers: prevMarkers } = prevProps
+    const { fitToBounds, markers, selectedResultIndex } = this.props
+    const { markers: prevMarkers, selectedResultIndex: prevSelectedResultIndex } = prevProps
 
-    // abort if markers === prevProps.markers
-    if ( deepEqual(markers, prevMarkers) ) return
+    // check if `selectedResultIndex` has changed
+    if ( selectedResultIndex && selectedResultIndex !== prevSelectedResultIndex ) {
 
-    // clear pubs
-    this.clearMarkers()
+      // center map to selected result
+      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: true })
 
-    // plot pubs
-    this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
+      // close marker tooltips
+      this.markerLayer.eachLayer( l => l.isTooltipOpen() && l.closeTooltip() )
 
-    // open tooltips
-    this.toggleTooltips()
+      // open marker's tooltip
+      this.markerLayerCache[selectedResultIndex].openTooltip()
+
+    }
+
+    // check if `markers` has changed
+    if ( !deepEqual(markers, prevMarkers) ) {
+
+      // clear pubs
+      this.clearMarkers()
+
+      // plot pubs
+      this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
+
+    }
 
   }
 
@@ -63,7 +77,6 @@ export default class Map extends Component {
 
     // add map events
     this.map.on('dragend', this.onMapDragEnd)
-    this.map.on('zoomend', this.onMapZoomEnd)
 
     // configure Leaflet
     L.tileLayer(tileURL, tileOptions).addTo(this.map)
@@ -80,9 +93,6 @@ export default class Map extends Component {
     // plot pubs
     this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
 
-    // open tooltips
-    this.toggleTooltips()
-
   }
 
   fitMapToBounds(bounds) {
@@ -93,11 +103,11 @@ export default class Map extends Component {
 
   }
 
-  setMapCenter([ lng, lat ]) {
+  setMapCenter([ lng, lat ], options={}) {
 
     const { map } = this
 
-    map.panTo({ lat, lng })
+    map.panTo({ lat, lng }, options)
 
   }
 
@@ -133,32 +143,35 @@ export default class Map extends Component {
     // no markers? abort!
     if (!markers.length) return
 
+    // reset marker layers cache
+    this.markerLayerCache.length = 0
+
     // init layers
-    this.tooltipLayer = L.layerGroup()
     this.markerLayer = L.markerClusterGroup({ iconCreateFunction: this.generateClusterIcon, polygonOptions: { color: colours.dark } })
 
     markers.map( ({ coordinates: [ lng, lat ], name }, index) => {
 
       // init tooltip
-      let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 10 ], permanent: true })
+      let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 10 ] })
         .setLatLng([ lat, lng ])
         .setContent(name)
 
-      // add tooltip to layer
-      this.tooltipLayer.addLayer(tooltip)
-
       // init marker
       let marker = new L.marker([ lat, lng ], { icon })
+        .bindTooltip(tooltip)
 
       // marker events
       marker.on('click', () => this.onMarkerClick(index))
+
+      // add marker to layer cache
+      this.markerLayerCache.push(marker)
 
       // add marker to layer
       return this.markerLayer.addLayer(marker)
 
     } )
 
-    // add layer to map
+    // add marker layer to map
     this.markerLayer.addTo(this.map)
 
     // should map be fitted to bounds?
@@ -177,19 +190,6 @@ export default class Map extends Component {
   clearMarkers() {
 
     this.markerLayer && this.markerLayer.clearLayers()
-    this.tooltipLayer && this.tooltipLayer.clearLayers()
-
-  }
-
-  toggleTooltips() {
-
-    const zoomLevel = this.map.getZoom()
-    const tooltipLayer = this.tooltipLayer
-    const isLayerOnMap = this.map.hasLayer(tooltipLayer)
-    const isTooltipZoomLevel = zoomLevel >= MAP_TOOLTIP_ZOOM_LEVEL
-
-    if (isTooltipZoomLevel && !isLayerOnMap) return tooltipLayer.addTo(this.map)
-    else if (!isTooltipZoomLevel && isLayerOnMap) return tooltipLayer.removeFrom(this.map)
 
   }
 
@@ -199,12 +199,6 @@ export default class Map extends Component {
     const { lat, lng } = this.map.getCenter()
 
     setPoint([ lng, lat ])
-
-  }
-
-  onMapZoomEnd() {
-
-    this.toggleTooltips()
 
   }
 

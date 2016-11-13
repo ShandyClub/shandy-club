@@ -13,11 +13,11 @@ import selectors from './selectors'
 
 // components
 import { Anchor } from 'components/anchor'
-import { Button } from 'components/button'
+// import { Button } from 'components/button'
 import { Image } from 'components/image'
 import { Input } from 'components/input'
 import { IntroText, TitleText } from 'components/text'
-import { HAlign, View } from 'components/layout'
+import { View } from 'components/layout'
 import { List } from 'components/list'
 import Map from 'components/map'
 import Panel from 'components/panel'
@@ -123,55 +123,57 @@ export class Search extends Component {
     return (
       <View>
 
-        <HAlign media='half'>
+        <Image src='shandy-club.png' width='50px' height='50px' center />
 
-          <Image src='shandy-club.png' width='50px' height='50px' center />
+        { isSearchOverlayed ? (
+          <section>
 
-          <TitleText>
-            Shandy Club
-          </TitleText>
+            <TitleText>
+              Shandy Club
+            </TitleText>
 
-          <IntroText>
+            <IntroText>
 
-            Fancy a pint? Silly question.<br/>
-            So, where to?<br/>
-            Now that’s a little tougher.<br/>
+              Fancy a pint? Silly question.<br/>
+              So, where to?<br/>
+              Now that’s a little tougher.<br/>
 
-            <Anchor onClick={getGeolocation}>
-              Luckily we know a few nearby
-            </Anchor>
+              <Anchor onClick={getGeolocation}>
+                Luckily we know a few nearby
+              </Anchor>
 
-          </IntroText>
+            </IntroText>
 
-          <IntroText>
+            <IntroText>
 
-            But maybe you’re a savvy old sort<br/>
-            planning a trip to
+              But maybe you’re a savvy old sort<br/>
+              planning a trip to
 
-            <Input
-              autoFocus
-              type='text'
-              placeholder='Islington'
-              width='100px'
-              value={ term || '' }
-              innerRef={ r => Search._input = r }
-              onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
-              onFocus={ () => toggleInputFocus() }
-              onClick={ e => e.stopPropagation() } />
+              <Input
+                autoFocus
+                type='text'
+                placeholder='Islington'
+                width='100px'
+                value={ term || '' }
+                innerRef={ r => Search._input = r }
+                onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
+                onFocus={ () => toggleInputFocus() }
+                onClick={ e => e.stopPropagation() } />
 
-          </IntroText>
+            </IntroText>
 
-          { showSuggestions ? (
-            <List>
-              { geocodes.map( g => (
-                <div key={uuid.v4()} onClick={ () => setGeocode(g.get('center'), g.get('place_name')) }>
-                  { g.get('place_name') }
-                </div>
-              )) }
-            </List>
-          ) : null }
+            { showSuggestions ? (
+              <List>
+                { geocodes.map( g => (
+                  <div key={uuid.v4()} onClick={ () => setGeocode(g.get('center'), g.get('place_name')) }>
+                    { g.get('place_name') }
+                  </div>
+                )) }
+              </List>
+            ) : null }
 
-        </HAlign>
+          </section>
+        ) : null }
 
         {/* { renderFeaturesToggle } */}
 

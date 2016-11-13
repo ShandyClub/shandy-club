@@ -19,6 +19,7 @@ export default class Map extends Component {
 
     super()
 
+    this.onMapDragStart = this.onMapDragStart.bind(this)
     this.onMapDragEnd = this.onMapDragEnd.bind(this)
     this.onMarkerClick = this.onMarkerClick.bind(this)
 
@@ -76,6 +77,7 @@ export default class Map extends Component {
     this.map = L.map('map', mapOptions )
 
     // add map events
+    this.map.on('dragstart', this.onMapDragStart)
     this.map.on('dragend', this.onMapDragEnd)
 
     // configure Leaflet
@@ -190,6 +192,15 @@ export default class Map extends Component {
   clearMarkers() {
 
     this.markerLayer && this.markerLayer.clearLayers()
+
+  }
+
+  onMapDragStart() {
+
+    const { setSelectedResult } = this.props
+
+    // reset selectedResult to default
+    setSelectedResult()
 
   }
 

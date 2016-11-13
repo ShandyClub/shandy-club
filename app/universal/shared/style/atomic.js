@@ -29,6 +29,7 @@ const properties = {
   pr: 'padding-right',
   pb: 'padding-bottom',
   pl: 'padding-left',
+  po: 'position',
   r: 'right',
   t: 'top',
   ta: 'text-align',
@@ -37,6 +38,7 @@ const properties = {
   va: 'vertical-align',
   w: 'width',
   ws: 'white-space',
+  z: 'z-index',
 }
 
 // -----
@@ -67,6 +69,12 @@ const values = {
     h: 'hidden',
     s: 'scroll',
     v: 'visible',
+  },
+  po: {
+    s: 'static',
+    r: 'relative',
+    a: 'absolute',
+    f: 'fixed',
   },
   ta: {
     c: 'center',
@@ -122,6 +130,7 @@ const getters = {
   pr: value => getScaledProperty('pr', value),
   pb: value => getScaledProperty('pb', value),
   pl: value => getScaledProperty('pl', value),
+  po: value => getStaticProperty('po', value),
   r: value => getScaledProperty('r', value),
   t: value => getScaledProperty('t', value),
   ta: value => getStaticProperty('ta', value),
@@ -130,6 +139,7 @@ const getters = {
   va: value => getStaticProperty('va', value),
   w: value => getScaledProperty('w', value),
   ws: value => getStaticProperty('ws', value),
+  z: value => getActualProperty('z', value),
 }
 
 // -----
@@ -140,7 +150,9 @@ const createScaledPropertyGetter = (property, value, unit, scale=SCALE) => typeo
 
 const createComputedPropertyGetter = (property, value, unit) => typeof value === 'number' && typeof properties[property] === 'string' ? { [`${ properties[property] }`]: `${ value }${ unit }` } : null
 
-const createStaticPropertyGetter = (property, value) =>  typeof properties[property] === 'string' && typeof values[property] === 'object' && typeof values[property][value] !== 'undefined' ? { [`${ properties[property] }`]: `${ values[property][value] }` } : null
+const createStaticPropertyGetter = (property, value) => typeof properties[property] === 'string' && typeof values[property] === 'object' && typeof values[property][value] !== 'undefined' ? { [`${ properties[property] }`]: `${ values[property][value] }` } : null
+
+const createActualPropertyGetter = (property, value) => typeof properties[property] === 'string' ? { [`${ properties[property] }`]: value } : null
 
 // -----
 // RESOLVE METHOD CREATORS
@@ -151,6 +163,8 @@ const getScaledProperty = (property, value, unit=UNIT) => createScaledPropertyGe
 const getComputedProperty = (property, value, unit=UNIT) => createComputedPropertyGetter(property, value, unit)
 
 const getStaticProperty = (property, value) => createStaticPropertyGetter(property, value)
+
+const getActualProperty = (property, value) => createActualPropertyGetter(property, value)
 
 // -----
 // ATOMIC STYLE HANDLER

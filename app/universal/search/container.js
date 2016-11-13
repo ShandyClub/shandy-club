@@ -122,9 +122,9 @@ export class Search extends Component {
     ) : null
 
     return (
-      <View atomic={{ pt:14 }}>
+      <View atomic={{ pt: isSearchOverlayed ? 14 : 0 }}>
 
-        <Image src='shandy-club.png' width='50px' height='50px' center />
+        <Image src='shandy-club.png' width='50px' height='50px' center atomic={ !isSearchOverlayed ? { po:'a', t:1, l:1, z:1 } : null } />
 
         { isSearchOverlayed ? (
           <Section>

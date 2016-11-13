@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import { selectors } from '../../ui'
 
-import { View } from 'components/layout'
 import { Loader } from 'components/loader'
 
 class App extends Component {
@@ -16,13 +15,13 @@ class App extends Component {
     const renderLoader = requesting ? <Loader /> : null
 
     return (
-      <View>
+      <div id='App'>
 
         { renderLoader }
 
         { children }
 
-      </View>
+      </div>
     )
 
   }

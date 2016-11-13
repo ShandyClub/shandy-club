@@ -3,7 +3,7 @@ import { injectGlobal } from 'styled-components'
 import { animation, colours, scale, typography } from '../style'
 
 injectGlobal`
-  html, body, #Root {
+  html, body, #Root, #App {
     height: 100%;
     min-height: 100%;
   }
@@ -119,6 +119,7 @@ injectGlobal`
   #map {
     width: 100%;
     height: 100%;
+    z-index: 0;
   }
 
   ::-moz-selection {

@@ -21,6 +21,24 @@ injectGlobal`
     transition: transform 0.3s ease-out, opacity 0.3s ease-in;
   }
 
+  .leaflet-marker-icon {
+    border: none;
+    border-radius: 50%;
+    background: ${ colours.light };
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: ${ colours.shandy };
+      flex: none;
+    }
+  }
+
   .marker-cluster {
     width: 30px;
     height: 30px;

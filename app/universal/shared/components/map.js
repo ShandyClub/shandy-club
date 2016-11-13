@@ -91,7 +91,7 @@ export default class Map extends Component {
 
   generateMarkerIcon() {
 
-    return L.divIcon({ className: 'TODO', iconSize: [ 40, 40 ] })
+    return L.divIcon({ iconSize: [ 20, 20 ] })
 
   }
 

@@ -9,5 +9,6 @@ export const List = styled.div`
 
   & > * {
     border-bottom: 1px dotted ${ colours.dark };
+    cursor: pointer;
   }
 `

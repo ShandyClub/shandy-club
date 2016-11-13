@@ -98,9 +98,9 @@ export class Search extends Component {
 
     const { toggleInputFocus, toggleFeatures } = this
 
-    const renderFeaturesToggle = !isSearchOverlayed ? (
-      <Button onClick={toggleFeatures}>toggle features</Button>
-    ) : null
+    // const renderFeaturesToggle = !isSearchOverlayed ? (
+    //   <Button onClick={toggleFeatures}>toggle features</Button>
+    // ) : null
 
     const renderMap = !isSearchOverlayed ? (
       <Map
@@ -119,7 +119,7 @@ export class Search extends Component {
     ) : null
 
     return (
-      <View padded paddedTop>
+      <View>
 
         <HAlign media='half'>
 
@@ -171,15 +171,15 @@ export class Search extends Component {
 
         </HAlign>
 
-        { renderFeaturesToggle }
+        {/* { renderFeaturesToggle } */}
 
-        { isSearchFeatures ? (
+        {/* { isSearchFeatures ? (
           <List>
             { features.keySeq().map( f => (
               <div key={uuid.v4()} className={ features.get(f) ? 'TODO active' : 'TODO normal' } onClick={ () => toggleFeature(f) }>{ f }</div>
             )) }
           </List>
-        ) : null }
+        ) : null } */}
 
         { renderMap }
 

@@ -1,25 +1,23 @@
 import styled from 'styled-components'
+import Atomic from 'style/atomic'
 
-import { scale, space, typography } from '../style'
+import { colours, typography } from 'style'
 
 export const Text = styled.p`
-  ${ scale.getScaledProperty('margin-top', 3) }
-  ${ scale.getScaledProperty('margin-bottom', 3) }
-  ${ space.fs(3) }
-  ${ typography.ff() }
+  ${ props => typography.ff(props.fontStack || 'primary') }
+  color: ${ props => props.color && colours[props.color] || Text.default.color };
+  letter-spacing: ${ props => props.letterSpacing || Text.default.letterSpacing };
+
+  ${ ({ atomic }) => Atomic({ ...Text.default.atomic, ...atomic }) }
 `
 
-export const IntroText = styled(Text)`
-  ${ space.fs(4) }
-  text-align: center;
-`
-
-export const TitleText = styled.h1`
-  ${ scale.getScaledProperty('margin-top', 3) }
-  ${ scale.getScaledProperty('margin-bottom', 3) }
-  ${ space.fs(6) }
-  ${ typography.ff('secondary') }
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 3px;
-`
+Text.default = {
+  color: colours.dark,
+  letterSpacing: 'normal',
+  atomic: {
+    fs: 4,
+    mt: 4,
+    mb: 4,
+    ta: 'l',
+  },
+}

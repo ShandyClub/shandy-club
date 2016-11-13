@@ -14,12 +14,12 @@ import selectors from './selectors'
 
 // components
 import { Anchor } from 'components/anchor'
-// import { Button } from 'components/button'
 import { Image } from 'components/image'
 import { Input } from 'components/input'
-import { IntroText, TitleText } from 'components/text'
 import { View } from 'components/layout'
 import { List } from 'components/list'
+import { Section } from 'components/section'
+import { Text } from 'components/text'
 import Map from 'components/map'
 import Panel from 'components/panel'
 
@@ -122,18 +122,18 @@ export class Search extends Component {
     ) : null
 
     return (
-      <View>
+      <View atomic={{ pt:14 }}>
 
         <Image src='shandy-club.png' width='50px' height='50px' center />
 
         { isSearchOverlayed ? (
-          <section>
+          <Section>
 
-            <TitleText>
+            <Text atomic={{ fs:7, ta:'c', tt:'u' }} fontStack='secondary' letterSpacing='3px'>
               Shandy Club
-            </TitleText>
+            </Text>
 
-            <IntroText>
+            <Text atomic={{ fs:5, ta:'c' }}>
 
               Fancy a pint? Silly question.<br/>
               So, where to?<br/>
@@ -143,9 +143,9 @@ export class Search extends Component {
                 Luckily we know a few nearby
               </Anchor>
 
-            </IntroText>
+            </Text>
 
-            <IntroText>
+            <Text atomic={{ fs:5, ta:'c' }}>
 
               But maybe you’re a savvy old sort<br/>
               planning a trip to
@@ -155,16 +155,17 @@ export class Search extends Component {
                 type='text'
                 placeholder='Islington'
                 width='100px'
+                atomic={{ ml:1, mr:1 }}
                 value={ term || '' }
                 innerRef={ r => Search._input = r }
                 onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
                 onFocus={ () => toggleInputFocus() }
                 onClick={ e => e.stopPropagation() } />
 
-            </IntroText>
+            </Text>
 
             { showSuggestions ? (
-              <List>
+              <List maxWidth='600px' maxHeight='144px'>
                 { geocodes.map( g => (
                   <div key={uuid.v4()} onClick={ () => setGeocode(g.get('center'), g.get('place_name')) }>
                     { g.get('place_name') }
@@ -173,7 +174,7 @@ export class Search extends Component {
               </List>
             ) : null }
 
-          </section>
+          </Section>
         ) : null }
 
         {/* { renderFeaturesToggle } */}

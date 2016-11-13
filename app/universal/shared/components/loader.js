@@ -1,10 +1,9 @@
 import styled from 'styled-components'
+import Atomic from 'style/atomic'
 
-import { animation, colours, scale } from 'style'
+import { animation, colours } from 'style'
 
 export const Loader = styled.div`
-  ${ scale.getScaledProperty('top', 5) }
-  ${ scale.getScaledProperty('right', 5) }
   width: 0;
   height: 0;
   border-width: 0 10px 17.3px 10px;
@@ -13,4 +12,14 @@ export const Loader = styled.div`
   position: absolute;
   transform-origin: center center;
   animation: ${ animation.rotate360 } 0.5s linear infinite;
+
+  ${ ({ atomic }) => Atomic({ ...Loader.default.atomic, ...atomic }) }
 `
+
+Loader.default = {
+  backgroundSize: '100% auto',
+  atomic: {
+    r: 6,
+    t: 6,
+  },
+}

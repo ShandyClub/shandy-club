@@ -1,13 +1,20 @@
 import styled from 'styled-components'
+import Atomic from 'style/atomic'
 
-import { colours, scale } from 'style'
+import { colours } from 'style'
 
 export const Input = styled.input`
   width: ${ props => props.width || 'auto' };
-  ${ scale.getScaledProperty('margin-left', 0) }
-  ${ scale.getScaledProperty('margin-right', 0) }
-  border-bottom: 2px solid ${ colours.shandy }
+  border-bottom: 2px solid ${ colours.shandy };
   padding-bottom: 2px;
   text-overflow: ellipsis;
   outline: none;
+
+  ${ ({ atomic }) => Atomic({ ...Input.default.atomic, ...atomic }) }
 `
+
+Input.default = {
+  atomic: {
+    d: 'ib',
+  },
+}

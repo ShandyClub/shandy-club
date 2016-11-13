@@ -39,6 +39,17 @@ injectGlobal`
     }
   }
 
+  .leaflet-tooltip {
+    ${ typography.ff() }
+    border: none;
+    border-radius: 2px;
+    background-color: ${ colours.light };
+
+    &:before {
+      border-bottom-color: ${ colours.light };
+    }
+  }
+
   .marker-cluster {
     width: 30px;
     height: 30px;

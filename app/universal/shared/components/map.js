@@ -46,6 +46,9 @@ export default class Map extends Component {
     // plot pubs
     this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
 
+    // open tooltips
+    this.toggleTooltips()
+
   }
 
   initMap() {
@@ -70,6 +73,9 @@ export default class Map extends Component {
 
     // plot pubs
     this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
+
+    // open tooltips
+    this.toggleTooltips()
 
   }
 

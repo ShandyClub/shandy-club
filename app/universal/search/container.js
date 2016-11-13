@@ -93,10 +93,10 @@ export class Search extends Component {
 
   render() {
 
-    const { actions, features, geocodes, geolocation, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFeatures, isSearchFitToBounds, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
-    const { getGeocode, setGeocode, clearGeocode, getGeolocation, toggleFeature, setPoint, setSelectedResult } = actions
+    const { actions, geocodes, geolocation, point, mapMarkers, selectedResultIndex, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, showSuggestions, totalResults } = this.props
+    const { getGeocode, setGeocode, clearGeocode, getGeolocation, setPoint, setSelectedResult } = actions
 
-    const { toggleInputFocus, toggleFeatures } = this
+    const { toggleInputFocus } = this
 
     // const renderFeaturesToggle = !isSearchOverlayed ? (
     //   <Button onClick={toggleFeatures}>toggle features</Button>

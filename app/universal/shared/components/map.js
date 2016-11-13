@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import deepEqual from 'deep-equal'
+
 import { isBrowser } from '../util'
 import { MAP_TOOLTIP_ZOOM_LEVEL } from '../constants'
 import { colours } from 'style'
@@ -30,14 +32,18 @@ export default class Map extends Component {
 
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
 
     const { fitToBounds, markers } = this.props
+    const { markers: prevMarkers } = prevProps
+
+    // abort if markers === prevProps.markers
+    if ( deepEqual(markers, prevMarkers) ) return
 
     // clear pubs
     this.clearMarkers()
 
-    // TODO - really should check if markers != prevProps.markers
+    // plot pubs
     this.plotMarkers(markers, this.generateMarkerIcon(), fitToBounds)
 
   }

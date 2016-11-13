@@ -103,6 +103,7 @@
     "body-parser": "^1.15.2",
     "chroma-js": "^1.2.1",
     "co": "^4.6.0",
+    "deep-equal": "^1.0.1",
     "express": "^4.14.0",
     "http-proxy": "^1.14.0",
     "immutable": "^3.7.6",

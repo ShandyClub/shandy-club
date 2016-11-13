@@ -109,7 +109,7 @@ export default class Map extends Component {
 
   generateGeolocationIcon() {
 
-    return L.divIcon({ className: 'leaflet-geolocation-icon', iconSize: [ 16, 16 ] })
+    return L.divIcon({ className: 'leaflet-geolocation-icon', iconSize: [ 20, 20 ] })
 
   }
 

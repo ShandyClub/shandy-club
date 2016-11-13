@@ -22,6 +22,7 @@ injectGlobal`
   }
 
   .leaflet-geolocation-icon {
+    border: 3px solid ${ colours.light };
     border-radius: 50%;
     background: ${ colours.accent };
 

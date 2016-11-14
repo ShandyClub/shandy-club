@@ -14,6 +14,9 @@ import routes from '../universal/routes'
 import ApiRoutes from './routes'
 import './database'
 
+// critical CSS - temp fix for https://github.com/styled-components/styled-components/issues/124
+import styles from './styles'
+
 // setup express
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -37,6 +40,7 @@ const renderPage = (html, initialState) => `
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="shortcut icon" href="/favicon.png">
+  ${styles}
   <div id="Root">${html}</div>
   <script>window.__INITIAL_STATE__ = ${initialState}</script>
   <script src="/bundle.js"></script>

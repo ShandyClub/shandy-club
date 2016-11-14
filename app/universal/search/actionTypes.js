@@ -20,3 +20,5 @@ export const GEOLOCATION_FAILURE = `${name}/GEOLOCATION_FAILURE`
 export const SUBMIT_REQUEST = `${name}/SUBMIT_REQUEST`
 export const SUBMIT_SUCCESS = `${name}/SUBMIT_SUCCESS`
 export const SUBMIT_FAILURE = `${name}/SUBMIT_FAILURE`
+
+export const RESET = `${name}/RESET`

@@ -60,3 +60,7 @@ export const toggleFeature = feature => ({
 export const submitSearch = () => ({
   type: actions.SUBMIT_REQUEST
 })
+
+export const resetSearch = () => ({
+  type: actions.RESET
+})

@@ -37,6 +37,7 @@ export class Search extends Component {
     this.toggleClickOutsideEvent = this.toggleClickOutsideEvent.bind(this)
     this.toggleFeatures = this.toggleFeatures.bind(this)
     this.toggleInputFocus = this.toggleInputFocus.bind(this)
+    this.onLogoClick = this.onLogoClick.bind(this)
     this.onPubCloseClick = this.onPubCloseClick.bind(this)
     this.onPubPrevClick = this.onPubPrevClick.bind(this)
     this.onPubNextClick = this.onPubNextClick.bind(this)
@@ -96,6 +97,18 @@ export class Search extends Component {
 
   }
 
+  onLogoClick() {
+
+    const { resetSearch, updateUI } = this.props.actions
+
+    // reset search state
+    resetSearch()
+
+    // update ui state
+    updateUI({ search: { overlay: true } })
+
+  }
+
   onPubCloseClick() {
 
     const { actions: { setSelectedResult } } = this.props
@@ -130,7 +143,7 @@ export class Search extends Component {
     const { actions, geocodes, geolocation, point, mapMarkers, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, selectedResultIndex, showSuggestions } = this.props
     const { getGeocode, setGeocode, clearGeocode, getGeolocation, setPoint, setSelectedResult } = actions
 
-    const { toggleInputFocus, onPubCloseClick, onPubPrevClick, onPubNextClick } = this
+    const { toggleInputFocus, onLogoClick, onPubCloseClick, onPubPrevClick, onPubNextClick } = this
 
     // const renderFeaturesToggle = !isSearchOverlayed ? (
     //   <Button onClick={toggleFeatures}>toggle features</Button>
@@ -139,7 +152,7 @@ export class Search extends Component {
     return (
       <View atomic={{ pt: isSearchOverlayed ? 14 : 0 }} maxWidth='none'>
 
-        <Image src='shandy-club.png' width='50px' height='50px' center atomic={ !isSearchOverlayed ? { po:'a', t:1, l:1, z:1 } : null } />
+        <Image src='shandy-club.png' width='50px' height='50px' center atomic={ !isSearchOverlayed ? { c:'p', po:'a', t:1, l:1, z:1 } : null } onClick={ () => !isSearchOverlayed && onLogoClick() } />
 
         { isSearchOverlayed ? (
           <Section>

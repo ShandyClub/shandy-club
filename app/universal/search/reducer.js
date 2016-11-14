@@ -44,4 +44,6 @@ export default createReducer(initialState, {
   [actions.SUBMIT_REQUEST]: (state, action) => state.merge({ ...action.payload }),
   [actions.SUBMIT_SUCCESS]: (state, action) => state.merge({ ...action.payload }),
 
+  [actions.RESET]: state => state.merge({ ...initialState.toJS() }),
+
 })

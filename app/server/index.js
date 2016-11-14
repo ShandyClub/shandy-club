@@ -3,6 +3,7 @@ import express from 'express'
 import path from 'path'
 import httpProxy from 'http-proxy'
 import bodyParser from 'body-parser'
+import compression from 'compression'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
@@ -40,6 +41,9 @@ const renderPage = (html, initialState) => `
   <script>window.__INITIAL_STATE__ = ${initialState}</script>
   <script src="/bundle.js"></script>
  `
+
+// compress static assets in production
+if (!isDevelopment) app.use(compression())
 
 // serve static assets
 app.use(express.static(staticPath))

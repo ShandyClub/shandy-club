@@ -40,7 +40,7 @@ export default class Map extends Component {
     const { markers: prevMarkers, selectedResultIndex: prevSelectedResultIndex } = prevProps
 
     // check if `selectedResultIndex` has changed
-    if ( selectedResultIndex && selectedResultIndex !== prevSelectedResultIndex ) {
+    if ( selectedResultIndex !== null && selectedResultIndex !== prevSelectedResultIndex ) {
 
       // center map to selected result
       this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: false })

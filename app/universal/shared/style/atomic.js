@@ -11,6 +11,7 @@ import { SCALE, UNIT } from './scale'
 const properties = {
   b: 'bottom',
   bw: 'border-width',
+  c: 'cursor',
   d: 'display',
   fd: 'flex-direction',
   fs: 'font-size',
@@ -47,6 +48,11 @@ const properties = {
 // -----
 
 const values = {
+  c: {
+    a: 'auto',
+    d: 'default',
+    p: 'pointer',
+  },
   d: {
     b: 'block',
     i: 'inline',
@@ -118,6 +124,7 @@ const values = {
 const getters = {
   b: value => getScaledProperty('b', value),
   bw: value => getComputedProperty('bw', value),
+  c: value => getStaticProperty('c', value),
   d: value => getStaticProperty('d', value),
   fd: value => getStaticProperty('fd', value),
   fs: value => getScaledProperty('fs', value),

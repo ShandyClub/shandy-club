@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import Atomic from 'style/atomic'
+import Atomic from '../style/atomic'
 
-import { animation, colours } from 'style'
+import { animation, colours } from '../style'
 
 export const Loader = styled.div`
   width: 0;

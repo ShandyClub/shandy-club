@@ -13,19 +13,19 @@ import { actions as uiActions } from '../ui'
 import selectors from './selectors'
 
 // components
-import { Anchor } from 'components/anchor'
-import { Button } from 'components/button'
-import { Icon } from 'components/icon'
-import { Image } from 'components/image'
-import { Input } from 'components/input'
-import { View } from 'components/layout'
-import { List } from 'components/list'
-import { Section } from 'components/section'
-import { Text } from 'components/text'
-import Map from 'components/map'
+import { Anchor } from '../shared/components/anchor'
+import { Button } from '../shared/components/button'
+import { Icon } from '../shared/components/icon'
+import { Image } from '../shared/components/image'
+import { Input } from '../shared/components/input'
+import { View } from '../shared/components/layout'
+import { List } from '../shared/components/list'
+import { Section } from '../shared/components/section'
+import { Text } from '../shared/components/text'
+import Map from '../shared/components/map'
 
 // constants
-import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS, ZOOM_CONTROL_OPTIONS } from 'constants'
+import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS, ZOOM_CONTROL_OPTIONS } from '../shared/constants'
 
 export class Search extends Component {
 
@@ -137,7 +137,7 @@ export class Search extends Component {
     // ) : null
 
     return (
-      <View atomic={{ pt: isSearchOverlayed ? 14 : 0 }}>
+      <View atomic={{ pt: isSearchOverlayed ? 14 : 0 }} maxWidth='none'>
 
         <Image src='shandy-club.png' width='50px' height='50px' center atomic={ !isSearchOverlayed ? { po:'a', t:1, l:1, z:1 } : null } />
 

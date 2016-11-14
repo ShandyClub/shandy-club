@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { selectors } from '../../ui'
 
-import { Loader } from 'components/loader'
+import { Loader } from '../components/loader'
 
 class App extends Component {
 

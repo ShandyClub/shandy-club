@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import Atomic from 'style/atomic'
+import Atomic from '../style/atomic'
 
-import { colours } from 'style'
+import { colours } from '../style'
 
 export const Section = styled.section`
   width: ${ props => props.width || Section.default.width };

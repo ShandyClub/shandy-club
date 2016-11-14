@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router'
 
-import { colours, scale } from 'style'
+import { colours, scale } from '../style'
 
 export const Anchor = styled(Link)`
   color: ${ colours.dark };

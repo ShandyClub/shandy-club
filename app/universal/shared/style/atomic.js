@@ -2,7 +2,7 @@
   * @desc Atomic styled-components
 */
 
-import { SCALE, UNIT } from 'style/scale'
+import { SCALE, UNIT } from './scale'
 
 // -----
 // PROPERTY SHORTHAND

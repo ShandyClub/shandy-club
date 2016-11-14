@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Atomic from 'style/atomic'
+import Atomic from '../style/atomic'
 
 import { colours } from '../style'
 

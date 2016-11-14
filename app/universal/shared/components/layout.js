@@ -9,9 +9,9 @@
 */
 
 import styled from 'styled-components'
-import Atomic from 'style/atomic'
+import Atomic from '../style/atomic'
 
-import { media, scale } from 'style'
+import { media, scale } from '../style'
 
 export const View = styled.div`
   width: ${ props => props.width || View.default.width };

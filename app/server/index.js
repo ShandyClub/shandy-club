@@ -7,8 +7,8 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
-import configureStore from 'store/configureStore'
-import rootSaga from 'sagas'
+import configureStore from '../universal/shared/store/configureStore'
+import rootSaga from '../universal/shared/sagas'
 import routes from '../universal/routes'
 import ApiRoutes from './routes'
 import './database'
@@ -36,7 +36,7 @@ const renderPage = (html, initialState) => `
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="shortcut icon" href="/favicon.png">
-  <div id="root">${html}</div>
+  <div id="Root">${html}</div>
   <script>window.__INITIAL_STATE__ = ${initialState}</script>
   <script src="/bundle.js"></script>
  `

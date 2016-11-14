@@ -19,16 +19,6 @@
       "react",
       "stage-2"
     ],
-    "plugins": [
-      [
-        "resolver",
-        {
-          "resolveDirs": [
-            "app/universal/shared"
-          ]
-        }
-      ]
-    ],
     "env": {
       "production": {
         "presets": [

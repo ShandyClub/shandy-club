@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Atomic from 'style/atomic'
+import Atomic from '../style/atomic'
 
-import { colours } from 'style'
+import { colours } from '../style'
 
 const MaterialIcon = ({ children, className, ...props }) => <i className={`material-icons ${className}`} { ...props }>{ children }</i>
 

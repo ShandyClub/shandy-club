@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import deepEqual from 'deep-equal'
 
 import { isBrowser } from '../util'
-import { colours } from 'style'
+import { colours } from '../style'
 
 // conditionally import Leaflet + plugins -> requires `window`
 let L

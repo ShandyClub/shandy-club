@@ -8,6 +8,7 @@ import Color from 'color'
 // PALETTE
 // -----
 
+export const white = '#FFFFFF'
 export const dark = '#47444F'
 export const light = '#FFFBF3'
 export const shandy = '#F58C40'

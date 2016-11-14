@@ -74,6 +74,12 @@ injectGlobal`
       background: ${ colours.shandy };
       flex: none;
     }
+
+    &--selected {
+      &:after {
+        background: ${ colours.dark };
+      }
+    }
   }
 
   .leaflet-tooltip {

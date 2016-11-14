@@ -43,13 +43,33 @@ export default class Map extends Component {
     if ( selectedResultIndex && selectedResultIndex !== prevSelectedResultIndex ) {
 
       // center map to selected result
-      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: true })
+      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: false })
 
-      // close marker tooltips
-      this.markerLayer.eachLayer( l => l.isTooltipOpen() && l.closeTooltip() )
+      // get previous selected marker
+      const prevSelectedMarker = this.markerLayerCache[prevSelectedResultIndex]
 
-      // open marker's tooltip
-      this.markerLayerCache[selectedResultIndex].openTooltip()
+      if (prevSelectedMarker) {
+
+        // close previous selected marker tooltips
+        prevSelectedMarker.isTooltipOpen() && prevSelectedMarker.closeTooltip()
+
+        // reset previous selected marker icon
+        prevSelectedMarker.setIcon(this.generateMarkerIcon())
+
+      }
+
+      // get selected marker
+      const selectedMarker = this.markerLayerCache[selectedResultIndex]
+
+      if (selectedMarker) {
+
+        // open selected marker tooltip
+        selectedMarker.openTooltip()
+
+        // set selected marker icon
+        selectedMarker.setIcon(this.generateSelectedMarkerIcon())
+
+      }
 
     }
 
@@ -128,6 +148,12 @@ export default class Map extends Component {
   generateMarkerIcon() {
 
     return L.divIcon({ className: 'leaflet-pub-icon', iconSize: [ 20, 20 ] })
+
+  }
+
+  generateSelectedMarkerIcon() {
+
+    return L.divIcon({ className: 'leaflet-pub-icon leaflet-pub-icon--selected', iconSize: [ 20, 20 ] })
 
   }
 

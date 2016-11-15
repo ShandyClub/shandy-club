@@ -60,8 +60,10 @@ test(`Search:Action[${types.FEATURE}] - Toggle feature action`, t => {
 
 test(`Search:Action[${types.SUBMIT_REQUEST}] - Submit search action`, t => {
 
-  const actual = actions.submitSearch()
-  const expected = { type: types.SUBMIT_REQUEST }
+  const meta = {}
+
+  const actual = actions.submitSearch(meta)
+  const expected = { type: types.SUBMIT_REQUEST, meta }
 
   t.deepEqual(actual, expected,
     'submitSearch() should start search request')

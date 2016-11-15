@@ -8,6 +8,16 @@ export const getGeocode = term => ({
   }
 })
 
+export const geocodeSuccess = payload => ({
+  type: actions.GEOCODE_SUCCESS,
+  payload,
+})
+
+export const geocodeFailure = payload => ({
+  type: actions.GEOCODE_FAILURE,
+  payload,
+})
+
 export const setGeocode = (point, term) => ({
   type: actions.GEOCODE_SET,
   payload: {
@@ -26,6 +36,16 @@ export const clearGeocode = () => ({
 
 export const getGeolocation = () => ({
   type: actions.GEOLOCATION_REQUEST
+})
+
+export const geolocationSuccess = payload => ({
+  type: actions.GEOLOCATION_SUCCESS,
+  payload,
+})
+
+export const geolocationFailure = payload => ({
+  type: actions.GEOLOCATION_FAILURE,
+  payload,
 })
 
 export const setPoint = (point=DEFAULT_POINT) => ({
@@ -57,8 +77,20 @@ export const toggleFeature = feature => ({
   },
 })
 
-export const submitSearch = () => ({
-  type: actions.SUBMIT_REQUEST
+export const submitSearch = meta => ({
+  type: actions.SUBMIT_REQUEST,
+  meta,
+})
+
+export const submitSuccess = (payload, meta) => ({
+  type: actions.SUBMIT_SUCCESS,
+  payload,
+  meta,
+})
+
+export const submitFailure = payload => ({
+  type: actions.SUBMIT_FAILURE,
+  payload,
 })
 
 export const resetSearch = () => ({

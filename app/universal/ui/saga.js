@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga'
 import { fork, put } from 'redux-saga/effects'
 
-import * as actions from './actionTypes'
+import * as actions from './actions'
 import { REQUEST_PATTERN, SUCCESS_PATTERN, FAILURE_PATTERN } from './constants'
 
 // -----
@@ -18,7 +18,7 @@ function* handleRequest({ meta={} }) {
 
   const { ui } = meta
 
-  yield put({ type: actions.UPDATE, payload: { error: null, requesting: true, ...ui } })
+  yield put(actions.updateUI({ error: null, requesting: true, ...ui }))
 
 }
 
@@ -36,7 +36,7 @@ function* handleSuccess({ meta={} }) {
 
   const { ui } = meta
 
-  yield put({ type: actions.UPDATE, payload: { requesting: false, ...ui } })
+  yield put(actions.updateUI({ requesting: false, ...ui }))
 
 }
 
@@ -54,7 +54,7 @@ function* handleFailure(action) {
 
   const { error } = action.payload
 
-  yield put({ type: actions.UPDATE, payload: { error, requesting: false } })
+  yield put(actions.updateUI({ error, requesting: false }))
 
 }
 

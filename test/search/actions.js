@@ -6,9 +6,10 @@ import * as types from '../../app/universal/search/actionTypes'
 test(`Search:Action[${types.GEOCODE_REQUEST}] - Geocode API request action`, t => {
 
   const term = 'Shoreditch'
+  const meta = { analytics: { payload: { term }, type: 'geocodeRequest' } }
 
   const actual = actions.getGeocode(term)
-  const expected = { type: types.GEOCODE_REQUEST, payload: { term } }
+  const expected = { type: types.GEOCODE_REQUEST, payload: { term }, meta }
 
   t.deepEqual(actual, expected,
     'getGeocode() should set `term`')
@@ -21,9 +22,10 @@ test(`Search:Action[${types.GEOCODE_SET}] - Geocode set action`, t => {
 
   const point = [ -0.101729, 51.569542 ]
   const term = 'Finsbury Park'
+  const meta = { analytics: { payload: { point, term }, type: 'geocodeSelect' } }
 
   const actual = actions.setGeocode(point, term)
-  const expected = { type: types.GEOCODE_SET, payload: { point, term } }
+  const expected = { type: types.GEOCODE_SET, payload: { point, term }, meta }
 
   t.deepEqual(actual, expected,
     'setGeocode() should set `point` and `term`')

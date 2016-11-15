@@ -16,12 +16,14 @@ import { track } from '../util/track'
 // middleware
 const router = routerMiddleware(browserHistory)
 const saga = createSagaMiddleware()
-const analytics = analyticsMiddleware( ({ type, payload }) => track(type, payload) )
 
-let middleware = [ router, saga, analytics ]
+let middleware = [ router, saga ]
 
 // logger middleware in development
 if (isDevelopment) middleware.push( createLogger({ collapsed: true }) )
+
+// analytics middleware in production
+if (!isDevelopment) middleware.push( analyticsMiddleware( ({ type, payload }) => track(type, payload) ) )
 
 // create store with middleware - and devTools if dev
 const finalCreateStore = compose(

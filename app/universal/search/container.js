@@ -242,9 +242,13 @@ export class Search extends Component {
                 { selectedResult.name }
               </Text>
 
-              <Text atomic={{ fs:3, mt:0, ta:'c' }}>
+              <Text atomic={{ fs:3, mt:0, mb:0, ta:'c' }}>
                 { selectedResult.address } { selectedResult.postcode }
               </Text>
+
+              <Anchor atomic={{ d:'b', fs:3, td:'n', w:11 }} center href={ selectedResult.website } target='_blank'>
+                Visit website
+              </Anchor>
 
               <Text atomic={{ fs:5, ta:'c' }}>
                 { selectedResult.desc }

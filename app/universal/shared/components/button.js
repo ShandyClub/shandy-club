@@ -1,13 +1,19 @@
-import React from 'react'
+import styled from 'styled-components'
+import Atomic from '../style/atomic'
 
-const Button = ({ label, callback }) => {
+import { colours } from '../style'
 
-  return (
-    <div onClick={callback}>
-      { label }
-    </div>
-  )
+export const Button = styled.button`
+  color: ${ props => props.color || colours.dark };
+  cursor: pointer;
+  outline: 0;
 
+  ${ ({ atomic }) => Atomic({ ...Button.default.atomic, ...atomic }) }
+`
+
+
+Button.default = {
+  atomic: {
+    fs: 4,
+  },
 }
-
-export default Button

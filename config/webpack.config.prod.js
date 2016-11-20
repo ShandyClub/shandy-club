@@ -1,14 +1,12 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const CleanPlugin = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const PATHS = {
   src: path.join(__dirname, '../app/client'),
   dist: path.join(__dirname, '../public'),
-  css: path.join(__dirname, '../app/client/css'),
-  img: path.join(__dirname, '../static/img')
+  img: path.join(__dirname, '../static/img'),
 }
 
 module.exports = {
@@ -19,15 +17,7 @@ module.exports = {
 
   output: {
     path: PATHS.dist,
-    filename: 'bundle.js',
-    publicPath: '/'
-  },
-
-  resolve: {
-    alias: {
-      css: PATHS.css,
-      img: PATHS.img
-    }
+    filename: 'bundle.js'
   },
 
   plugins: [
@@ -42,14 +32,12 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new CleanPlugin([ './public' ], process.cwd()),
     new CopyPlugin([
-      { from: 'package.json', to: 'package.json' }
-    ]),
-    new HtmlWebpackPlugin({
-      template: 'app/client/index.html',
-      favicon: 'static/img/favicon.png'
-    })
+      { from: 'package.json', to: 'package.json' },
+      { from: 'static/img/favicon.png', to: 'favicon.png' },
+      { from: PATHS.img }
+    ])
   ],
 
   eslint: {
@@ -62,21 +50,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [ 'babel', 'eslint' ]
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1!postcss')
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
       }
     ]
-  },
-
-  postcss: [ require('postcss-cssnext') ]
+  }
 
 }

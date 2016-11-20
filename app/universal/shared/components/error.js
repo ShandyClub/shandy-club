@@ -1,13 +1,27 @@
-import React from 'react'
+import styled from 'styled-components'
+import Atomic from '../style/atomic'
 
-const Component = () => {
+import { colours } from '../style'
 
-  return (
-    <div>
-      Error
-    </div>
-  )
+export const Error = styled.div`
+  color: ${ colours.error };
+  font-style: italic;
+  border: 2px dotted ${ colours.error };
+  border-radius: 4px;
 
+  ${ ({ atomic }) => Atomic({ ...Error.default.atomic, ...atomic }) }
+
+  &:before {
+    content: '😫';
+    margin-right: 10px;
+    font-style: normal;
+  }
+`
+
+Error.default = {
+  atomic: {
+    fs: 4,
+    m: 4,
+    p: 4,
+  },
 }
-
-export default Component

@@ -1,23 +1,25 @@
-import React, { PropTypes } from 'react'
+import styled from 'styled-components'
+import Atomic from '../style/atomic'
 
-const Loader = ({ loaded, children }) => {
+import { animation, colours } from '../style'
 
-  const content = loaded ? children : 'Loading...'
+export const Loader = styled.div`
+  width: 0;
+  height: 0;
+  border-width: 0 10px 17.3px 10px;
+  border-style: solid;
+  border-color: transparent transparent ${ colours.shandy } transparent;
+  position: absolute;
+  transform-origin: center center;
+  animation: ${ animation.rotate360 } 0.5s linear infinite;
 
-  return (
-    <div>
-      { content }
-    </div>
-  )
+  ${ ({ atomic }) => Atomic({ ...Loader.default.atomic, ...atomic }) }
+`
 
+Loader.default = {
+  backgroundSize: '100% auto',
+  atomic: {
+    r: 6,
+    t: 6,
+  },
 }
-
-Loader.propTypes = {
-  loaded: PropTypes.bool.isRequired
-}
-
-Loader.defaultProps = {
-  loaded: false
-}
-
-export default Loader

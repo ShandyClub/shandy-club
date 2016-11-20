@@ -1,7 +1,14 @@
-import './css/app.css'
-
 import React from 'react'
 import { render } from 'react-dom'
+
+import { isDevelopment } from '../universal/shared/util'
+import { init as initAnalytics } from '../universal/shared/util/track'
 import Root from '../universal/shared/containers/Root'
 
-render(<Root />, document.getElementById('root'))
+import '../universal/shared/style/global'
+
+// app setup
+if (!isDevelopment) initAnalytics()
+
+// app render
+render(<Root />, document.getElementById('Root'))

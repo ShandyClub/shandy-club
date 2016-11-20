@@ -6,7 +6,8 @@ import * as API from '../shared/services/api'
 import * as Geolocation from '../shared/services/geolocation'
 
 // actions/selectors
-import * as actions from './actionTypes'
+import * as actions from './actions'
+import * as actionTypes from './actionTypes'
 import selectors from './selectors'
 
 // -----
@@ -15,7 +16,7 @@ import selectors from './selectors'
 
 export function* geocode() {
 
-  yield* takeLatest(actions.GEOCODE_REQUEST, fetchGeocode)
+  yield* takeLatest(actionTypes.GEOCODE_REQUEST, fetchGeocode)
 
 }
 
@@ -23,46 +24,50 @@ function* fetchGeocode(action) {
 
   try {
 
+    // geocode search term
     const res = yield call(API.get, `search/geocode/${action.payload.term}`)
     const data = yield res.json()
     const geocodes = data.geocode
 
-    yield put({ type: actions.GEOCODE_SUCCESS, payload: { geocodes } })
+    // success!
+    yield put(actions.geocodeSuccess({ geocodes }))
 
   } catch (error) {
 
-    yield put({ type: actions.GEOCODE_FAILURE, payload: { error } })
+    // failure!
+    yield put(actions.geocodeFailure({ error }))
 
   }
 
 }
 
 // -----
-// LUCKY
+// GEOLOCATION
 // -----
 
-export function* lucky() {
+export function* geolocation() {
 
-  yield* takeLatest(actions.LUCKY_REQUEST, checkGeolocation, fetchLucky, actions.LUCKY_FAILURE)
+  yield* takeLatest(actionTypes.GEOLOCATION_REQUEST, fetchGeolocation, requestSubmit)
 
 }
 
-function* fetchLucky() {
+function* fetchGeolocation(callback) {
 
   try {
 
-    // get geolocation data
-    const geolocation = yield select(selectors.geolocation)
+    // request user geolocation
+    const { coords: { longitude: lng, latitude: lat } } = yield call(Geolocation.getCurrentPosition)
 
-    const res = yield call(API.post, 'search/lucky', { ...geolocation })
-    const data = yield res.json()
-    const results = data.pubs
+    // success!
+    yield put(actions.geolocationSuccess({ geolocation: [ lat, lng ], point: [ lng, lat ] }))
 
-    yield put({ type: actions.LUCKY_SUCCESS, payload: { results } })
+    // continue
+    yield call(callback)
 
   } catch (error) {
 
-    yield put({ type: actions.LUCKY_FAILURE, payload: { error } })
+    // failure!
+    yield put(actions.geolocationFailure({ error }))
 
   }
 
@@ -74,7 +79,7 @@ function* fetchLucky() {
 
 export function* submit() {
 
-  yield* takeLatest(actions.SUBMIT_REQUEST, fetchSubmit)
+  yield* takeLatest(actionTypes.SUBMIT_REQUEST, fetchSubmit)
 
 }
 
@@ -87,40 +92,65 @@ function* fetchSubmit() {
     const features = yield select(selectors.features)
     const maxDistance = yield select(selectors.maxDistance)
 
+    // perform request
     const res = yield call(API.post, 'search/pubs', { point, features, maxDistance })
     const data = yield res.json()
     const results = data.pubs
 
-    yield put({ type: actions.SUBMIT_SUCCESS, payload: { results } })
+    // get search ui state
+    const isSearchOverlayed = yield select(selectors.isSearchOverlayed)
+
+    // construct meta
+    const meta = {}
+
+    // update search ui state if necessary
+    if (isSearchOverlayed) meta.ui = { search: { overlay: !isSearchOverlayed } }
+
+    // success!
+    yield put(actions.submitSuccess({ results }, meta))
 
   } catch (error) {
 
-    yield put({ type: actions.SUBMIT_FAILURE, payload: { error } })
+    // failure!
+    yield put(actions.submitFailure({ error }))
 
   }
 
 }
 
-// -----
-// GEOLOCATION
-// -----
+function* requestSubmit({ fitToBounds=true }={}) {
 
-function* checkGeolocation(callback, failure, action) {
+  yield put(actions.submitSearch({ ui: { search: { fitToBounds } } }))
 
-  try {
+}
 
-    // request user geolocation
-    const { coords: { longitude: lng, latitude: lat } } = yield call(Geolocation.getCurrentPosition)
+// ----
+// OBSERVERS
+// ----
 
-    yield put({ type: actions.GEOLOCATION_SET, payload: { geolocation: { lng, lat } } })
+export function* observeFeature() {
 
-    yield call(callback, action)
+  yield* takeLatest(actionTypes.FEATURE, handleFeature)
 
-  } catch (error) {
+}
 
-    yield put({ type: failure, payload: { error } })
+function* handleFeature() {
 
-  }
+  const isSearchOverlayed = yield select(selectors.isSearchOverlayed)
+
+  if (!isSearchOverlayed) yield* requestSubmit({ fitToBounds: false })
+
+}
+
+export function* observeGeocode() {
+
+  yield* takeLatest(actionTypes.GEOCODE_SET, requestSubmit)
+
+}
+
+export function* observePoint() {
+
+  yield* takeLatest(actionTypes.POINT_SET, requestSubmit, { fitToBounds: false })
 
 }
 
@@ -128,7 +158,11 @@ function* checkGeolocation(callback, failure, action) {
 export default function* root() {
 
   yield fork(geocode)
-  yield fork(lucky)
+  yield fork(geolocation)
   yield fork(submit)
+
+  yield fork(observeFeature)
+  yield fork(observeGeocode)
+  yield fork(observePoint)
 
 }

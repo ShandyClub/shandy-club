@@ -6,9 +6,10 @@ import * as types from '../../app/universal/search/actionTypes'
 test(`Search:Action[${types.GEOCODE_REQUEST}] - Geocode API request action`, t => {
 
   const term = 'Shoreditch'
+  const meta = { analytics: { payload: { term }, type: 'geocodeRequest' } }
 
   const actual = actions.getGeocode(term)
-  const expected = { type: types.GEOCODE_REQUEST, payload: { term } }
+  const expected = { type: types.GEOCODE_REQUEST, payload: { term }, meta }
 
   t.deepEqual(actual, expected,
     'getGeocode() should set `term`')
@@ -21,9 +22,10 @@ test(`Search:Action[${types.GEOCODE_SET}] - Geocode set action`, t => {
 
   const point = [ -0.101729, 51.569542 ]
   const term = 'Finsbury Park'
+  const meta = { analytics: { payload: { point, term }, type: 'geocodeSelect' } }
 
   const actual = actions.setGeocode(point, term)
-  const expected = { type: types.GEOCODE_SET, payload: { point, term } }
+  const expected = { type: types.GEOCODE_SET, payload: { point, term }, meta }
 
   t.deepEqual(actual, expected,
     'setGeocode() should set `point` and `term`')
@@ -49,7 +51,7 @@ test(`Search:Action[${types.FEATURE}] - Toggle feature action`, t => {
   const feature = 'beer'
 
   const actual = actions.toggleFeature(feature)
-  const expected = { type: types.FEATURE, payload: { feature } }
+  const expected = { type: types.FEATURE, payload: { feature }, meta: { analytics: { type: 'toggleFeature', payload: { feature } } } }
 
   t.deepEqual(actual, expected,
     'toggleFeature() should toggle `feature`')
@@ -60,23 +62,13 @@ test(`Search:Action[${types.FEATURE}] - Toggle feature action`, t => {
 
 test(`Search:Action[${types.SUBMIT_REQUEST}] - Submit search action`, t => {
 
-  const actual = actions.submitSearch()
-  const expected = { type: types.SUBMIT_REQUEST }
+  const meta = {}
+
+  const actual = actions.submitSearch(meta)
+  const expected = { type: types.SUBMIT_REQUEST, meta }
 
   t.deepEqual(actual, expected,
     'submitSearch() should start search request')
-
-  t.end()
-
-})
-
-test(`Search:Action[${types.LUCKY_REQUEST}] - Submit lucky action`, t => {
-
-  const actual = actions.submitLucky()
-  const expected = { type: types.LUCKY_REQUEST }
-
-  t.deepEqual(actual, expected,
-    'submitLucky() should start lucky request')
 
   t.end()
 

@@ -1,11 +1,27 @@
+import { createSelector } from 'reselect'
+
 import { name } from './constants'
 
-export const getAll = state => state.get(name)
+const getAll = state => state.get(name)
 
-export const getError = state => state.getIn([ name, 'error' ])
-export const getRequesting = state => state.getIn([ name, 'requesting' ])
+const getError = createSelector( getAll, state => state.get('error') )
+const getRequesting = createSelector( getAll, state => state.get('requesting') )
 
-export const getSearch = state => state.getIn([ name, 'search' ])
-export const getSearchFeatures = state => state.getIn([ name, 'search', 'features' ])
-export const getSearchFocus = state => state.getIn([ name, 'search', 'focus' ])
-export const getSearchOverlay = state => state.getIn([ name, 'search', 'overlay' ])
+const getSearch = createSelector( getAll, state => state.get('search') )
+const getSearchFeatures = createSelector( getSearch, state => state.get('features') )
+const getSearchFitToBounds = createSelector( getSearch, state => state.get('fitToBounds') )
+const getSearchFocus = createSelector( getSearch, state => state.get('focus') )
+const getSearchOverlay = createSelector( getSearch, state => state.get('overlay') )
+
+export default {
+  all: getAll,
+
+  error: getError,
+  requesting: getRequesting,
+
+  search: getSearch,
+  searchFeatures: getSearchFeatures,
+  searchFitToBounds: getSearchFitToBounds,
+  searchFocus: getSearchFocus,
+  searchOverlay: getSearchOverlay,
+}

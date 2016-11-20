@@ -1,13 +1,17 @@
 import Immutable from 'immutable'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { browserHistory } from 'react-router'
+import analyticsMiddleware from 'redux-analytics'
 import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import createSagaMiddleware, { END } from 'redux-saga'
-import { isBrowser, isDevelopment } from '../util'
 import rootReducer from '../reducers'
 import * as Storage from '../services/storage'
 import { STATE_KEY } from '../constants'
+
+// utils
+import { isBrowser, isDevelopment } from '../util'
+import { track } from '../util/track'
 
 // middleware
 const router = routerMiddleware(browserHistory)
@@ -17,6 +21,9 @@ let middleware = [ router, saga ]
 
 // logger middleware in development
 if (isDevelopment) middleware.push( createLogger({ collapsed: true }) )
+
+// analytics middleware in production
+if (!isDevelopment) middleware.push( analyticsMiddleware( ({ type, payload }) => track(type, payload) ) )
 
 // create store with middleware - and devTools if dev
 const finalCreateStore = compose(
@@ -44,7 +51,7 @@ export default function configureStore(state = initialState) {
   store.subscribe( () => {
 
     // remove routing|ui from state before storing
-    let stateTrimmed = store.getState().delete('routing').delete('ui')
+    let stateTrimmed = store.getState().delete('routing').delete('search').delete('ui')
 
     isBrowser && Storage.setItem(STATE_KEY, stateTrimmed)
 

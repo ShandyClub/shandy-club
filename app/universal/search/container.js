@@ -246,9 +246,11 @@ export class Search extends Component {
                 { selectedResult.address } { selectedResult.postcode }
               </Text>
 
-              <Anchor atomic={{ d:'b', fs:3, td:'n', w:11 }} center href={ selectedResult.website } target='_blank'>
-                Visit website
-              </Anchor>
+              { selectedResult.website ? (
+                <Anchor atomic={{ d:'b', fs:3, td:'n', w:11 }} center href={ selectedResult.website } target='_blank'>
+                  Visit website
+                </Anchor>
+              ) : null }
 
               <Text atomic={{ fs:5, ta:'c' }}>
                 { selectedResult.desc }

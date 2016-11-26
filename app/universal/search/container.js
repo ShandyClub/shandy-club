@@ -164,7 +164,7 @@ export class Search extends Component {
             <Text atomic={{ fs:5, ta:'c' }}>
 
               Fancy a pint? Silly question.<br/>
-              So, where to?<br/>
+              So, which pub?<br/>
               Now that’s a little tougher.<br/>
 
               <Anchor onClick={getGeolocation}>
@@ -175,7 +175,7 @@ export class Search extends Component {
 
             <Text atomic={{ fs:5, ta:'c' }}>
 
-              But maybe you’re a savvy<br/>
+              Or maybe you’re a savvy<br/>
               old sort planning a trip<br/>
               to
 

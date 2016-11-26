@@ -150,7 +150,7 @@ export class Search extends Component {
     // ) : null
 
     return (
-      <View atomic={{ pt: isSearchOverlayed ? 14 : 0 }} maxWidth='none'>
+      <View atomic={{ pt: isSearchOverlayed ? 12 : 0 }} maxWidth='none'>
 
         <Image src='shandy-club.png' width='50px' height='50px' center atomic={ !isSearchOverlayed ? { c:'p', po:'a', t:1, l:1, z:1 } : null } onClick={ () => !isSearchOverlayed && onLogoClick() } />
 

@@ -175,14 +175,15 @@ export class Search extends Component {
 
             <Text atomic={{ fs:5, ta:'c' }}>
 
-              But maybe you’re a savvy old sort<br/>
-              planning a trip to
+              But maybe you’re a savvy<br/>
+              old sort planning a trip<br/>
+              to
 
               <Input
                 autoFocus
                 type='text'
                 placeholder='Islington'
-                width='100px'
+                width='200px'
                 atomic={{ ml:1, mr:1 }}
                 value={ term || '' }
                 innerRef={ r => Search._input = r }

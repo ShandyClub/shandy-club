@@ -6,7 +6,7 @@ export const name = 'search'
 export const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API
 
 export const GEOCODE_OPTIONS = {
-  types: 'region,postcode,place,locality,neighborhood,address',
+  types: 'region,postcode,place,locality,neighborhood,address,poi',
   country: 'gb',
   // weight results closer to London
   proximity: { latitude: 51.507463, longitude: -0.127694 },

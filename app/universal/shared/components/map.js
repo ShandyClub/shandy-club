@@ -43,15 +43,12 @@ export default class Map extends Component {
     if ( selectedResultIndex !== null && selectedResultIndex !== prevSelectedResultIndex ) {
 
       // center map to selected result
-      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: false })
+      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: true })
 
       // get previous selected marker
       const prevSelectedMarker = this.markerLayerCache[prevSelectedResultIndex]
 
       if (prevSelectedMarker) {
-
-        // close previous selected marker tooltips
-        prevSelectedMarker.isTooltipOpen() && prevSelectedMarker.closeTooltip()
 
         // reset previous selected marker icon
         prevSelectedMarker.setIcon(this.generateMarkerIcon())
@@ -62,9 +59,6 @@ export default class Map extends Component {
       const selectedMarker = this.markerLayerCache[selectedResultIndex]
 
       if (selectedMarker) {
-
-        // open selected marker tooltip
-        selectedMarker.openTooltip()
 
         // set selected marker icon
         selectedMarker.setIcon(this.generateSelectedMarkerIcon())
@@ -180,7 +174,7 @@ export default class Map extends Component {
     markers.map( ({ coordinates: [ lng, lat ], name }, index) => {
 
       // init tooltip
-      let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 10 ] })
+      let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 10 ], permanent: true })
         .setLatLng([ lat, lng ])
         .setContent(name)
 

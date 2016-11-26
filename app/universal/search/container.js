@@ -25,7 +25,7 @@ import { Text } from '../shared/components/text'
 import Map from '../shared/components/map'
 
 // constants
-import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS, ZOOM_CONTROL_OPTIONS } from '../shared/constants'
+import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS } from '../shared/constants'
 
 export class Search extends Component {
 
@@ -225,7 +225,6 @@ export class Search extends Component {
             selectedResultIndex={selectedResultIndex}
             tileOptions={MAP_TILE_OPTIONS}
             tileURL={MAP_TILE_URL}
-            zoomControlOptions={ZOOM_CONTROL_OPTIONS}
             setPoint={setPoint}
             setSelectedResult={setSelectedResult} />
         ) : null }

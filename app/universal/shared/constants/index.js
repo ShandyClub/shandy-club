@@ -19,7 +19,3 @@ export const MAP_TILE_OPTIONS = {
   id: 'shandyclub.1hme714m',
   accessToken: 'pk.eyJ1Ijoic2hhbmR5Y2x1YiIsImEiOiJjaXRyNW1pcjQwMDA5MnlyeXcxNDIwem9xIn0.7eka1aSf6KStTHqTZ8h7Fg',
 }
-
-export const ZOOM_CONTROL_OPTIONS = {
-  position:'bottomleft',
-}

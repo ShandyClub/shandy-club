@@ -1,38 +1,9 @@
-# Shandy Club - Application
+<p align='center'>
+  <img src='https://cloud.githubusercontent.com/assets/1913316/21065430/0f34a09a-be58-11e6-81a7-89ad74e2b1fb.jpg' width='200'/>
+</p>
 
-> Shandy strictly prohibited
+> Curated pubs for curious people
 
-## Setup
+## Contributing
 
-[Setup instructions](wiki/setup.md)
-
-## Develop
-
-```
-npm start
-```
-
-## Boilerplate
-
-Templates can be generated for all Redux modules to reduce boilerplate repetition. Run the command below and choose which templates to generate:
-
-```
-npm run generate
-```
-
-## Test
-
-Lint CSS and JS:
-```
-npm run lint
-```
-
-Run unit tests:
-```
-npm test
-```
-
-## Release
-```
-npm run build
-```
+[Contribute to the kitty](wiki/contributing.md) 🍻

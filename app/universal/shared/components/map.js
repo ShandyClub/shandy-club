@@ -168,7 +168,7 @@ export default class Map extends Component {
     // init layers
     this.markerLayer = L.markerClusterGroup({ iconCreateFunction: this.generateClusterIcon, polygonOptions: { color: colours.dark } })
 
-    markers.map( ({ coordinates: [ lng, lat ], name }, index) => {
+    markers.map( ({ id, coordinates: [ lng, lat ], name }, index) => {
 
       // init tooltip
       let tooltip = new L.tooltip({ direction: 'bottom', offset: [ 0, 10 ], permanent: true })
@@ -180,7 +180,7 @@ export default class Map extends Component {
         .bindTooltip(tooltip)
 
       // marker events
-      marker.on('click', () => this.onMarkerClick(index))
+      marker.on('click', () => this.onMarkerClick(index, id))
 
       // add marker to layer cache
       this.markerLayerCache.push(marker)
@@ -230,11 +230,11 @@ export default class Map extends Component {
 
   }
 
-  onMarkerClick(index) {
+  onMarkerClick(selectedResultIndex, pubId) {
 
     const { setSelectedResult } = this.props
 
-    setSelectedResult(index)
+    setSelectedResult(selectedResultIndex, pubId)
 
   }
 

@@ -99,7 +99,7 @@ export const setPoint = (point=DEFAULT_POINT) => ({
   },
 })
 
-export const setSelectedResult = (selectedResultIndex=null) => ({
+export const setSelectedResult = (selectedResultIndex=null, pubId=null) => ({
   type: actions.SELECTED_RESULT_SET,
   payload: {
     selectedResultIndex,
@@ -107,8 +107,7 @@ export const setSelectedResult = (selectedResultIndex=null) => ({
   meta: {
     analytics: {
       type: 'setSelectedResult',
-      // TODO - method! marker or panel
-      // payload: { method },
+      payload: { pubId },
     },
   },
 })

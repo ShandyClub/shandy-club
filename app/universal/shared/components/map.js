@@ -13,6 +13,9 @@ if (isBrowser) {
 
 }
 
+const MAP_OFFSET_X = 100
+const MAP_OFFSET_Y = 0
+
 export default class Map extends Component {
 
   constructor() {
@@ -39,31 +42,46 @@ export default class Map extends Component {
     const { fitToBounds, markers, selectedResultIndex } = this.props
     const { markers: prevMarkers, selectedResultIndex: prevSelectedResultIndex } = prevProps
 
+    const { map } = this
+
     // check if `selectedResultIndex` has changed
     if ( selectedResultIndex !== null && selectedResultIndex !== prevSelectedResultIndex ) {
 
+      // offset map center to account for side panel
+      const offset = [ MAP_OFFSET_X, MAP_OFFSET_Y ]
+
       // center map to selected result
-      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: true })
+      this.setMapCenter(markers[selectedResultIndex].coordinates, { animate: true }, offset)
 
       // get previous selected marker
       const prevSelectedMarker = this.markerLayerCache[prevSelectedResultIndex]
 
-      if (prevSelectedMarker) {
-
-        // reset previous selected marker icon
-        prevSelectedMarker.setIcon(this.generateMarkerIcon())
-
-      }
+      // reset previous selected marker icon
+      if (prevSelectedMarker) prevSelectedMarker.setIcon(this.generateMarkerIcon())
 
       // get selected marker
       const selectedMarker = this.markerLayerCache[selectedResultIndex]
 
-      if (selectedMarker) {
+      // set selected marker icon
+      if (selectedMarker) selectedMarker.setIcon(this.generateSelectedMarkerIcon())
 
-        // set selected marker icon
-        selectedMarker.setIcon(this.generateSelectedMarkerIcon())
+    }
 
-      }
+    // check if `selectedResultIndex` has changed to `null`
+    if ( selectedResultIndex === null && selectedResultIndex !== prevSelectedResultIndex ) {
+
+      const { isDragging } = map
+
+      const center = map.getCenter()
+
+      // as long as user is not dragging the map, reset map center to remove side panel offset
+      if (!isDragging) this.setMapCenter([ center.lng, center.lat ], { animate: true }, [ -MAP_OFFSET_X, MAP_OFFSET_Y ])
+
+      // get previous selected marker
+      const prevSelectedMarker = this.markerLayerCache[prevSelectedResultIndex]
+
+      // reset previous selected marker icon
+      if (prevSelectedMarker) prevSelectedMarker.setIcon(this.generateMarkerIcon())
 
     }
 
@@ -116,11 +134,21 @@ export default class Map extends Component {
 
   }
 
-  setMapCenter([ lng, lat ], options={}) {
+  setMapCenter([ lng, lat ], options={}, offset=null) {
 
     const { map } = this
 
-    map.panTo({ lat, lng }, options)
+    let center = { lat, lng }
+
+    if (offset) center = map.unproject( map.project(center).add(offset) )
+
+    map.panTo(center, options)
+
+  }
+
+  setMapIsDragging(isDragging) {
+
+    return this.map.isDragging = isDragging
 
   }
 
@@ -216,6 +244,9 @@ export default class Map extends Component {
 
     const { setSelectedResult } = this.props
 
+    // drag ahoy!
+    this.setMapIsDragging(true)
+
     // reset selectedResult to default
     setSelectedResult()
 
@@ -225,6 +256,9 @@ export default class Map extends Component {
 
     const { setPoint } = this.props
     const { lat, lng } = this.map.getCenter()
+
+    // drag over!
+    this.setMapIsDragging(false)
 
     setPoint([ lng, lat ])
 

@@ -161,30 +161,18 @@ export class Search extends Component {
               Shandy Club
             </Text>
 
-            <Text atomic={{ fs:5, ta:'c' }}>
-
-              Fancy a pint? Silly question.<br/>
-              So, which pub?<br/>
-              Now that’s a little tougher.<br/>
-
-              <Anchor onClick={getGeolocation}>
-                Luckily we know a few nearby
-              </Anchor>
-
+            <Text atomic={{ fs:5, ta:'c' }} fontStack='secondary'>
+              curated pubs for curious people
             </Text>
 
             <Text atomic={{ fs:5, ta:'c' }}>
 
-              Or maybe you’re a savvy<br/>
-              old sort planning a trip<br/>
-              to
-
               <Input
                 autoFocus
                 type='text'
-                placeholder='Islington'
+                placeholder='Where to?'
                 width='200px'
-                atomic={{ ml:1, mr:1 }}
+                atomic={{ ml:1, mr:1, p:1 }}
                 value={ term || '' }
                 innerRef={ r => Search._input = r }
                 onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
@@ -202,6 +190,14 @@ export class Search extends Component {
                 )) }
               </List>
             ) : null }
+
+            <Text atomic={{ fs:3, ta:'c' }}>
+
+              <Anchor onClick={getGeolocation}>
+                Find pubs nearby
+              </Anchor>
+
+            </Text>
 
           </Section>
         ) : null }

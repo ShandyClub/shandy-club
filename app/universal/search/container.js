@@ -232,7 +232,7 @@ export class Search extends Component {
 
         <Transition transitionName='slide-left' transitionEnterTimeout={500} transitionLeaveTimeout={300}>
           { !isSearchOverlayed && isPanelOpen ? (
-            <Section atomic={{ p:4, po:'f', t:0, r:0 }} width='15em' height='100%' backgroundColor='white' style={{ boxShadow: '-4px 0 20px 0 rgba(0, 0, 0, 0.2)' }}>
+            <Section atomic={{ p:4, po:'f', t:0, r:0 }} width='50%' maxWidth='500px' minWidth='15em' height='100%' backgroundColor='white' style={{ boxShadow: '-4px 0 20px 0 rgba(0, 0, 0, 0.2)' }}>
 
               <Button onClick={ () => onPubCloseClick() }>
                 <Icon>close</Icon>

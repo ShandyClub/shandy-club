@@ -9,6 +9,7 @@ export const Anchor = styled.a`
   background: linear-gradient(transparent 4px, ${ colours.shandy } 4px) no-repeat bottom;
   background-size: 100% ${ scale.getScaledValue(1) };
   cursor: pointer;
+  text-decoration: none;
   transition: 0.2s;
 
   ${ ({ atomic }) => Atomic(atomic) }

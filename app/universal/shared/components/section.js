@@ -8,6 +8,7 @@ export const Section = styled.section`
   max-width: ${ props => props.maxWidth || Section.default.maxWidth };
   min-width: ${ props => props.minWidth || Section.default.minWidth };
   height: ${ props => props.height || Section.default.height };
+  margin: ${ props => props.margin || Section.default.margin };
   background-color: ${ props => props.backgroundColor && colours[props.backgroundColor] || Section.default.backgroundColor };
 
   ${ ({ atomic }) => Atomic({ ...atomic }) }
@@ -18,5 +19,6 @@ Section.default = {
   maxWidth: 'auto',
   minWidth: 'auto',
   height: 'auto',
+  margin: 'auto',
   backgroundColor: 'transparent',
 }

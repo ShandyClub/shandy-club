@@ -3,7 +3,7 @@
 */
 
 const stacks = {
-  primary: '\'Open Sans\', helvetica, sans-serif',
+  primary: '\'Karla\', helvetica, sans-serif',
   secondary: 'Lato, helvetica, sans-serif',
 }
 

@@ -9,11 +9,12 @@ import Color from 'color'
 // -----
 
 export const white = '#FFFFFF'
-export const dark = '#47444F'
-export const light = '#FFFBF3'
-export const shandy = '#F58C40'
-export const accent = '#27A5F9'
-export const error = '#AC6F76'
+export const dark = '#2F2F2C'
+export const light = '#FEFEF2'
+export const grey = '#D4D7D1'
+export const shandy = '#F79E5A'
+export const accent = '#6CCBF1'
+export const error = '#EA663A'
 
 // -----
 // UTILS

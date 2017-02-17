@@ -36,7 +36,7 @@ const renderPage = (html, initialState) => `
   <title>Shandy Club</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" media="(device-height: 568px)" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/4.1.0/sanitize.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:700|Open+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:700|Karla">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
   <link rel="shortcut icon" href="/favicon.png">

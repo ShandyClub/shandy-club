@@ -252,7 +252,7 @@ export class Search extends Component {
                 </Anchor>
               ) : null }
 
-              <Text atomic={{ fs:5, ta:'c' }}>
+              <Text atomic={{ fs:5, o:'s', ta:'c' }} maxHeight='40%'>
                 { selectedResult.desc }
               </Text>
 

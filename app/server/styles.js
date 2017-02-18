@@ -1,88 +1,121 @@
 const styles = `
-  <style type="text/css">
-    @keyframes iVXCSc {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-
+  <style type="text/css">@keyframes iVXCSc {
+    from {
+      transform: rotate(0deg);
     }
-    @keyframes kkQPNV {
-      from {
-        transform: scale(1);
-        opacity: 0.5;
-      }
-      to {
-        transform: scale(3);
-        opacity: 0;
-      }
+    to {
+      transform: rotate(360deg);
+    }
 
-    }.bWrtJF {
-      color: #47444F;
-      background: linear-gradient(transparent 4px, #F58C40 4px) no-repeat bottom;
-      background-size: 100% 8px;
-      -webkit-cursor: pointer;
-      cursor: pointer;
-      -webkit-transition: 0.2s;
-      transition: 0.2s;
-     }
-    .bWrtJF:hover {
-      background-size: 100% 12px;
+    }@keyframes kkQPNV {
+    from {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    to {
+      transform: scale(3);
+      opacity: 0;
+    }
+
+    }.hRiTpT {
+    color: #2F2F2C;
+    -webkit-cursor: pointer;
+    cursor: pointer;
+    outline: 0;
+
+    font-size: 16px; font-weight: 700; padding: 8px;
+
+    border: 1px solid #2F2F2C;
+    background: #FFFFFF;
+    position: relative;
+    }
+    .hRiTpT:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border: inherit;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: -1;
     }.bcYVJF {
-      width: 50px;
-      height: 50px;
-      background: url( shandy-club.png ) no-repeat center;
-      background-size: 100% auto;
-      margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    background: url( shandy-club.png ) no-repeat center;
+    background-size: 100% auto;
+    margin: 0 auto;
 
-      display: block;
-     }.gBKoKb {
-      width: 100px;
-      border-bottom: 2px solid #F58C40;
-      padding-bottom: 2px;
-      text-overflow: ellipsis;
-      outline: none;
+    display: block;
+    }.eQYgxT {
+    width: 30px;
+    height: 30px;
+    background: url( compass.svg ) no-repeat center;
+    background-size: 100% auto;
+    margin: 0;
 
-      display: inline-block; margin-left: 8px; margin-right: 8px;
-     }.bpkSAU {
-      width: 100%;
-      max-width: none;
-      height: 100%;
-      margin: 0 auto;
+    display: inline-block; margin-right: 8px; vertical-align: middle;
+    }.kwrSoa {
+    width: 158px;
+    border-bottom: 2px solid #2F2F2C;
+    text-overflow: ellipsis;
+    outline: none;
 
-      padding: 0px; padding-top: 144px;
-     }.gxknPv {
-      width: auto;
-      height: auto;
-      background-color: transparent;
+    display: inline-block; margin-left: 8px; margin-right: 8px; padding-top: 8px; padding-bottom: 8px;
+    }.ggULXJ {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0 auto;
+
+    padding: 0px; padding-top: 96px;
+    }.dNVKtY {
+    width: auto;
+    max-width: auto;
+    min-width: auto;
+    height: auto;
+    margin: auto;
+    background-color: transparent;
+
+
+    }.edxjVd {
+    font-family: Lato, helvetica, sans-serif;
+    max-height: auto;
+    color: #2F2F2C;
+    letter-spacing: 3px;
+
+    font-size: 32px; margin-top: 16px; margin-bottom: 16px; text-align: center; text-transform: uppercase;
+    }.ciKqbq {
+    font-family: 'Karla', helvetica, sans-serif;
+    max-height: auto;
+    color: #2F2F2C;
+    letter-spacing: normal;
+
+    font-size: 16px; margin-top: 16px; margin-bottom: 16px; text-align: center; font-weight: 700;
+    }.gAyvQQ {
+    font-family: 'Karla', helvetica, sans-serif;
+    max-height: auto;
+    color: #2F2F2C;
+    letter-spacing: normal;
+
+    font-size: 16px; margin-top: 32px; margin-bottom: 32px; text-align: center;
+    }.fdvRTF {
+    font-family: 'Karla', helvetica, sans-serif;
+    max-height: auto;
+    color: #2F2F2C;
+    letter-spacing: normal;
+
+    font-size: 16px; margin-top: 16px; margin-bottom: 16px; text-align: center;
     }
-
-    .hLAxwV {
-      font-family: Lato, helvetica, sans-serif;
-      color: #47444F;
-      letter-spacing: 3px;
-      font-size: 32px; margin-top: 16px; margin-bottom: 16px; text-align: center; text-transform: uppercase;
-    }
-
-    .lixavm {
-      font-family: 'Open Sans', helvetica, sans-serif;
-      color: #47444F;
-      letter-spacing: normal;
-      font-size: 18px; margin-top: 16px; margin-bottom: 16px; text-align: center;
-    }
-
     html, body, #Root, #App {
       height: 100%;
       min-height: 100%;
     }
 
     body {
-      font-family: 'Open Sans', helvetica, sans-serif;
+      font-family: 'Karla', helvetica, sans-serif;
       font-size: 16px;
       line-height: 1.625;
-      color: #47444F;
+      color: #2F2F2C;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -114,9 +147,9 @@ const styles = `
     }
 
     .leaflet-geolocation-icon {
-      border: 3px solid #FFFBF3;
+      border: 3px solid #FEFEF2;
       border-radius: 50%;
-      background: #27A5F9;
+      background: #6CCBF1;
     }
 
     .leaflet-geolocation-icon:after {
@@ -125,13 +158,13 @@ const styles = `
       height: 100%;
       border-radius: 50%;
       display: block;
-      background: #27A5F9;
+      background: #6CCBF1;
       animation: kkQPNV 1s ease-in-out infinite;
     }
 
     .leaflet-pub-icon {
       border-radius: 50%;
-      background: #FFFBF3;
+      background: #FEFEF2;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -142,19 +175,23 @@ const styles = `
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: #F58C40;
+      background: #F79E5A;
       flex: none;
     }
 
+    .leaflet-pub-icon--selected:after {
+      background: #2F2F2C;
+    }
+
     .leaflet-tooltip {
-      font-family: 'Open Sans', helvetica, sans-serif;
+      font-family: 'Karla', helvetica, sans-serif;
       border: none;
       border-radius: 2px;
-      background-color: #FFFBF3;
+      background-color: #FEFEF2;
     }
 
     .leaflet-tooltip:before {
-      border-bottom-color: #FFFBF3;
+      border-bottom-color: #FEFEF2;
     }
 
     .marker-cluster {
@@ -180,7 +217,7 @@ const styles = `
     }
 
     .marker-cluster span {
-      color: #FFFBF3;
+      color: #FEFEF2;
       line-height: 30px;
       position: relative;
       z-index: 1;
@@ -193,12 +230,12 @@ const styles = `
     }
 
     ::-moz-selection {
-      color: #FFFBF3;
-      background: #47444F;
+      color: #FEFEF2;
+      background: #2F2F2C;
     }
     ::selection {
-      color: #FFFBF3;
-      background: #47444F;
+      color: #FEFEF2;
+      background: #2F2F2C;
     }
   </style>
 `

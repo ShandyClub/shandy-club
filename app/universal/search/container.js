@@ -14,7 +14,7 @@ import selectors from './selectors'
 
 // components
 import { Anchor } from '../shared/components/anchor'
-import { Button } from '../shared/components/button'
+import { Button, ButtonIcon } from '../shared/components/button'
 import { Icon } from '../shared/components/icon'
 import { Image } from '../shared/components/image'
 import { Input } from '../shared/components/input'
@@ -161,18 +161,30 @@ export class Search extends Component {
               Shandy Club
             </Text>
 
-            <Text atomic={{ fs:5, ta:'c' }} fontStack='secondary'>
+            <Text atomic={{ fs:4, fw:'b', ta:'c' }}>
               curated pubs for curious people
             </Text>
 
-            <Text atomic={{ fs:5, ta:'c' }}>
+            <Text atomic={{ mt:7, mb:7, ta:'c' }}>
+
+              <ButtonIcon atomic={{ fs:4, fw:'b', p:1 }} onClick={getGeolocation}>
+
+                <Image src='compass.svg' width='30px' height='30px' atomic={{ d:'ib', mr:1, va:'m' }} />
+
+                Find pubs nearby
+
+              </ButtonIcon>
+
+            </Text>
+
+            <Text atomic={{ fs:4, ta:'c' }}>
 
               <Input
                 autoFocus
                 type='text'
-                placeholder='Where to?'
-                width='200px'
-                atomic={{ ml:1, mr:1, p:1 }}
+                placeholder='Or somewhere else?'
+                width='158px'
+                atomic={{ ml:1, mr:1, pt:1, pb:1 }}
                 value={ term || '' }
                 innerRef={ r => Search._input = r }
                 onChange={ () => Search._input.value ? getGeocode(Search._input.value) : clearGeocode() }
@@ -190,14 +202,6 @@ export class Search extends Component {
                 )) }
               </List>
             ) : null }
-
-            <Text atomic={{ fs:3, ta:'c' }}>
-
-              <Anchor onClick={getGeolocation}>
-                Find pubs nearby
-              </Anchor>
-
-            </Text>
 
           </Section>
         ) : null }

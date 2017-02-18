@@ -5,7 +5,7 @@ import { colours } from '../style'
 
 export const Input = styled.input`
   width: ${ props => props.width || 'auto' };
-  border-bottom: 2px solid ${ colours.shandy };
+  border-bottom: 2px solid ${ colours.dark };
   text-overflow: ellipsis;
   outline: none;
 

@@ -180,7 +180,6 @@ export class Search extends Component {
             <Text atomic={{ fs:4, ta:'c' }}>
 
               <Input
-                autoFocus
                 type='text'
                 placeholder='Or somewhere else?'
                 width='164px'

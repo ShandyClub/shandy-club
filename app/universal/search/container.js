@@ -169,7 +169,7 @@ export class Search extends Component {
 
               <ButtonIcon atomic={{ fs:4, fw:'b', p:1 }} onClick={getGeolocation}>
 
-                <Image src='compass.svg' width='30px' height='30px' atomic={{ d:'ib', mr:1, va:'m' }} />
+                <Image src='compass.svg' width='32px' height='32px' atomic={{ d:'ib', mr:1, va:'m' }} />
 
                 Find pubs nearby
 
@@ -183,7 +183,7 @@ export class Search extends Component {
                 autoFocus
                 type='text'
                 placeholder='Or somewhere else?'
-                width='158px'
+                width='164px'
                 atomic={{ ml:1, mr:1, pt:1, pb:1 }}
                 value={ term || '' }
                 innerRef={ r => Search._input = r }

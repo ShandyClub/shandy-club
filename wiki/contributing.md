@@ -4,27 +4,19 @@
 
 [Setup instructions](setup.md)
 
-## Develop
+## Run
 
 ```
 yarn start
 ```
 
-## Lint
-
-Lint CSS and JS:
-```
-yarn lint
-```
-
 ## Test
 
-Run unit tests:
 ```
 yarn test
 ```
 
-## Release
+## Build
 
 ```
 yarn build

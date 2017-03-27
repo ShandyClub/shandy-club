@@ -19,7 +19,7 @@ node_modules/
 
 # Release #
 ######################
-public/
+.next/
 
 # Secret #
 ######################

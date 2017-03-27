@@ -2,7 +2,7 @@
 
 ## Install local dependencies
 ```
-npm i
+yarn
 ```
 
 ## Install MongoDB

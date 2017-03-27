@@ -7,32 +7,25 @@
 ## Develop
 
 ```
-npm start
-```
-
-## Boilerplate
-
-Templates can be generated for all Redux modules to reduce boilerplate repetition. Run the command below and choose which templates to generate:
-
-```
-npm run generate
+yarn start
 ```
 
 ## Lint
 
 Lint CSS and JS:
 ```
-npm run lint
+yarn lint
 ```
 
 ## Test
 
 Run unit tests:
 ```
-npm test
+yarn test
 ```
 
 ## Release
+
 ```
-npm run build
+yarn build
 ```

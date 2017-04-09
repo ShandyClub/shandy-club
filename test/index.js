@@ -1,5 +1,5 @@
 /**
-  * @desc Test root - import any tests you want to run (`npm test`) here
+  * @desc Test root - import any tests you want to run (`yarn test`) here
 */
 
 import './search'

@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    ["styled-components", {
+      "ssr": true
+    }]
+  ],
+  "presets": [
+    "next/babel",
+    "stage-3"
+  ]
+}

@@ -2,162 +2,93 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import uuid from 'uuid'
-import Transition from 'react-addons-css-transition-group'
+// import uuid from 'uuid'
 
-// actions
 import * as actions from './actions'
-import { actions as uiActions } from '../ui'
-
-// selectors
 import selectors from './selectors'
 
-// components
-import { Anchor } from '../core/primitives/anchor'
-import { Button, ButtonIcon } from '../core/primitives/button'
-import { Icon } from '../core/primitives/icon'
+// import { Anchor } from '../core/primitives/anchor'
+// import { Button, ButtonIcon } from '../core/primitives/button'
+// import { Icon } from '../core/primitives/icon'
 import { Image } from '../core/primitives/image'
-import { Input } from '../core/primitives/input'
+// import { Input } from '../core/primitives/input'
 import { View } from '../core/primitives/layout'
-import { List } from '../core/primitives/list'
+// import { List } from '../core/primitives/list'
 import { Section } from '../core/primitives/section'
-import { Text } from '../core/primitives/text'
-import Map from '../map/container'
-
-// constants
-import { MAP_OPTIONS, MAP_TILE_URL, MAP_TILE_OPTIONS } from '../core/constants'
+// import { Text } from '../core/primitives/text'
 
 export class Search extends Component {
 
-  constructor() {
+  // constructor() {
+  //
+  //   super()
+  //
+  //   this.handleClickOutside = this.handleClickOutside.bind(this)
+  //   this.toggleClickOutsideEvent = this.toggleClickOutsideEvent.bind(this)
+  //   this.toggleInputFocus = this.toggleInputFocus.bind(this)
+  //
+  // }
 
-    super()
+  // componentDidUpdate(prevProps) {
+  //
+  //   const { isSearchFocused } = this.props
+  //   const { isSearchFocused: prevIsSearchFocused } = prevProps
+  //
+  //   // check whether suggestions is newly opened || newly closed
+  //   if (isSearchFocused !== prevIsSearchFocused) this.toggleClickOutsideEvent(isSearchFocused)
+  //
+  // }
 
-    this.handleClickOutside = this.handleClickOutside.bind(this)
-    this.toggleClickOutsideEvent = this.toggleClickOutsideEvent.bind(this)
-    this.toggleFeatures = this.toggleFeatures.bind(this)
-    this.toggleInputFocus = this.toggleInputFocus.bind(this)
-    this.onLogoClick = this.onLogoClick.bind(this)
-    this.onPubCloseClick = this.onPubCloseClick.bind(this)
-    this.onPubPrevClick = this.onPubPrevClick.bind(this)
-    this.onPubNextClick = this.onPubNextClick.bind(this)
+  // componentWillUnmount() {
+  //
+  //   const { handleClickOutside } = this
+  //
+  //   // stop listening for clicks outside
+  //   window.removeEventListener('click', handleClickOutside)
+  //
+  //   // reset UI state
+  //   handleClickOutside()
+  //
+  // }
 
-  }
+  // toggleClickOutsideEvent(enabled) {
+  //
+  //   // listen for clicks outside || stop listening for clicks outside
+  //   const listener = enabled ? window.addEventListener : window.removeEventListener
+  //
+  //   listener('click', this.handleClickOutside)
+  //
+  // }
 
-  componentDidUpdate(prevProps) {
+  // handleClickOutside() {
+  //
+  //   this.toggleInputFocus(false)
+  //
+  // }
 
-    const { isSearchFocused } = this.props
-    const { isSearchFocused: prevIsSearchFocused } = prevProps
-
-    // check whether suggestions is newly opened || newly closed
-    if (isSearchFocused !== prevIsSearchFocused) this.toggleClickOutsideEvent(isSearchFocused)
-
-  }
-
-  componentWillUnmount() {
-
-    const { handleClickOutside } = this
-
-    // stop listening for clicks outside
-    window.removeEventListener('click', handleClickOutside)
-
-    // reset UI state
-    handleClickOutside()
-
-  }
-
-  toggleClickOutsideEvent(enabled) {
-
-    // listen for clicks outside || stop listening for clicks outside
-    const listener = enabled ? window.addEventListener : window.removeEventListener
-
-    listener('click', this.handleClickOutside)
-
-  }
-
-  handleClickOutside() {
-
-    this.toggleInputFocus(false)
-
-  }
-
-  toggleFeatures() {
-
-    const { isSearchFeatures, actions: { updateUI } } = this.props
-
-    updateUI({ search: { features: !isSearchFeatures } })
-
-  }
-
-  toggleInputFocus(focus=true) {
-
-    const { updateUI } = this.props.actions
-
-    updateUI({ search: { focus } })
-
-  }
-
-  onLogoClick() {
-
-    const { resetSearch, updateUI } = this.props.actions
-
-    // reset search state
-    resetSearch()
-
-    // update ui state
-    updateUI({ search: { overlay: true } })
-
-  }
-
-  onPubCloseClick() {
-
-    const { actions: { setSelectedResult } } = this.props
-
-    // reset selectedResult to default
-    setSelectedResult()
-
-  }
-
-  onPubPrevClick() {
-
-    const { actions: { setSelectedResult }, selectedResultIndex, totalResults } = this.props
-
-    const prevIndex = selectedResultIndex <= 0 ? totalResults - 1 : selectedResultIndex - 1
-
-    setSelectedResult(prevIndex)
-
-  }
-
-  onPubNextClick() {
-
-    const { actions: { setSelectedResult }, selectedResultIndex, totalResults } = this.props
-
-    const nextIndex = selectedResultIndex >= totalResults - 1 ? 0 : selectedResultIndex + 1
-
-    setSelectedResult(nextIndex)
-
-  }
+  // toggleInputFocus(focus=true) {
+  //
+  //   const { updateUI } = this.props.actions
+  //
+  //   updateUI({ search: { focus } })
+  //
+  // }
 
   render() {
 
-    const { actions, geocodes, geolocation, point, mapMarkers, term, isPanelOpen, isSearchFitToBounds, isSearchOverlayed, selectedResult, selectedResultIndex, showSuggestions } = this.props
-    const { getGeocode, setGeocode, clearGeocode, getGeolocation, setPoint, setSelectedResult } = actions
-
-    const { toggleInputFocus, onLogoClick, onPubCloseClick, onPubPrevClick, onPubNextClick } = this
-
-    // const renderFeaturesToggle = !isSearchOverlayed ? (
-    //   <Button onClick={toggleFeatures}>toggle features</Button>
-    // ) : null
+    // const { actions, geocodes, geolocation, term, showSuggestions } = this.props
+    // const { getGeocode, setGeocode, clearGeocode, getGeolocation, setPoint, setSelectedResult } = actions
 
     return (
-      <View atomic={{ pt: isSearchOverlayed ? 12 : 0 }} maxWidth='none'>
+      <View atomic={{ pt:12 }} maxWidth='none'>
 
-        <Image src='shandy-club.png' width='50px' height='50px' center atomic={ !isSearchOverlayed ? { c:'p', po:'a', t:1, l:1, z:1 } : null } onClick={ () => !isSearchOverlayed && onLogoClick() } />
+        <Image src='/static/img/shandy-club.png' width='50px' height='50px' center atomic={{ c:'p' }} />
 
-        { isSearchOverlayed ? (
           <Section>
 
-            <Text atomic={{ fs:7, ta:'c', tt:'u' }} fontStack='secondary' letterSpacing='3px'>
+            HI :)
+
+            {/* <Text atomic={{ fs:7, ta:'c', tt:'u' }} fontStack='secondary' letterSpacing='3px'>
               Shandy Club
             </Text>
 
@@ -200,78 +131,9 @@ export class Search extends Component {
                   </div>
                 )) }
               </List>
-            ) : null }
+            ) : null } */}
 
           </Section>
-        ) : null }
-
-        {/* { renderFeaturesToggle } */}
-
-        {/* { isSearchFeatures ? (
-          <List>
-            { features.keySeq().map( f => (
-              <div key={uuid.v4()} className={ features.get(f) ? 'TODO active' : 'TODO normal' } onClick={ () => toggleFeature(f) }>{ f }</div>
-            )) }
-          </List>
-        ) : null } */}
-
-        { !isSearchOverlayed ? (
-          <Map
-            center={point}
-            fitToBounds={isSearchFitToBounds}
-            geolocation={geolocation}
-            markers={mapMarkers}
-            mapOptions={MAP_OPTIONS}
-            selectedResultIndex={selectedResultIndex}
-            tileOptions={MAP_TILE_OPTIONS}
-            tileURL={MAP_TILE_URL}
-            setPoint={setPoint}
-            setSelectedResult={setSelectedResult} />
-        ) : null }
-
-        <Transition transitionName='slide-left' transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          { !isSearchOverlayed && isPanelOpen ? (
-            <Section atomic={{ p:4, po:'f', t:0, r:0 }} width='50%' maxWidth='500px' minWidth='15em' height='100%' backgroundColor='white' style={{ boxShadow: '-4px 0 20px 0 rgba(0, 0, 0, 0.2)' }}>
-
-              <Button onClick={ () => onPubCloseClick() }>
-                <Icon>close</Icon>
-              </Button>
-
-              <Text atomic={{ fs:6, mb:1, ta:'c', tt:'u' }} fontStack='secondary' letterSpacing='2px'>
-                { selectedResult.name }
-              </Text>
-
-              <Text atomic={{ fs:3, mt:0, mb:0, ta:'c' }}>
-                { selectedResult.address } { selectedResult.postcode }
-              </Text>
-
-              { selectedResult.website ? (
-                <Anchor atomic={{ d:'b', fs:3, td:'n', w:11 }} center href={ selectedResult.website } target='_blank'>
-                  Visit website
-                </Anchor>
-              ) : null }
-
-              <Text atomic={{ fs:5, o:'s', ta:'c' }} maxHeight='40%'>
-                { selectedResult.desc }
-              </Text>
-
-              { selectedResult.features.keySeq().map( f => selectedResult.features.get(f) ? (
-                <Text key={uuid.v4()} atomic={{ d:'ib', fs:3, fw:'b', mt:0, mr:1, mb:0, ml:1, td:'o', tt:'u' }}>{ f }</Text>
-              ) : null ) }
-
-              <Button atomic={{ po:'a', b:4, l:4 }} onClick={ () => onPubPrevClick() }>
-                <Icon>chevron_left</Icon>
-                <Text atomic={{ d:'ib', fs:3, m:0, tt:'u' }}>Prev</Text>
-              </Button>
-
-              <Button atomic={{ po:'a', b:4, r:4 }} onClick={ () => onPubNextClick() }>
-                <Text atomic={{ d:'ib', fs:3, m:0, tt:'u' }}>Next</Text>
-                <Icon>chevron_right</Icon>
-              </Button>
-
-            </Section>
-          ) : null }
-        </Transition>
 
       </View>
     )
@@ -283,6 +145,6 @@ export class Search extends Component {
 export default connect(
   createStructuredSelector({ ...selectors }),
   dispatch => ({
-    actions: bindActionCreators({ ...actions, ...uiActions }, dispatch)
+    actions: bindActionCreators({ ...actions }, dispatch)
   })
 )(Search)

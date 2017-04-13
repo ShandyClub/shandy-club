@@ -1,24 +1,23 @@
-import analyticsMiddleware from 'redux-analytics'
-import createLogger from 'redux-logger'
-import createSagaMiddleware from 'redux-saga'
+import analyticsMiddleware from 'redux-analytics';
+import createLogger from 'redux-logger';
+import {middleware as pack} from 'redux-pack';
 
-import { track } from '../util/track'
-
-export const saga = createSagaMiddleware()
+import {track} from '../util/track';
 
 const createMiddleware = isDevelopment => {
-
   // default middleware
-  let middleware = [ saga ]
+  let middleware = [pack];
 
   // logger middleware in development
-  if (isDevelopment) middleware.push( createLogger({ collapsed: true }) )
+  if (isDevelopment) middleware.push(createLogger({collapsed: true}));
 
   // analytics middleware in production
-  if (!isDevelopment) middleware.push( analyticsMiddleware( ({ type, payload }) => track(type, payload) ) )
+  if (!isDevelopment)
+    middleware.push(
+      analyticsMiddleware(({type, payload}) => track(type, payload)),
+    );
 
-  return middleware
+  return middleware;
+};
 
-}
-
-export default createMiddleware
+export default createMiddleware;

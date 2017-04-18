@@ -1,0 +1,85 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import",
+    "react"
+  ],
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "comma-spacing": "error",
+    "eqeqeq": [
+      "error",
+      "always"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "no-console": "off",
+    "no-irregular-whitespace": "error",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "padded-blocks": "error",
+    "semi": [
+      "error",
+      "never"
+    ],
+    "react/display-name": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-undef": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/no-danger": "error",
+    "react/no-deprecated": "error",
+    "react/no-did-mount-set-state": "error",
+    "react/no-did-update-set-state": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/no-find-dom-node": "error",
+    "react/no-is-mounted": "error",
+    "react/no-unknown-property": "error",
+    "react/no-render-return-value": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "error"
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.0"
+    }
+  }
+}

@@ -3,7 +3,6 @@ import reducer, { initialState } from './reducer'
 import * as selectors from './selectors'
 import Container from './container'
 import { name } from './constants'
-import saga from './saga'
 
 export {
   actions,
@@ -12,5 +11,4 @@ export {
   selectors,
   Container,
   name,
-  saga,
 }

@@ -27,12 +27,13 @@
   },
   "pre-commit": {
     "run": [
-      "lint:staged"
+      "lint:staged",
+      "test"
     ],
     "silent": true
   },
   "scripts": {
-    "test": "babel-node test | faucet",
+    "test": "exit",
     "lint:staged": "lint-staged",
     "start": "per-env",
     "start:development": "next",

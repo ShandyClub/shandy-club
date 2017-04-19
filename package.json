@@ -75,6 +75,7 @@
     "redux-pack": "^0.1.5",
     "regenerator-runtime": "^0.9.5",
     "reselect": "^2.3.0",
+    "sip.css": "^0.0.2",
     "styled-components": "^2.0.0-14",
     "uuid": "^3.0.1"
   }

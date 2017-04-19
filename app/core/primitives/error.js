@@ -1,15 +1,15 @@
 import styled from 'styled-components'
-import Atomic from '../style/atomic'
+import Sip from 'sip.css'
 
 import { colours } from '../style'
 
-export const Error = styled.div`
+const Error = styled.div`
   color: ${ colours.error };
   font-style: italic;
   border: 2px dotted ${ colours.error };
   border-radius: 4px;
 
-  ${ ({ atomic }) => Atomic({ ...Error.default.atomic, ...atomic }) }
+  ${ ({ sip }) => Sip({ ...Error.default.sip, ...sip }) }
 
   &:before {
     content: '😫';
@@ -18,10 +18,13 @@ export const Error = styled.div`
   }
 `
 
+
 Error.default = {
-  atomic: {
+  sip: {
     fs: 4,
     m: 4,
     p: 4,
   },
 }
+
+export default Error

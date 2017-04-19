@@ -7,15 +7,7 @@ import { createStructuredSelector } from 'reselect'
 import * as actions from './actions'
 import selectors from './selectors'
 
-// import { Anchor } from '../core/primitives/anchor'
-// import { Button, ButtonIcon } from '../core/primitives/button'
-// import { Icon } from '../core/primitives/icon'
-import { Image } from '../core/primitives/image'
-// import { Input } from '../core/primitives/input'
-import { View } from '../core/primitives/layout'
-// import { List } from '../core/primitives/list'
-import { Section } from '../core/primitives/section'
-// import { Text } from '../core/primitives/text'
+import { Image, Section, View } from '../core/primitives'
 
 export class Search extends Component {
 
@@ -145,6 +137,6 @@ export class Search extends Component {
 export default connect(
   createStructuredSelector({ ...selectors }),
   dispatch => ({
-    actions: bindActionCreators({ ...actions }, dispatch)
+    actions: bindActionCreators({ ...actions }, dispatch),
   })
 )(Search)

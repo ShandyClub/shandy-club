@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import Atomic from '../style/atomic'
+import Sip from 'sip.css'
 
 import { colours } from '../style'
 
-export const Section = styled.section`
+const Section = styled.section`
   width: ${ props => props.width || Section.default.width };
   max-width: ${ props => props.maxWidth || Section.default.maxWidth };
   min-width: ${ props => props.minWidth || Section.default.minWidth };
@@ -11,7 +11,7 @@ export const Section = styled.section`
   margin: ${ props => props.margin || Section.default.margin };
   background-color: ${ props => props.backgroundColor && colours[props.backgroundColor] || Section.default.backgroundColor };
 
-  ${ ({ atomic }) => Atomic({ ...atomic }) }
+  ${ ({ sip }) => Sip({ ...Section.default.sip, ...sip }) }
 `
 
 Section.default = {
@@ -22,3 +22,5 @@ Section.default = {
   margin: 'auto',
   backgroundColor: 'transparent',
 }
+
+export default Section

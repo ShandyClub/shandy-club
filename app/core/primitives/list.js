@@ -1,16 +1,16 @@
 import styled from 'styled-components'
-import Atomic from '../style/atomic'
+import Sip from 'sip.css'
 
 import { colours } from '../style'
 
-export const List = styled.div`
+const List = styled.div`
   width: 100%;
   max-width: ${ props => props.maxWidth || 'auto' };
   max-height: ${ props => props.maxHeight || 'auto' };
   margin: 0 auto;
   overflow-y: scroll;
 
-  ${ ({ atomic }) => Atomic({ ...List.default.atomic, ...atomic }) }
+  ${ ({ sip }) => Sip({ ...List.default.sip, ...sip }) }
 
   & > * {
     border-bottom: 1px dotted ${ colours.dark };
@@ -19,8 +19,10 @@ export const List = styled.div`
 `
 
 List.default = {
-  atomic: {
+  sip: {
     pl: 5,
     pr: 5,
   },
 }
+
+export default List

@@ -1,6 +1,7 @@
 import { injectGlobal } from 'styled-components'
+import Sip from 'sip.css'
 
-import { animation, colours, scale, typography } from '../style'
+import { animation, colours, typography } from '../style'
 
 injectGlobal`
   html, body, #Root, #App {
@@ -10,7 +11,7 @@ injectGlobal`
 
   body {
     ${ typography.ff() }
-    font-size: ${ scale.getScaledValue(4) };
+    ${ () => Sip({ fs:4 }) }
     line-height: 1.625;
     color: ${ colours.dark };
     -webkit-font-smoothing: antialiased;

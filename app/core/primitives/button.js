@@ -1,14 +1,14 @@
 import styled from 'styled-components'
-import Atomic from '../style/atomic'
+import Sip from 'sip.css'
 
 import { colours } from '../style'
 
-export const Button = styled.button`
+const Button = styled.button`
   color: ${ props => props.color || colours.dark };
   cursor: pointer;
   outline: 0;
 
-  ${ ({ atomic }) => Atomic({ ...Button.default.atomic, ...atomic }) }
+  ${ ({ sip }) => Sip({ ...Button.default.sip, ...sip }) }
 `
 
 export const ButtonIcon = styled(Button)`
@@ -28,8 +28,11 @@ export const ButtonIcon = styled(Button)`
   }
 `
 
+
 Button.default = {
-  atomic: {
+  sip: {
     fs: 4,
   },
 }
+
+export default Button

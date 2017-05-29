@@ -4,7 +4,7 @@
   "description": "Shandy Club",
   "main": "server.bundle.js",
   "engines": {
-    "node": "~6.2.0"
+    "node": "~7.10.0"
   },
   "pre-commit": {
     "run": [
@@ -35,13 +35,13 @@
     "lint": "npm run lint:js",
     "lint:js": "eslint --config config/.eslintrc.js app/",
     "db": "npm-run mongo-express -u admin -p admin -d shandyclub",
-    "start": "per-env",
-    "start:development": "webpack-dev-server --config config/webpack.config.dev.js & NODE_ENV=development nodemon --exec babel-node app/server/index.js",
-    "start:production": "node server.bundle.js",
+    "start": "webpack-dev-server --config config/webpack.config.dev.js & NODE_ENV=development nodemon --exec babel-node app/server/index.js",
+    "now-start": "node server.bundle.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
     "build:server": "webpack --config config/webpack.config.server.js",
-    "deploy": "npm run build && modulus deploy -p shandyclub public/"
+    "now-build": "",
+    "deploy": "npm run build && now public/ -e MAPBOX_API=@mapbox-api-key -e MONGO_URL=@mongo-url"
   },
   "repository": {
     "type": "git",
@@ -102,7 +102,6 @@
     "mongoose": "^4.5.3",
     "mongoose-simple-random": "^0.3.3",
     "node-uuid": "^1.4.7",
-    "per-env": "^1.0.2",
     "react": "^15.0.1",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.0.1",

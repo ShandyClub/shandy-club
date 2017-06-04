@@ -41,7 +41,7 @@
     "build:client": "NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --profile --colors",
     "build:server": "webpack --config config/webpack.config.server.js",
     "now-build": "",
-    "deploy": "npm run build && now public/ -e MAPBOX_API=@mapbox-api-key -e MONGO_URL=@mongo-url"
+    "deploy": "npm run build && now public/ -e MAPBOX_API=@mapbox-api-key -e MONGO_URL=@mongo-shandy-prod && now alias `pbpaste` shandy.club"
   },
   "repository": {
     "type": "git",
